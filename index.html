@@ -1,15 +1,15 @@
 <!DOCTYPE html> 
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8XP3Y786J9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8XP3Y786J9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8XP3Y786J9');
+  </script>
 
-  gtag('config', 'G-8XP3Y786J9');
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Managed OpenClaw — Enterprise Agent Hosting</title>
@@ -370,7 +370,7 @@
       white-space:nowrap;
     }
 
-    input, select{
+    input, select, textarea{
       width:100%;
       padding: 12px 12px;
       border-radius: 14px;
@@ -380,9 +380,15 @@
       font-size: 16px;
       outline:none;
       transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+      font-family: inherit;
     }
-    input::placeholder{color: rgba(255,255,255,.45)}
-    input:focus, select:focus{
+    textarea{
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+    input::placeholder, textarea::placeholder{color: rgba(255,255,255,.45)}
+    input:focus, select:focus, textarea:focus{
       border-color: rgba(34,211,238,.55);
       box-shadow: 0 0 0 4px rgba(34,211,238,.10);
     }
@@ -684,6 +690,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="container">
@@ -700,6 +707,7 @@
           <a href="#features">Features</a>
           <a href="#who">Who it’s for</a>
           <a href="#trust">Trust</a>
+          <a href="#" onclick="openModal('contact'); return false;">Contact</a>
           <a href="#" class="nav-cta" onclick="openModal('privacy'); return false;">
             <span class="dot" aria-hidden="true"></span>
             Privacy
@@ -763,6 +771,7 @@
               <!-- Optional: makes emails easier to filter in Formspree/email -->
               <input type="hidden" name="_subject" value="Managed OpenClaw — Waitlist signup" />
               <input type="hidden" name="source" value="managedopenclaw.com" />
+              <input type="hidden" name="kind" value="waitlist" />
 
               <div class="field">
                 <label for="email">Work email <span class="hint">required</span></label>
@@ -949,6 +958,7 @@
         <div class="foot">
           <h4>Company</h4>
           <a href="#">About Oliphant Digital</a>
+          <a href="#" onclick="openModal('contact'); return false;">Contact</a>
           <a href="https://clawconsultant.com" target="_blank" rel="noreferrer">Consulting</a>
           <a href="mailto:contact@managedopenclaw.com">contact@managedopenclaw.com</a>
         </div>
@@ -1003,6 +1013,68 @@
           <p>
             Have an edge-case environment or special constraints? Join the list — we’ll follow up and learn what you need.
           </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+    <div class="modalbox">
+      <div class="modalinner">
+        <div class="modalhead">
+          <div>
+            <h2 id="contactTitle">Contact</h2>
+            <div style="color: rgba(255,255,255,.55); font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; margin-top: 6px;">
+              Ask a question — we’ll respond by email.
+            </div>
+          </div>
+          <button class="close" onclick="closeModal('contact')" aria-label="Close">×</button>
+        </div>
+
+        <div class="modalcontent">
+          <div class="success" id="contactSuccess" role="status" aria-live="polite">
+            ✅ Message sent. We’ll reply soon.
+          </div>
+
+          <form id="contactForm" action="https://formspree.io/f/mykplbdd" method="POST" onsubmit="handleContactSubmit(event)">
+            <input type="hidden" name="_subject" value="Managed OpenClaw — Contact message" />
+            <input type="hidden" name="source" value="managedopenclaw.com" />
+            <input type="hidden" name="kind" value="contact" />
+
+            <div class="row">
+              <div class="field">
+                <label for="contactEmail">Email <span class="hint">required</span></label>
+                <input id="contactEmail" name="email" type="email" required placeholder="you@company.com" autocomplete="email" inputmode="email" />
+              </div>
+
+              <div class="field">
+                <label for="contactName">Name <span class="hint">optional</span></label>
+                <input id="contactName" name="name" type="text" placeholder="Your name" autocomplete="name" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="contactMessage">Message <span class="hint">required</span></label>
+              <textarea id="contactMessage" name="message" required placeholder="What can we help with?"></textarea>
+            </div>
+
+            <!-- Honeypot -->
+            <input
+              type="text"
+              name="_gotcha"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              style="position:absolute;left:-5000px;top:auto;width:1px;height:1px;overflow:hidden;"
+            />
+
+            <button class="submit" id="contactSubmitBtn" type="submit">Send message</button>
+
+            <p class="fineprint" style="margin-top: 12px;">
+              Prefer email? Write us at <a href="mailto:contact@managedopenclaw.com">contact@managedopenclaw.com</a>.
+            </p>
+          </form>
         </div>
       </div>
     </div>
@@ -1160,6 +1232,65 @@
         }
       } catch (err){
         console.error('Form submission failed:', err);
+        msg.textContent = '⚠️ Network error. Please try again.';
+        msg.classList.add('active');
+        setTimeout(()=>msg.classList.remove('active'), 7000);
+      } finally {
+        if(btn){
+          btn.disabled = false;
+          btn.textContent = originalBtnText;
+        }
+      }
+    }
+
+    // Contact form submission (same Formspree endpoint, labeled as kind=contact)
+    async function handleContactSubmit(event){
+      event.preventDefault();
+      const form = event.target;
+
+      const emailEl = form.querySelector('#contactEmail');
+      const messageEl = form.querySelector('#contactMessage');
+      const email = (emailEl?.value || '').trim();
+      const message = (messageEl?.value || '').trim();
+
+      if(!email){
+        emailEl?.focus();
+        return;
+      }
+      if(!message){
+        messageEl?.focus();
+        return;
+      }
+
+      const btn = document.getElementById('contactSubmitBtn');
+      const msg = document.getElementById('contactSuccess');
+
+      const originalBtnText = btn ? btn.textContent : 'Send message';
+      if(btn){
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+      }
+
+      try{
+        const formData = new FormData(form);
+        const res = await fetch(form.action, {
+          method: form.method || 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if(res.ok){
+          msg.textContent = '✅ Message sent. We’ll reply soon.';
+          msg.classList.add('active');
+          form.reset();
+          setTimeout(()=>msg.classList.remove('active'), 7000);
+        } else {
+          msg.textContent = '⚠️ Something went wrong. Please try again.';
+          msg.classList.add('active');
+          setTimeout(()=>msg.classList.remove('active'), 7000);
+        }
+      } catch (err){
+        console.error('Contact submission failed:', err);
         msg.textContent = '⚠️ Network error. Please try again.';
         msg.classList.add('active');
         setTimeout(()=>msg.classList.remove('active'), 7000);
