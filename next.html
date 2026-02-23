@@ -72,18 +72,20 @@
                 <div class="w-9 h-9 bg-white text-white flex items-center justify-center text-lg rounded border-2 border-claw-500">🦞</div>
                 <span class="font-bold text-xl tracking-tight text-neutral-900">ManagedOpenClaw<span class="text-neutral-400">.com</span></span>
             </a>
-            <div class="hidden md:flex items-center gap-8">
+            <div class="hidden lg:flex items-center gap-8 whitespace-nowrap">
                 <a href="#benefits" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Benefits</a>
                 <a href="#services" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Pricing</a>
+                <a href="#about" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">About</a>
                 <a href="#faq" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">FAQ</a>
                 <a href="#contact" class="px-5 py-2.5 btn-claw text-sm font-semibold">Let&#39;s Talk</a>
             </div>
-            <button class="md:hidden text-2xl" id="mobile-menu-toggle" type="button" aria-label="Open menu">≡</button>
+            <button class="lg:hidden text-2xl" id="mobile-menu-toggle" type="button" aria-label="Open menu">≡</button>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden border-t border-neutral-200 bg-white">
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-neutral-200 bg-white">
             <div class="px-6 py-4 flex flex-col gap-4">
                 <a href="#benefits" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">Benefits</a>
                 <a href="#services" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">Pricing</a>
+                <a href="#about" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">About</a>
                 <a href="#faq" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">FAQ</a>
                 <a href="#contact" class="btn-claw px-5 py-3 text-center text-sm font-semibold">Let&#39;s Talk</a>
             </div>
@@ -255,67 +257,6 @@
             <a href="#contact" class="border-2 border-claw-500 text-claw-400 hover:bg-claw-500 hover:text-white px-8 py-4 text-sm font-semibold whitespace-nowrap rounded transition-all">Tell Us What You Need</a>
         </div>
 
-        <!-- Video (moved above FAQ) -->
-        <section id="video" class="border-b border-neutral-200 grid md:grid-cols-12">
-            <div class="md:col-span-5 p-10 md:p-16 border-r border-neutral-200 bg-neutral-50">
-                <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-500 mb-3">Video</p>
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tighter mb-6">See it in action.</h2>
-                <p class="text-neutral-600 leading-relaxed max-w-md">
-                    A quick walkthrough of what a managed OpenClaw deployment looks like.
-                    Click to load the video (keeps the preview sandbox quiet on refresh).
-                </p>
-                <a href="#contact" class="inline-flex mt-8 btn-claw px-8 py-4 text-sm font-semibold">Let’s Talk</a>
-            </div>
-            <div class="md:col-span-7 bg-neutral-50 flex items-center justify-center p-10 md:p-16">
-                <div class="w-full">
-                    <!-- YouTube embed (lazy-loaded to avoid sandbox console spam on reload) -->
-                    <div id="video-shell" class="w-full aspect-video bg-black rounded overflow-hidden relative" data-youtube-id="dQw4w9WgXcQ">
-                        <button id="video-load" type="button" class="absolute inset-0 w-full h-full flex items-center justify-center group" aria-label="Play video">
-                            <span class="absolute inset-0 bg-black/20"></span>
-                            <span class="relative z-10 flex items-center gap-3 px-5 py-3 bg-white/95 text-neutral-900 rounded border-2 border-neutral-200 group-hover:border-claw-500 transition">
-                                <i class="fa-solid fa-play text-claw-500"></i>
-                                <span class="text-sm font-semibold">Load video</span>
-                            </span>
-                        </button>
-                        <div class="absolute bottom-3 left-3 text-xs text-white/80 font-mono">youtube.com</div>
-                    </div>
-                    <p class="mt-3 text-xs text-neutral-400">
-                        Tip: the preview sandbox can log repeated warnings for iframes on reload. This video loads only when clicked.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ -->
-        <section id="faq" class="grid md:grid-cols-12 border-b border-neutral-200 min-h-[600px]">
-            <div class="md:col-span-4 p-10 md:p-16 border-r border-neutral-200 bg-claw-50/30">
-                <h2 class="text-4xl font-bold tracking-tighter mb-6">FAQ.</h2>
-                <p class="text-neutral-500">Common questions from business owners.</p>
-            </div>
-            <div class="md:col-span-8 divide-y divide-neutral-200" id="faq-accordion">
-                <details class="group faq-item p-10" open>
-                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">Do I really own it?<span class="transform group-open:rotate-180 transition-transform text-claw-400">▼</span></summary>
-                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Yes. Unlike subscribing to software where you lose access if you stop paying, this is built on your own cloud account. We help you set it up and keep it running — but the infrastructure, the data, and the API keys are yours. Walk away anytime and everything keeps working.</p>
-                </details>
-                <details class="group faq-item p-10">
-                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">What are the ongoing costs?<span class="transform group-open:rotate-180 transition-transform text-claw-400">▼</span></summary>
-                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Typical baseline is cloud hosting (like DigitalOcean, usually ~$5-10/month), plus any third-party API usage you choose. We add no vendor markups.</p>
-                </details>
-                <details class="group faq-item p-10">
-                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">Can you help my marketing agency?<span class="transform group-open:rotate-180 transition-transform text-claw-400">▼</span></summary>
-                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Absolutely. We partner with marketing and consulting agencies who want to offer AI agents to their clients without touching the infrastructure. You own the client relationship, we handle the backend. <a href="#contact" class="underline text-claw-600 hover:text-claw-800">Reach out about agency partnerships</a> — it's one of the most common ways people work with us.</p>
-                </details>
-                <details class="group faq-item p-10">
-                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">Is this secure?<span class="transform group-open:rotate-180 transition-transform text-claw-400">▼</span></summary>
-                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Yes. We deploy with hardened defaults — your agent isn't exposed to the public internet, secrets are managed properly, and access is locked down to only what's needed. It's significantly more secure than a default installation, and our Ops + Security plan adds ongoing patching and monitoring on top.</p>
-                </details>
-                <details class="group faq-item p-10">
-                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">What about enterprise needs — compliance, SLAs, governance?<span class="transform group-open:rotate-180 transition-transform text-claw-400">▼</span></summary>
-                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">We've got you covered. Our Custom Care plans include SLAs, environment separation (dev/stage/prod), audit‑friendly access controls, release and rollback support, and team onboarding. If you need it production‑grade, that's exactly what we do.</p>
-                </details>
-            </div>
-        </section>
-
         <!-- Who We Are -->
         <section id="about" class="grid md:grid-cols-12 border-b border-neutral-200">
             <div class="md:col-span-5 p-10 md:p-16 border-r border-neutral-200">
@@ -325,167 +266,62 @@
                 <p class="text-neutral-600 leading-relaxed mb-6">We're a small, technical team that works directly with founders, ops leads, and agency owners. If you're tired of paying SaaS premiums for AI tools you can't control, that's exactly the problem we exist to solve.</p>
                 <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-sm font-semibold text-claw-500 hover:text-claw-700 transition-colors">Learn more at aifreelancer.co →</a>
             </div>
-            <div class="md:col-span-7 bg-neutral-50 p-10 md:p-16 flex items-center">
-                <div class="w-full">
-                    <p class="text-sm font-mono text-claw-500 font-medium mb-3">$ openclaw status --secure</p>
-                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4">Built for real ops.</h3>
-                    <ul class="check-list">
-                        <li>Secure-by-default deployment patterns</li>
-                        <li>Clear ownership: your VPS, your keys, your data</li>
-                        <li>Agency-friendly: white-label support available</li>
-                        <li>Optional ongoing ops + security care</li>
-                    </ul>
-                    <a href="#contact" class="inline-flex mt-8 btn-outline px-8 py-4 text-sm font-semibold">Talk to us about your setup</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact -->
-        <section id="contact" class="grid md:grid-cols-12 border-b border-neutral-200">
-            <div class="md:col-span-4 p-10 md:p-16 border-r border-neutral-200 bg-claw-50/30">
-                <h2 class="text-4xl font-bold tracking-tighter mb-6">Get Started.</h2>
-                <p class="text-neutral-500 mb-8">Tell us what you're looking for and we'll get back to you within one business day.</p>
-                <div class="space-y-6">
-                    <div class="border-l-2 border-claw-500 pl-4">
-                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Phone</p>
-                        <a href="tel:+14409411785" class="font-medium text-sm hover:text-claw-500 transition-colors">(440) 941-1785</a>
-                    </div>
-                    <div class="border-l-2 border-claw-500 pl-4">
-                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Email</p>
-                        <a href="mailto:hello@managedopenclaw.com" class="font-medium text-sm hover:text-claw-500 transition-colors">hello@managedopenclaw.com</a>
-                    </div>
-                    <div class="border-l-2 border-claw-500 pl-4">
-                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Based In</p>
-                        <p class="font-medium text-sm">Cleveland, OH</p>
-                    </div>
-                </div>
-            </div>
-            <div class="md:col-span-8 p-10 md:p-16">
-                <div class="form-wrapper max-w-xl" id="contact-form-wrapper">
-                    <form id="contact-form" class="space-y-6">
-                        <div class="grid sm:grid-cols-2 gap-6">
-                            <div><label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">Name</label><input type="text" name="name" class="form-input" placeholder="Your name" required></div>
-                            <div><label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">Email *</label><input type="email" name="email" class="form-input" placeholder="you@company.com" required></div>
+            <div class="md:col-span-7 bg-neutral-50 flex items-center justify-center p-10 md:p-16">
+                <div class="w-full aspect-video bg-neutral-900 rounded overflow-hidden relative" id="video-shell">
+                    <!-- Preview-safe thumbnail; loads YouTube only after click (modal). -->
+                    <button type="button" id="video-open" class="absolute inset-0 w-full h-full flex items-center justify-center group" aria-label="Play video">
+                        <div class="absolute inset-0" aria-hidden="true">
+                            <!-- Inline SVG "thumbnail" so the preview doesn't request network access -->
+                            <svg class="w-full h-full" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Video preview">
+                                <defs>
+                                    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0" stop-color="#111111"/>
+                                        <stop offset="1" stop-color="#262626"/>
+                                    </linearGradient>
+                                    <radialGradient id="r" cx="35%" cy="65%" r="70%">
+                                        <stop offset="0" stop-color="#E63B2E" stop-opacity="0.22"/>
+                                        <stop offset="1" stop-color="#E63B2E" stop-opacity="0"/>
+                                    </radialGradient>
+                                </defs>
+                                <rect width="1280" height="720" fill="url(#g)"/>
+                                <rect width="1280" height="720" fill="url(#r)"/>
+                                <g opacity="0.25" fill="#ffffff">
+                                    <rect x="90" y="110" width="520" height="34" rx="8"/>
+                                    <rect x="90" y="170" width="690" height="22" rx="8" opacity="0.7"/>
+                                    <rect x="90" y="210" width="610" height="22" rx="8" opacity="0.55"/>
+                                    <rect x="90" y="250" width="460" height="22" rx="8" opacity="0.4"/>
+                                </g>
+                                <text x="90" y="330" fill="#ffffff" opacity="0.75" font-size="40" font-family="JetBrains Mono, monospace">$ openclaw demo --play</text>
+                            </svg>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">I'm interested in</label>
-                            <select name="interest" class="form-input" required>
-                                <option value="" disabled selected>Select an option</option>
-                                <option value="guided-setup">Guided Setup ($200)</option>
-                                <option value="template-bots">Template Bots (from $1,000)</option>
-                                <option value="custom-agents">Custom Agents (from $2,000)</option>
-                                <option value="managed-care">Managed Care Plans</option>
-                                <option value="enterprise">Enterprise / Custom Scope</option>
-                                <option value="agency-partner">Agency Partnership</option>
-                                <option value="not-sure">Not sure yet — just exploring</option>
-                            </select>
+                        <div class="relative z-10 flex items-center gap-4 px-7 py-5 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm group-hover:bg-white/15 transition">
+                            <span class="w-16 h-16 rounded-full bg-claw-500 flex items-center justify-center shadow-lg">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M9 7.5v9l8-4.5-8-4.5z" fill="#ffffff"/>
+                                </svg>
+                            </span>
+                            <div class="text-left">
+                                <p class="text-white font-semibold leading-tight text-lg">Play video</p>
+                                <p class="text-white/70 text-sm">Opens in a popup</p>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">Tell us more <span class="text-neutral-300 normal-case tracking-normal">(optional)</span></label>
-                            <textarea name="message" class="form-input" placeholder="What does your business do? What are you hoping the AI agent will handle?"></textarea>
-                        </div>
-                        <button type="submit" class="btn-claw w-full sm:w-auto px-10 py-4 text-base font-semibold">Send Message</button>
-                        <p class="text-xs text-neutral-400">We'll respond within one business day. No spam, no mailing list.</p>
-
-                        <!-- Sandbox-safe fallback: populated on submit if navigation is blocked -->
-                        <div id="mailto-fallback" class="hidden mt-4 p-4 border-2 border-claw-200 bg-claw-50 rounded">
-                            <p class="text-sm text-neutral-700"><strong class="text-neutral-900">If your browser blocks the mail popup</strong>, use this link:</p>
-                            <a id="mailto-link" href="#" class="text-sm font-semibold text-claw-600 hover:text-claw-800 underline break-all">Open email draft</a>
-                            <p class="text-xs text-neutral-500 mt-2">Or email us at <a href="mailto:hello@managedopenclaw.com" class="underline text-claw-600">hello@managedopenclaw.com</a>.</p>
-                        </div>
-                    </form>
-                    <div class="form-success flex-col items-center justify-center text-center py-20">
-                        <div class="w-16 h-16 bg-claw-50 border-2 border-claw-500 flex items-center justify-center mb-8 mx-auto rounded-full"><i class="fa-solid fa-check text-2xl text-claw-500"></i></div>
-                        <h3 class="text-2xl font-bold tracking-tight mb-3">Message sent.</h3>
-                        <p class="text-neutral-500 max-w-md mx-auto">We'll get back to you within one business day. In the meantime, feel free to email us directly at <a href="mailto:hello@managedopenclaw.com" class="underline text-claw-600">hello@managedopenclaw.com</a>.</p>
-                    </div>
+                    </button>
                 </div>
             </div>
-        </section>
+        </section>dal wiring
+            const videoOpen = document.getElementById('video-open');
+            if (videoOpen) videoOpen.addEventListener('click', openVideoModal);
 
-        <!-- Footer -->
-        <footer class="p-10 md:p-16">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-10">
-                <div>
-                    <a href="#" class="flex items-center gap-3 mb-4">
-                        <div class="w-8 h-8 bg-white text-white flex items-center justify-center text-base rounded border-2 border-claw-500">🦞</div>
-                        <span class="font-bold text-xl tracking-tight text-neutral-900">ManagedOpenClaw<span class="text-neutral-400">.com</span></span>
-                    </a>
-                    <p class="text-sm text-neutral-500">A service by <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-neutral-800 font-semibold hover:text-claw-500 transition-colors">AI Freelancer</a><br>Sovereign AI Operations &amp; Implementation.<br>Cleveland, OH</p>
-                </div>
-                <div class="flex flex-col md:items-end gap-4">
-                    <div class="flex gap-6 text-xl text-neutral-400">
-                        <a href="#" class="hover:text-claw-500 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="#" class="hover:text-claw-500 transition-colors"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="mailto:hello@managedopenclaw.com" class="hover:text-claw-500 transition-colors"><i class="fa-solid fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-neutral-200 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-sm text-neutral-500 hover:text-neutral-700 transition-colors">Built &amp; managed by <strong class="text-neutral-700">AI Freelancer</strong> — AI implementation for businesses that want to own their tools.</a>
-                <p class="text-xs text-neutral-400 uppercase tracking-wide">© 2026 ManagedOpenClaw.com</p>
-            </div>
-        </footer>
-    </main>
+            const modal = document.getElementById('video-modal');
+            if (modal) {
+                modal.querySelectorAll('[data-video-close]').forEach((el) => {
+                    el.addEventListener('click', closeVideoModal);
+                });
+            }
 
-    <script>
-        // ===== Utilities =====
-        function buildMailtoUrl(formData) {
-            const interest = String(formData.get('interest') || '').trim();
-            const name = String(formData.get('name') || '').trim();
-            const email = String(formData.get('email') || '').trim();
-            const message = String(formData.get('message') || '(no message)');
-
-            const subject = encodeURIComponent('MOC Inquiry: ' + (interest || 'general'));
-            // IMPORTANT: use explicit \n escapes; raw newlines inside JS strings can crash parsing.
-            const bodyText =
-                'Name: ' + name + '\n' +
-                'Email: ' + email + '\n' +
-                'Interest: ' + interest + '\n' +
-                'Message: ' + message;
-
-            const body = encodeURIComponent(bodyText);
-            return 'mailto:hello@managedopenclaw.com?subject=' + subject + '&body=' + body;
-        }
-
-        function showMailtoFallback(url) {
-            const box = document.getElementById('mailto-fallback');
-            const link = document.getElementById('mailto-link');
-            if (!box || !link) return;
-            link.setAttribute('href', url);
-            box.classList.remove('hidden');
-        }
-
-        // ===== Wiring =====
-        (function init() {
-            // Prevent noisy sandbox warnings from obscuring real errors
-            window.addEventListener('unhandledrejection', (e) => {
-                // Leave a breadcrumb, but don't crash.
-                console.warn('[MOC] unhandled promise rejection:', e.reason);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeVideoModal();
             });
-            // FAQ: deterministic accordion behavior across browsers
-            const faq = document.getElementById('faq-accordion');
-            if (faq) {
-                const items = Array.from(faq.querySelectorAll('details.faq-item'));
-                items.forEach((item) => {
-                    item.addEventListener('toggle', () => {
-                        if (!item.open) return;
-                        items.forEach((other) => {
-                            if (other !== item) other.open = false;
-                        });
-                    });
-                });
-            }
-
-            // Mobile menu toggle + auto-close on link click
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileToggle = document.getElementById('mobile-menu-toggle');
-            if (mobileToggle && mobileMenu) {
-                mobileToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-                mobileMenu.querySelectorAll('a').forEach((link) => {
-                    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-                });
-            }
 
             // Form handler (sandbox-safe)
             const form = document.getElementById('contact-form');
@@ -511,36 +347,6 @@
                     wrapper.classList.add('submitted');
                 });
             }
-
-            // ===== Lazy YouTube loader =====
-            (function initVideo() {
-                const shell = document.getElementById('video-shell');
-                const btn = document.getElementById('video-load');
-                if (!shell || !btn) return;
-
-                btn.addEventListener('click', () => {
-                    const id = shell.getAttribute('data-youtube-id');
-                    if (!id) return;
-
-                    // Build iframe only on demand.
-                    const iframe = document.createElement('iframe');
-                    iframe.className = 'w-full h-full';
-                    iframe.setAttribute('title', 'AI Freelancer — Video');
-                    iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-                    iframe.setAttribute('allowfullscreen', '');
-                    iframe.setAttribute('loading', 'lazy');
-                    iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-
-                    // Use nocookie to reduce cookie-related console warnings.
-                    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?rel=0&modestbranding=1';
-
-                    // Clear shell and mount iframe.
-                    shell.innerHTML = '';
-                    shell.appendChild(iframe);
-                }, { once: true });
-            })();
-
             // ===== Minimal self-tests (run in console) =====
             // These are lightweight and won't affect UI; they just help catch regressions.
             (function runTests() {
@@ -549,9 +355,96 @@
                     fd.set('interest', 'guided-setup');
                     fd.set('name', 'Test User');
                     fd.set('email', 'test@example.com');
-                    fd.set('message', 'Hello');
+        </main>
 
-                    const url = buildMailtoUrl(fd);
+    <!-- Video Modal (loads YouTube only after click) -->
+    <div id="video-modal" class="fixed inset-0 z-[999] hidden" aria-hidden="true">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-video-close></div>
+        <div class="relative w-full h-full flex items-center justify-center p-4 sm:p-8">
+            <div class="w-full max-w-5xl bg-neutral-900 rounded-xl border border-white/10 shadow-2xl overflow-hidden">
+                <div class="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/10">
+                    <p class="text-white/90 text-sm font-semibold tracking-tight">ManagedOpenClaw — Demo</p>
+                    <button type="button" class="text-white/70 hover:text-white transition text-xl leading-none" aria-label="Close video" data-video-close>×</button>
+                </div>
+                <div class="relative aspect-video bg-black" id="video-frame-wrap">
+                    <!-- iframe injected on open -->
+                    <div class="absolute inset-0 flex items-center justify-center" id="video-loading">
+                        <div class="text-white/70 text-sm">Loading video…</div>
+                    </div>
+                    <div class="absolute inset-0 hidden items-center justify-center p-6 text-center" id="video-fallback">
+                        <div>
+                            <p class="text-white font-semibold mb-2">Video blocked in this preview.</p>
+                            <p class="text-white/70 text-sm mb-4">Your environment may be preventing embedded network access.</p>
+                            <a id="video-fallback-link" href="https://www.youtube.com/watch?v=Hx7hXZxoXz4" target="_blank" rel="noopener" class="inline-flex items-center gap-2 btn-claw px-6 py-3 text-sm font-semibold">Open on YouTube <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>essage', '// ===== Utilities =====
+        const YT_WATCH_URL = 'https://www.youtube.com/watch?v=Hx7hXZxoXz4';
+        // Use nocookie domain to reduce cross-site tracking prompts.
+        const YT_EMBED_URL = 'https://www.youtube-nocookie.com/embed/Hx7hXZxoXz4?autoplay=1&rel=0&modestbranding=1';
+
+        function lockScroll(locked) {
+            document.documentElement.style.overflow = locked ? 'hidden' : '';
+            document.body.style.overflow = locked ? 'hidden' : '';
+        }
+
+        function openVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const wrap = document.getElementById('video-frame-wrap');
+            const loading = document.getElementById('video-loading');
+            const fallback = document.getElementById('video-fallback');
+            if (!modal || !wrap) return;
+
+            modal.classList.remove('hidden');
+            modal.setAttribute('aria-hidden', 'false');
+            lockScroll(true);
+
+            // Reset UI
+            if (loading) loading.classList.remove('hidden');
+            if (fallback) fallback.classList.add('hidden');
+
+            // Inject iframe lazily (prevents repeated console spam on reload)
+            const iframe = document.createElement('iframe');
+            iframe.className = 'absolute inset-0 w-full h-full';
+            iframe.setAttribute('title', 'ManagedOpenClaw video');
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+            iframe.setAttribute('allowfullscreen', '');
+
+            let settled = false;
+            const failTimer = window.setTimeout(() => {
+                if (settled) return;
+                settled = true;
+                // If the sandbox blocks the iframe, show fallback.
+                if (loading) loading.classList.add('hidden');
+                if (fallback) fallback.classList.remove('hidden');
+            }, 1800);
+
+            iframe.addEventListener('load', () => {
+                if (settled) return;
+                settled = true;
+                window.clearTimeout(failTimer);
+                if (loading) loading.classList.add('hidden');
+            });
+
+            // Set src last to avoid extra work before insertion
+            iframe.src = YT_EMBED_URL;
+            wrap.appendChild(iframe);
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const wrap = document.getElementById('video-frame-wrap');
+            const loading = document.getElementById('video-loading');
+            if (!modal || !wrap) return;
+
+            modal.classList.add('hidden');
+            modal.setAttribu      const url = buildMailtoUrl(fd);
                     if (!url.startsWith('mailto:hello@managedopenclaw.com?subject=')) throw new Error('mailto base incorrect');
                     if (!url.includes('MOC%20Inquiry%3A%20guided-setup')) throw new Error('subject encoding incorrect');
                     // Ensure newlines are encoded as %0A (from \n)
