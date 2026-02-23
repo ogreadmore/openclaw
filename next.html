@@ -97,38 +97,40 @@
     <main class="pt-20 max-w-[1440px] mx-auto border-x border-neutral-200 min-h-screen bg-white shadow-[0_0_50px_rgba(0,0,0,.02)]">
 
         <!-- Hero -->
-        <header class="relative grid md:grid-cols-12 border-b border-neutral-200 claw-pattern">
-            <div class="md:col-span-7 p-8 md:p-16 lg:p-24 flex flex-col justify-center md:border-r border-neutral-200">
+        <header class="relative grid md:grid-cols-12 border-b border-neutral-200 bg-cover bg-center bg-no-repeat" style="background-image: url('assets/robobg.png');">
+            <!-- Overlay gradient to ensure text readability -->
+            <div class="absolute inset-0 bg-white/85 md:bg-gradient-to-r md:from-white/95 md:via-white/80 md:to-white/20 pointer-events-none"></div>
+
+            <div class="relative z-10 md:col-span-7 p-8 md:p-16 lg:p-24 flex flex-col justify-center border-b md:border-b-0 md:border-r border-neutral-200/50">
                 <div class="inline-block mb-8">
-                    <span class="px-3 py-1.5 bg-claw-50 border border-claw-200 text-claw-600 text-xs font-bold uppercase tracking-wider rounded-full">🦞 Now Accepting Partners</span>
+                    <span class="px-3 py-1.5 bg-claw-50 border border-claw-200 text-claw-600 text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">🦞 Now Accepting Partners</span>
                 </div>
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[0.95] mb-8 text-neutral-900">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[0.95] mb-8 text-neutral-900 drop-shadow-sm">
                     AI Employees.<br><span class="text-claw-500">Owned by You.</span>
                 </h1>
-                <p class="text-xl md:text-2xl text-neutral-600 max-w-2xl leading-relaxed mb-12 font-light">
-                    We build autonomous <strong class="text-neutral-900 font-semibold">OpenClaw agents</strong> that live on <strong class="text-neutral-900 font-semibold">your own private cloud</strong>. You keep the data. We handle the tech.
+                <p class="text-xl md:text-2xl text-neutral-800 max-w-2xl leading-relaxed mb-12 font-medium drop-shadow-sm">
+                    We build autonomous <strong class="text-neutral-900 font-bold">OpenClaw agents</strong> that live on <strong class="text-neutral-900 font-bold">your own private cloud</strong>. You keep the data. We handle the tech.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#services" class="btn-claw px-8 py-4 text-base font-semibold">See Pricing</a>
-                    <a href="#benefits" class="btn-outline px-8 py-4 text-base font-medium flex items-center gap-2">How It Works <i class="fa-solid fa-arrow-down transform -rotate-45 text-xs"></i></a>
+                    <a href="#services" class="btn-claw px-8 py-4 text-base font-semibold shadow-md hover:shadow-lg">See Pricing</a>
+                    <a href="#benefits" class="btn-outline px-8 py-4 text-base font-medium flex items-center gap-2 bg-white/60 backdrop-blur-sm shadow-sm hover:bg-white transition-all">How It Works <i class="fa-solid fa-arrow-down transform -rotate-45 text-xs"></i></a>
                 </div>
             </div>
-            <div class="hidden md:flex md:col-span-5 flex-col justify-end p-10 relative overflow-hidden bg-cover bg-center bg-neutral-100" style="background-image: url('assets/robobg.png');">
-                <!-- Overlay gradient to ensure text remains readable over the image -->
-                <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/95 via-neutral-900/30 to-transparent"></div>
-                
-                <div class="space-y-6 relative z-10 mt-auto text-white">
+            
+            <div class="relative z-10 hidden md:flex md:col-span-5 flex-col justify-end p-10 lg:p-16">
+                <!-- Glassmorphism card for the features on top of the image -->
+                <div class="space-y-6 mt-auto bg-white/40 backdrop-blur-md p-8 rounded-2xl border border-white/50 shadow-xl">
                     <div class="border-l-2 border-claw-500 pl-4 py-1">
-                        <p class="text-xs font-bold uppercase tracking-widest text-claw-300 mb-1 drop-shadow-md">Ownership</p>
-                        <p class="font-medium text-lg drop-shadow-md">100% Client Owned</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-1">Ownership</p>
+                        <p class="font-bold text-lg text-neutral-900">100% Client Owned</p>
                     </div>
                     <div class="border-l-2 border-claw-500 pl-4 py-1">
-                        <p class="text-xs font-bold uppercase tracking-widest text-claw-300 mb-1 drop-shadow-md">Security</p>
-                        <p class="font-medium text-lg drop-shadow-md">Hardened by Default</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-1">Security</p>
+                        <p class="font-bold text-lg text-neutral-900">Hardened by Default</p>
                     </div>
                     <div class="border-l-2 border-claw-500 pl-4 py-1">
-                        <p class="text-xs font-bold uppercase tracking-widest text-claw-300 mb-1 drop-shadow-md">Cost</p>
-                        <p class="font-medium text-lg drop-shadow-md">No Hidden Fees</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-1">Cost</p>
+                        <p class="font-bold text-lg text-neutral-900">No Hidden Fees</p>
                     </div>
                 </div>
             </div>
