@@ -101,7 +101,7 @@
 
             <div class="relative z-10 md:col-span-7 p-8 md:p-16 lg:p-24 flex flex-col justify-center">
                 <div class="inline-block mb-8">
-                    <span class="px-3 py-1.5 bg-claw-50 border border-claw-200 text-claw-600 text-xs font-bold uppercase tracking-wider rounded-full shadow-sm">🦞 Now Accepting Partners</span>
+                    <span class="px-3 py-1.5 bg-claw-50 border border-claw-200 text-claw-600 text-xs font-bold uppercase tracking-wider rounded-md shadow-sm">🦞 Now Accepting Partners</span>
                 </div>
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[0.95] mb-8 text-neutral-900 drop-shadow-sm">
                     AI Employees.<br><span class="text-claw-500">Owned by You.</span>
@@ -111,7 +111,7 @@
                 </p>
                 <div class="flex flex-wrap gap-4">
                     <a href="#services" class="btn-claw px-8 py-4 text-base font-semibold shadow-md hover:shadow-lg">See Pricing</a>
-                    <a href="#about" class="btn-outline px-8 py-4 text-base font-medium flex items-center gap-2 bg-white/60 backdrop-blur-sm shadow-sm hover:bg-white transition-all">How It Works <i class="fa-solid fa-arrow-down transform -rotate-45 text-xs"></i></a>
+                    <a href="#about" class="btn-outline px-8 py-4 text-base font-medium flex items-center gap-2 bg-white/60 backdrop-blur-sm shadow-sm hover:bg-white transition-all">Learn More <i class="fa-solid fa-arrow-down transform -rotate-45 text-xs"></i></a>
                 </div>
             </div>
             
@@ -136,11 +136,6 @@
 
         <!-- Services -->
         <section id="services" class="bg-white">
-            <div class="border-b border-neutral-200 p-8 md:p-16 text-center">
-                <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4">Service Offerings</h2>
-                <p class="text-neutral-500 max-w-2xl mx-auto">Pick a setup path to get live fast, then add managed care if you want ongoing peace of mind.</p>
-            </div>
-
             <!-- Setup -->
             <div class="bg-white border-b border-neutral-200">
                 <div class="p-8 md:p-12 border-b border-neutral-200">
@@ -149,13 +144,13 @@
                     <p class="text-neutral-500 mt-2 max-w-2xl">From a guided install session to template deployments to fully custom agent builds.</p>
                 </div>
                 <div class="grid lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-neutral-200">
-                    <div class="p-10 flex flex-col">
+                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
                         <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">One-Time Session</span><h4 class="text-3xl font-bold mt-2 mb-1">Guided Setup</h4><p class="text-2xl text-neutral-900 font-medium">$200</p></div>
                         <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">A live 1-hour video call to install and configure OpenClaw on your VPS, plus quick follow-up help.</p>
                         <ul class="check-list mb-10 flex-grow"><li>Live install + basic hardening</li><li>Connect keys / OAuth (your choice)</li><li>Smoke test: gateway + one channel</li><li>30 minutes async follow-up support</li></ul>
                         <a href="#contact" class="btn-outline w-full py-4 text-center font-semibold text-sm">Book Setup</a>
                     </div>
-                    <div class="p-10 flex flex-col relative bg-white lg:-mt-4 lg:-mb-4 featured-card lg:z-10 lg:border-t-4 lg:border-t-claw-500 lg:rounded-t">
+                    <div class="p-10 flex flex-col relative bg-white lg:-mt-4 lg:-mb-4 featured-card lg:z-10 lg:border-t-4 lg:border-t-claw-500 lg:rounded-t transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(230,59,46,0.25)] hover:z-20">
                         <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-claw-500 text-white text-[10px] font-bold px-4 py-1.5 uppercase tracking-widest rounded-b-md">Best Value</div>
                         <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Template Deploy</span><h4 class="text-3xl font-bold mt-2 mb-1">Template Bots</h4><p class="text-2xl text-neutral-900 font-medium">From $1,000</p></div>
                         <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">We deploy a proven bot template and tailor it to your business. Choose from pre-built agents for common workflows:</p>
@@ -163,7 +158,7 @@
                         <a href="#contact" class="btn-claw w-full py-4 text-center font-semibold text-sm">Pick a Template</a>
                         <p class="mt-5 text-xs text-neutral-400">If you don't see your use case, we'll recommend the closest template or quote custom.</p>
                     </div>
-                    <div class="p-10 flex flex-col">
+                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
                         <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Build + Implement</span><h4 class="text-3xl font-bold mt-2 mb-1">Custom Agents</h4><p class="text-2xl text-neutral-900 font-medium">From $2,000</p></div>
                         <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">Purpose-built agents for your exact workflows (sales, HR training, inventory, support, ops).</p>
                         <ul class="check-list mb-10 flex-grow"><li>Discovery + requirements</li><li>Custom tools / integrations</li><li>Guardrails + testing</li><li>Documentation + handoff</li><li>Managed care available</li></ul>
@@ -180,14 +175,14 @@
                     <p class="text-neutral-500 mt-2 max-w-2xl">Choose support only, ops + security, or a custom plan for mission-critical systems.</p>
                 </div>
                 <div class="grid lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-neutral-200 bg-white">
-                    <div class="p-10 flex flex-col">
+                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
                         <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Light Support</span><h4 class="text-3xl font-bold mt-2 mb-1">Support</h4><p class="text-2xl text-neutral-900 font-medium">$50 <span class="text-sm text-neutral-400 font-normal">/ mo</span></p></div>
                         <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">For owners who just want a human to ask when something feels off.</p>
                         <ul class="check-list mb-10 flex-grow"><li>Email support (best-effort)</li><li>1× 20-min support call / month</li><li>Guidance for updates &amp; fixes</li></ul>
                         <a href="#contact" class="btn-outline w-full py-4 text-center font-semibold text-sm">Start Support</a>
                         <p class="mt-5 text-xs text-neutral-400">Fair use: designed for light support, not ongoing engineering.</p>
                     </div>
-                    <div class="p-10 flex flex-col relative bg-white lg:-mt-4 lg:-mb-4 featured-card lg:z-10 lg:border-t-4 lg:border-t-claw-500 lg:rounded-t">
+                    <div class="p-10 flex flex-col relative bg-white lg:-mt-4 lg:-mb-4 featured-card lg:z-10 lg:border-t-4 lg:border-t-claw-500 lg:rounded-t transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(230,59,46,0.25)] hover:z-20">
                         <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-claw-500 text-white text-[10px] font-bold px-4 py-1.5 uppercase tracking-widest rounded-b-md">Popular</div>
                         <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Ops + Security</span><h4 class="text-3xl font-bold mt-2 mb-1">Ops + Security</h4><p class="text-2xl text-neutral-900 font-medium">$200 <span class="text-sm text-neutral-400 font-normal">/ mo</span></p></div>
                         <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">For teams that want proactive care without hiring DevOps.</p>
@@ -195,7 +190,7 @@
                         <a href="#contact" class="btn-claw w-full py-4 text-center font-semibold text-sm">Get Ops + Security</a>
                         <p class="mt-5 text-xs text-neutral-400">Cost monitoring here is alerts + thresholds (no daily babysitting).</p>
                     </div>
-                    <div class="p-10 flex flex-col">
+                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
                         <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Enterprise</span><h4 class="text-3xl font-bold mt-2 mb-1">Custom Care</h4><p class="text-2xl text-neutral-900 font-medium">Request a quote</p></div>
                         <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">SLAs, compliance posture, environment separation, team onboarding — scoped to your needs.</p>
                         <ul class="check-list mb-10 flex-grow"><li>SLA + response windows</li><li>Ongoing tuning + improvements</li><li>Deeper security + hardening</li><li>Cost reviews + optimization</li><li>Team onboarding + training</li></ul>
@@ -259,31 +254,24 @@
                                         <stop offset="0" stop-color="#111111"/>
                                         <stop offset="1" stop-color="#262626"/>
                                     </linearGradient>
-                                    <radialGradient id="r" cx="35%" cy="65%" r="70%">
-                                        <stop offset="0" stop-color="#E63B2E" stop-opacity="0.22"/>
+                                    <radialGradient id="r" cx="50%" cy="50%" r="70%">
+                                        <stop offset="0" stop-color="#E63B2E" stop-opacity="0.15"/>
                                         <stop offset="1" stop-color="#E63B2E" stop-opacity="0"/>
                                     </radialGradient>
                                 </defs>
                                 <rect width="1280" height="720" fill="url(#g)"/>
                                 <rect width="1280" height="720" fill="url(#r)"/>
-                                <g opacity="0.25" fill="#ffffff">
-                                    <rect x="90" y="110" width="520" height="34" rx="8"/>
-                                    <rect x="90" y="170" width="690" height="22" rx="8" opacity="0.7"/>
-                                    <rect x="90" y="210" width="610" height="22" rx="8" opacity="0.55"/>
-                                    <rect x="90" y="250" width="460" height="22" rx="8" opacity="0.4"/>
-                                </g>
-                                <text x="90" y="330" fill="#ffffff" opacity="0.75" font-size="40" font-family="JetBrains Mono, monospace">$ openclaw demo --play</text>
                             </svg>
                         </div>
 
                         <div class="relative z-10 flex items-center gap-4 px-7 py-5 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm group-hover:bg-white/15 transition">
-                            <span class="w-16 h-16 rounded-full bg-claw-500 flex items-center justify-center shadow-lg">
+                            <span class="w-16 h-16 rounded-full bg-claw-500 flex items-center justify-center shadow-lg transform group-hover:scale-105 transition-transform">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path d="M9 7.5v9l8-4.5-8-4.5z" fill="#ffffff"/>
                                 </svg>
                             </span>
                             <div class="text-left">
-                                <p class="text-white font-semibold leading-tight text-lg">Watch demo</p>
+                                <p class="text-white font-semibold leading-tight text-lg">1 minute intro</p>
                                 <p class="text-white/70 text-sm">Opens in a popup</p>
                             </div>
                         </div>
