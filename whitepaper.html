@@ -175,14 +175,14 @@
                 <h2 id="architecture">Deployment Architecture</h2>
                 <p>Every ManagedOpenClaw deployment follows this architecture:</p>
                 <ul>
-                    <li><strong>Dedicated VPS</strong> &mdash; one server per client, provisioned on Hetzner Cloud (or AWS/DigitalOcean on request). No shared infrastructure, no multi-tenancy.</li>
+                    <li><strong>Dedicated VPS</strong> &mdash; one server per client, provisioned on your choice of cloud provider (Hetzner, AWS, DigitalOcean, or others). No shared infrastructure, no multi-tenancy.</li>
                     <li><strong>Ubuntu LTS</strong> &mdash; minimal image with automatic security updates.</li>
                     <li><strong>Docker + Docker Compose</strong> &mdash; application runs in isolated containers. Daemon configured for localhost-only port binding.</li>
                     <li><strong>Caddy reverse proxy</strong> &mdash; automatic HTTPS, TLS termination, single ingress point on ports 80/443.</li>
                     <li><strong>UFW firewall</strong> &mdash; default-deny inbound. Ports 22, 80, 443 only.</li>
                     <li><strong>fail2ban</strong> &mdash; SSH brute-force protection.</li>
                     <li><strong>Health monitoring</strong> &mdash; automated health checks every 5 minutes with automatic restart on failure.</li>
-                    <li><strong>Encrypted backups</strong> &mdash; nightly restic backups to off-server storage with 30-day retention. AES-256 encryption at rest. Included with managed care plans.</li>
+                    <li><strong>Encrypted backups</strong> &mdash; nightly restic backups to off-server storage with 30-day retention. AES-256 encryption at rest.</li>
                 </ul>
 
                 <h2 id="comparison">Default OpenClaw vs. ManagedOpenClaw</h2>
@@ -199,7 +199,7 @@
                         <tr><td>Docker port exposure</td><td class="status-bad">Bypasses firewall</td><td class="status-good">Daemon locked to localhost</td></tr>
                         <tr><td>OS security updates</td><td class="status-bad">Manual</td><td class="status-good">Automatic (unattended-upgrades)</td></tr>
                         <tr><td>Infrastructure</td><td class="status-bad">Varies</td><td class="status-good">Dedicated VPS per client</td></tr>
-                        <tr><td>Backups</td><td class="status-bad">None</td><td class="status-good">Encrypted nightly (with care plan)</td></tr>
+                        <tr><td>Backups</td><td class="status-bad">None</td><td class="status-good">Encrypted nightly</td></tr>
                         <tr><td>CORS restrictions</td><td class="status-bad">Open</td><td class="status-good">Subdomain-locked allowedOrigins</td></tr>
                     </tbody>
                 </table>
