@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security White Paper | ManagedOpenClaw</title>
+    <meta name="description" content="A technical overview of how ManagedOpenClaw hardens OpenClaw deployments against the security risks flagged by Kaspersky, Palo Alto Networks, and Cisco.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: {
+                        claw: { 50:'#FEF2F1',100:'#FDE3E1',200:'#FBCBC7',300:'#F7A9A2',400:'#F07A6F',500:'#E63B2E',600:'#D42A1D',700:'#B22318',800:'#932118',900:'#7A211B' },
+                        neutral: { 50:'#fafafa',100:'#f5f5f5',200:'#e5e5e5',300:'#d4d4d4',500:'#737373',600:'#525252',700:'#404040',800:'#262626',900:'#111111' },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background: #fff; color: #111; -webkit-font-smoothing: antialiased; }
+        .btn-claw { background-color: #E63B2E; color: #fff; border: 2px solid #E63B2E; transition: all .2s; border-radius: 4px; }
+        .btn-claw:hover { background-color: #D42A1D; border-color: #D42A1D; }
+        .prose h2 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.03em; margin-top: 3.5rem; margin-bottom: 1rem; color: #111; }
+        .prose h3 { font-size: 1.25rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 0.75rem; color: #262626; }
+        .prose p { color: #404040; line-height: 1.8; margin-bottom: 1.25rem; }
+        .prose ul { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+        .prose ul li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; color: #404040; line-height: 1.7; }
+        .prose ul li::before { content: "\2192"; position: absolute; left: 0; color: #E63B2E; font-weight: 700; }
+        .prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; background: #f5f5f5; border: 1px solid #e5e5e5; padding: 0.15em 0.4em; border-radius: 3px; }
+        .prose .callout { background: #FEF2F1; border-left: 4px solid #E63B2E; padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: 0 4px 4px 0; }
+        .prose .callout p { color: #7A211B; margin-bottom: 0; }
+        .prose .comparison-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.9rem; }
+        .prose .comparison-table th { text-align: left; padding: 0.75rem 1rem; background: #111; color: #fff; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .prose .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #e5e5e5; color: #404040; }
+        .prose .comparison-table tr:last-child td { border-bottom: none; }
+        .prose .comparison-table .status-bad { color: #E63B2E; font-weight: 600; }
+        .prose .comparison-table .status-good { color: #16a34a; font-weight: 600; }
+        .toc a { color: #525252; text-decoration: none; transition: color 0.15s; display: block; padding: 0.35rem 0; font-size: 0.9rem; }
+        .toc a:hover { color: #E63B2E; }
+        .toc a.active { color: #E63B2E; font-weight: 600; }
+        @media print { nav, .toc-sidebar { display: none !important; } .prose { max-width: 100% !important; } }
+    </style>
+</head>
+<body class="font-sans">
+
+    <nav class="fixed w-full z-50 bg-white border-b border-neutral-200">
+        <div class="max-w-[1440px] mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-white flex items-center justify-center text-lg rounded border-2 border-claw-500">&#x1F99E;</div>
+                <span class="font-bold text-xl tracking-tight text-neutral-900">ManagedOpenClaw<span class="text-neutral-400">.com</span></span>
+            </a>
+            <div class="hidden lg:flex items-center gap-8 whitespace-nowrap">
+                <a href="index.html#services" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Pricing</a>
+                <a href="index.html#infrastructure" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Security</a>
+                <a href="whitepaper.html" class="text-sm font-medium text-claw-500 uppercase tracking-wide">White Paper</a>
+                <a href="index.html#about" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">About</a>
+                <a href="index.html#contact" class="px-5 py-2.5 btn-claw text-sm font-semibold">Let&#39;s Talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20 max-w-[1440px] mx-auto border-x border-neutral-200 min-h-screen bg-white">
+
+        <!-- Header -->
+        <div class="bg-neutral-900 text-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-neutral-200">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-400 mb-4">Security White Paper</p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-[1] mb-6">Securing OpenClaw<br>for Production Use</h1>
+            <p class="text-neutral-400 text-lg md:text-xl max-w-3xl leading-relaxed mb-8">A technical overview of the security risks in default OpenClaw installations and how ManagedOpenClaw hardens every deployment for business use.</p>
+            <div class="flex flex-wrap items-center gap-6 text-sm text-neutral-500">
+                <span>Published: March 2026</span>
+                <span class="hidden sm:inline">&middot;</span>
+                <span>By: AI Freelancer &mdash; ManagedOpenClaw.com</span>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-[260px_1fr] divide-x divide-neutral-200">
+
+            <!-- Table of Contents sidebar -->
+            <aside class="hidden lg:block toc-sidebar p-8 sticky top-20 self-start max-h-[calc(100vh-5rem)] overflow-y-auto">
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-neutral-400 mb-4">Contents</p>
+                <div class="toc space-y-1">
+                    <a href="#executive-summary">Executive Summary</a>
+                    <a href="#the-problem">The Problem</a>
+                    <a href="#threat-landscape">Threat Landscape</a>
+                    <a href="#our-approach">Our Hardening Approach</a>
+                    <a href="#architecture">Deployment Architecture</a>
+                    <a href="#comparison">Default vs. Hardened</a>
+                    <a href="#ongoing-security">Ongoing Security</a>
+                    <a href="#ownership">Ownership Model</a>
+                    <a href="#conclusion">Conclusion</a>
+                </div>
+            </aside>
+
+            <!-- Content -->
+            <article class="prose px-8 md:px-16 lg:px-20 py-12 md:py-16 max-w-3xl">
+
+                <h2 id="executive-summary">Executive Summary</h2>
+                <p>OpenClaw is an open-source AI agent platform that gives autonomous bots full system access: shell commands, file systems, browser control, and messaging APIs. That power makes it extraordinarily useful. It also makes it extraordinarily dangerous when deployed with default settings.</p>
+                <p>Out of the box, OpenClaw ships with authentication disabled, no firewall, and the gateway exposed to the public internet. Security researchers at Kaspersky, Palo Alto Networks, and Cisco Talos have all flagged default OpenClaw installations as high-risk targets for data exfiltration, prompt injection, and unauthorized remote access.</p>
+                <p>ManagedOpenClaw exists to close that gap. Every deployment we ship is hardened from the operating system up, isolated on dedicated infrastructure, and configured with defense-in-depth security controls. This white paper explains exactly what we do and why.</p>
+
+                <h2 id="the-problem">The Problem with Default OpenClaw</h2>
+                <p>OpenClaw's maintainers are transparent about the risks. The onboarding wizard itself displays a security warning that reads, in part: "OpenClaw is a hobby project and still in beta. Expect sharp edges... A bad prompt can trick it into doing unsafe things."</p>
+                <p>The default installation has several critical security gaps:</p>
+                <ul>
+                    <li><strong>No authentication.</strong> The gateway dashboard and API are accessible to anyone who can reach the server. There is no login, no token, no access control of any kind.</li>
+                    <li><strong>Gateway bound to all interfaces.</strong> The web gateway listens on <code>0.0.0.0</code>, meaning it accepts connections from every network interface, including the public internet.</li>
+                    <li><strong>No firewall.</strong> There is no firewall configured. Every port on the server is reachable from the internet unless the hosting provider has a separate network-level firewall.</li>
+                    <li><strong>No encryption in transit.</strong> The gateway communicates over plain HTTP. Credentials, tokens, and conversation data are transmitted in cleartext.</li>
+                    <li><strong>Full tool access by default.</strong> The agent has unrestricted access to shell commands, file read/write, and network requests. A prompt injection attack can leverage all of these capabilities.</li>
+                    <li><strong>SSH with password login.</strong> Most cloud providers ship Ubuntu images with password-based SSH enabled and root login permitted.</li>
+                </ul>
+                <p>For a developer running OpenClaw locally on their laptop behind a NAT, these defaults are tolerable. For a business deploying it on a public server to serve customers, they are not.</p>
+
+                <h2 id="threat-landscape">Threat Landscape</h2>
+                <p>AI agents with tool access represent a new category of attack surface. The risks are not theoretical. The security community has documented several classes of attack against systems like OpenClaw:</p>
+
+                <h3>Prompt Injection</h3>
+                <p>An attacker crafts input (via a messaging channel, uploaded document, or web request) that causes the agent to execute unintended actions. With tool access enabled, this can mean reading sensitive files, executing shell commands, or exfiltrating data to an external server.</p>
+
+                <h3>Credential Theft</h3>
+                <p>If the gateway is accessible without authentication, an attacker can access the dashboard, read conversation history, extract API keys visible in configuration, and issue commands to the agent directly.</p>
+
+                <h3>Lateral Movement</h3>
+                <p>An agent with shell access on an unpatched server can be used as a pivot point. If the server has access to internal networks, databases, or other services, the agent becomes an entry point for deeper compromise.</p>
+
+                <h3>Data Exfiltration</h3>
+                <p>Conversation history, uploaded documents, customer data processed by the agent, and configuration files (including API keys) are all accessible to anyone who can reach an unprotected gateway.</p>
+
+                <div class="callout">
+                    <p><strong>The core issue:</strong> OpenClaw gives your agent the same level of access as a human sitting at the server's terminal. Without security controls, anyone on the internet has that same access.</p>
+                </div>
+
+                <h2 id="our-approach">Our Hardening Approach</h2>
+                <p>ManagedOpenClaw applies defense-in-depth security: multiple independent layers of protection so that no single failure compromises the system. Every deployment includes the following controls, configured automatically during provisioning.</p>
+
+                <h3>1. Operating System Hardening</h3>
+                <p>Every server begins with a minimal Ubuntu LTS image. We immediately apply the following:</p>
+                <ul>
+                    <li><strong>SSH key-only authentication.</strong> Password login is disabled. Root login is disabled. Only the designated service user can authenticate, and only with a pre-authorized SSH key.</li>
+                    <li><strong>Firewall with explicit allowlist.</strong> UFW (Uncomplicated Firewall) is configured with a default-deny policy. Only ports 22 (SSH), 80 (HTTP for TLS certificate issuance), and 443 (HTTPS) are open. All other ports are blocked.</li>
+                    <li><strong>Brute-force protection.</strong> fail2ban monitors SSH logs and automatically bans IP addresses after repeated failed authentication attempts.</li>
+                    <li><strong>Automatic security updates.</strong> Unattended-upgrades is enabled for the security pocket. Critical OS patches are applied automatically without manual intervention.</li>
+                </ul>
+
+                <h3>2. Network Isolation</h3>
+                <p>The OpenClaw gateway runs inside a Docker container. Docker has a well-known behavior where published ports bypass the host firewall (UFW/iptables) by manipulating iptables rules directly. This means that even with UFW configured, a Docker container publishing a port can be reachable from the internet.</p>
+                <p>We solve this at the Docker daemon level. The daemon is configured to bind all published ports to <code>127.0.0.1</code> (localhost) by default. This means no Docker container on the server can expose a port to the public internet, regardless of what the compose file specifies. The only path to the gateway from the outside world is through the Caddy reverse proxy on port 443.</p>
+
+                <h3>3. Encrypted HTTPS via Caddy</h3>
+                <p>Caddy is a production-grade reverse proxy that automatically provisions and renews TLS certificates from Let's Encrypt. All traffic between the client's browser and the gateway is encrypted. There is no plain HTTP access to the gateway.</p>
+                <p>Caddy serves as the single ingress point. It terminates TLS, enforces HTTPS, and forwards traffic to the gateway on the local loopback interface. The gateway itself is never directly reachable from the internet.</p>
+
+                <h3>4. Gateway Authentication</h3>
+                <p>Every deployment is configured with a cryptographically random 256-bit gateway token generated during provisioning. The dashboard and API require this token for access. Without it, the gateway rejects all connections.</p>
+                <p>Additionally, OpenClaw's device pairing system is enforced. Each browser that accesses the dashboard must be explicitly approved from the server's command line. This provides a second factor of access control beyond the token itself.</p>
+
+                <h3>5. Docker Container Isolation</h3>
+                <p>The OpenClaw application runs inside a Docker container with its own filesystem, process namespace, and network stack. The container runs as a non-root user with a unique UID that differs from the host system. Configuration files are shared via Docker volume mounts with carefully managed permissions: world-readable for files the container needs to access, with sensitive credentials (OAuth tokens) locked to owner-only access (<code>600</code>).</p>
+
+                <h3>6. CORS and Origin Restrictions</h3>
+                <p>The gateway's Control UI is configured with an explicit allowedOrigins list that only permits requests from the deployment's HTTPS subdomain. Cross-origin requests from other domains are rejected, preventing clickjacking and cross-site request forgery against the dashboard.</p>
+
+                <h2 id="architecture">Deployment Architecture</h2>
+                <p>Every ManagedOpenClaw deployment follows this architecture:</p>
+                <ul>
+                    <li><strong>Dedicated VPS</strong> &mdash; one server per client, provisioned on Hetzner Cloud (or AWS/DigitalOcean on request). No shared infrastructure, no multi-tenancy.</li>
+                    <li><strong>Ubuntu LTS</strong> &mdash; minimal image with automatic security updates.</li>
+                    <li><strong>Docker + Docker Compose</strong> &mdash; application runs in isolated containers. Daemon configured for localhost-only port binding.</li>
+                    <li><strong>Caddy reverse proxy</strong> &mdash; automatic HTTPS, TLS termination, single ingress point on ports 80/443.</li>
+                    <li><strong>UFW firewall</strong> &mdash; default-deny inbound. Ports 22, 80, 443 only.</li>
+                    <li><strong>fail2ban</strong> &mdash; SSH brute-force protection.</li>
+                    <li><strong>Health monitoring</strong> &mdash; automated health checks every 5 minutes with automatic restart on failure.</li>
+                    <li><strong>Encrypted backups</strong> &mdash; nightly restic backups to off-server storage with 30-day retention. AES-256 encryption at rest. Included with managed care plans.</li>
+                </ul>
+
+                <h2 id="comparison">Default OpenClaw vs. ManagedOpenClaw</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th style="width:40%">Security Control</th><th style="width:30%">Default OpenClaw</th><th style="width:30%">ManagedOpenClaw</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Gateway authentication</td><td class="status-bad">Disabled</td><td class="status-good">256-bit token + device pairing</td></tr>
+                        <tr><td>Gateway network binding</td><td class="status-bad">0.0.0.0 (all interfaces)</td><td class="status-good">127.0.0.1 (localhost only)</td></tr>
+                        <tr><td>Encryption in transit</td><td class="status-bad">Plain HTTP</td><td class="status-good">HTTPS with auto-TLS</td></tr>
+                        <tr><td>Firewall</td><td class="status-bad">None</td><td class="status-good">UFW default-deny (22, 80, 443)</td></tr>
+                        <tr><td>SSH access</td><td class="status-bad">Password + root enabled</td><td class="status-good">Key-only, root disabled, fail2ban</td></tr>
+                        <tr><td>Docker port exposure</td><td class="status-bad">Bypasses firewall</td><td class="status-good">Daemon locked to localhost</td></tr>
+                        <tr><td>OS security updates</td><td class="status-bad">Manual</td><td class="status-good">Automatic (unattended-upgrades)</td></tr>
+                        <tr><td>Infrastructure</td><td class="status-bad">Varies</td><td class="status-good">Dedicated VPS per client</td></tr>
+                        <tr><td>Backups</td><td class="status-bad">None</td><td class="status-good">Encrypted nightly (with care plan)</td></tr>
+                        <tr><td>CORS restrictions</td><td class="status-bad">Open</td><td class="status-good">Subdomain-locked allowedOrigins</td></tr>
+                    </tbody>
+                </table>
+
+                <h2 id="ongoing-security">Ongoing Security Operations</h2>
+                <p>Initial hardening is necessary but not sufficient. Security is an ongoing practice, not a one-time configuration. Our managed care plans include:</p>
+                <ul>
+                    <li><strong>Same-day critical patches.</strong> When a CVE with a CVSS score of 9.0 or higher is published for any component in the stack (Ubuntu, Docker, Caddy, Node.js, OpenClaw), we apply the patch the same day it becomes available.</li>
+                    <li><strong>Routine updates within 48 hours.</strong> Non-critical OpenClaw updates, dependency patches, and minor version bumps are applied within 48 hours of stable release.</li>
+                    <li><strong>Weekly health checks.</strong> We review uptime, container status, disk usage, and gateway logs weekly. Issues are flagged and resolved before they become incidents.</li>
+                    <li><strong>Monthly backup restore tests.</strong> Backups are only useful if they work. We test a full restore from backup monthly and verify the gateway comes up correctly.</li>
+                    <li><strong>API cost monitoring.</strong> We set usage alerts on your AI model API spend. If costs spike unexpectedly (a signal of abuse or misconfiguration), you're notified immediately.</li>
+                </ul>
+
+                <h2 id="ownership">The Ownership Model</h2>
+                <p>ManagedOpenClaw is not a SaaS platform. We do not host your agent on our infrastructure. We do not hold your API keys. We do not have ongoing access to your server unless you explicitly grant it for managed care.</p>
+                <p>Every deployment is built on infrastructure that you own. The VPS is in your cloud account (or a dedicated account we create for you). The domain points to your server. The API keys are yours. If you stop working with us, everything keeps running exactly as it was.</p>
+                <p>This model exists because we believe that businesses running AI agents with access to sensitive data should own and control the infrastructure those agents run on. Multi-tenant platforms are fine for experimentation. For production use with client data, employee data, or proprietary workflows, isolated, owned infrastructure is the appropriate security posture.</p>
+
+                <h2 id="conclusion">Conclusion</h2>
+                <p>OpenClaw is a powerful platform. Its default security posture is designed for local development, not production deployment. The gap between those two contexts is significant, and closing it requires expertise across operating system hardening, container security, network architecture, and TLS configuration.</p>
+                <p>ManagedOpenClaw closes that gap for every client, every deployment, from day one. If you have questions about our security practices or want to discuss your specific requirements, we welcome the conversation.</p>
+
+                <div class="mt-16 pt-8 border-t border-neutral-200">
+                    <p class="text-sm text-neutral-500 mb-6">This white paper describes the security controls in place as of March 2026. Our hardening practices evolve as the OpenClaw project and the threat landscape evolve.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="index.html#contact" class="btn-claw px-8 py-3 text-sm font-semibold inline-block">Get in Touch</a>
+                        <a href="index.html" class="inline-flex items-center gap-2 px-8 py-3 text-sm font-medium text-neutral-600 border-2 border-neutral-200 rounded hover:border-claw-500 hover:text-claw-500 transition-all">&larr; Back to ManagedOpenClaw.com</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <footer class="p-10 md:p-16 border-t border-neutral-200">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-sm text-neutral-500 hover:text-neutral-700 transition-colors">Built &amp; managed by <strong class="text-neutral-700">AI Freelancer</strong> &mdash; AI implementation for businesses that want to own their tools.</a>
+                <p class="text-xs text-neutral-400 uppercase tracking-wide">&copy; 2026 ManagedOpenClaw.com</p>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>
