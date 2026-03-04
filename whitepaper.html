@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security White Paper | ManagedOpenClaw</title>
-    <meta name="description" content="A technical overview of how ManagedOpenClaw hardens OpenClaw deployments against the security risks flagged by Kaspersky, Palo Alto Networks, and Cisco.">
+    <title>White Paper: Running OpenClaw in Production | ManagedOpenClaw</title>
+    <meta name="description" content="A comprehensive guide to deploying, securing, and operating OpenClaw agents for business use. Covers infrastructure, security, ongoing operations, and the ownership model.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +40,7 @@
         .prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; background: #f5f5f5; border: 1px solid #e5e5e5; padding: 0.15em 0.4em; border-radius: 3px; }
         .prose .callout { background: #FEF2F1; border-left: 4px solid #E63B2E; padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: 0 4px 4px 0; }
         .prose .callout p { color: #7A211B; margin-bottom: 0; }
+        .prose .callout p + p { margin-top: 0.75rem; }
         .prose .comparison-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.9rem; }
         .prose .comparison-table th { text-align: left; padding: 0.75rem 1rem; background: #111; color: #fff; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
         .prose .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #e5e5e5; color: #404040; }
@@ -48,7 +49,6 @@
         .prose .comparison-table .status-good { color: #16a34a; font-weight: 600; }
         .toc a { color: #525252; text-decoration: none; transition: color 0.15s; display: block; padding: 0.35rem 0; font-size: 0.9rem; }
         .toc a:hover { color: #E63B2E; }
-        .toc a.active { color: #E63B2E; font-weight: 600; }
         @media print { nav, .toc-sidebar { display: none !important; } .prose { max-width: 100% !important; } }
     </style>
 </head>
@@ -72,11 +72,10 @@
 
     <main class="pt-20 max-w-[1440px] mx-auto border-x border-neutral-200 min-h-screen bg-white">
 
-        <!-- Header -->
         <div class="bg-neutral-900 text-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-neutral-200">
-            <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-400 mb-4">Security White Paper</p>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-[1] mb-6">Securing OpenClaw<br>for Production Use</h1>
-            <p class="text-neutral-400 text-lg md:text-xl max-w-3xl leading-relaxed mb-8">A technical overview of the security risks in default OpenClaw installations and how ManagedOpenClaw hardens every deployment for business use.</p>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-400 mb-4">White Paper</p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-[1] mb-6">Running OpenClaw<br>in Production</h1>
+            <p class="text-neutral-400 text-lg md:text-xl max-w-3xl leading-relaxed mb-8">What it takes to deploy, secure, and operate OpenClaw agents for real business use &mdash; and why most teams shouldn't do it alone.</p>
             <div class="flex flex-wrap items-center gap-6 text-sm text-neutral-500">
                 <span>Published: March 2026</span>
                 <span class="hidden sm:inline">&middot;</span>
@@ -86,145 +85,204 @@
 
         <div class="grid lg:grid-cols-[260px_1fr] divide-x divide-neutral-200">
 
-            <!-- Table of Contents sidebar -->
             <aside class="hidden lg:block toc-sidebar p-8 sticky top-20 self-start max-h-[calc(100vh-5rem)] overflow-y-auto">
                 <p class="text-xs font-bold uppercase tracking-[0.2em] text-neutral-400 mb-4">Contents</p>
                 <div class="toc space-y-1">
                     <a href="#executive-summary">Executive Summary</a>
-                    <a href="#the-problem">The Problem</a>
-                    <a href="#threat-landscape">Threat Landscape</a>
-                    <a href="#our-approach">Our Hardening Approach</a>
-                    <a href="#architecture">Deployment Architecture</a>
-                    <a href="#comparison">Default vs. Hardened</a>
-                    <a href="#ongoing-security">Ongoing Security</a>
-                    <a href="#ownership">Ownership Model</a>
+                    <a href="#why-openclaw">Why OpenClaw</a>
+                    <a href="#the-gap">The Gap</a>
+                    <a href="#security">Security Hardening</a>
+                    <a href="#infrastructure">Infrastructure</a>
+                    <a href="#deployment">Deployment &amp; Onboarding</a>
+                    <a href="#ongoing-ops">Ongoing Operations</a>
+                    <a href="#agent-development">Agent Development</a>
+                    <a href="#cost-model">Cost Model</a>
+                    <a href="#comparison">Default vs. Managed</a>
+                    <a href="#ownership">Ownership</a>
+                    <a href="#agencies">For Agencies</a>
                     <a href="#conclusion">Conclusion</a>
                 </div>
             </aside>
 
-            <!-- Content -->
             <article class="prose px-8 md:px-16 lg:px-20 py-12 md:py-16 max-w-3xl">
 
                 <h2 id="executive-summary">Executive Summary</h2>
-                <p>OpenClaw is an open-source AI agent platform that gives autonomous bots full system access: shell commands, file systems, browser control, and messaging APIs. That power makes it extraordinarily useful. It also makes it extraordinarily dangerous when deployed with default settings.</p>
-                <p>Out of the box, OpenClaw ships with authentication disabled, no firewall, and the gateway exposed to the public internet. Security researchers at Kaspersky, Palo Alto Networks, and Cisco Talos have all flagged default OpenClaw installations as high-risk targets for data exfiltration, prompt injection, and unauthorized remote access.</p>
-                <p>ManagedOpenClaw exists to close that gap. Every deployment we ship is hardened from the operating system up, isolated on dedicated infrastructure, and configured with defense-in-depth security controls. This white paper explains exactly what we do and why.</p>
+                <p>OpenClaw is an open-source AI agent platform that gives autonomous bots full system access: shell commands, file systems, browser control, and messaging APIs. It is one of the most capable self-hosted agent frameworks available. It is also one of the most difficult to deploy safely and maintain over time.</p>
+                <p>Out of the box, OpenClaw is designed for local development. Moving it to a production environment &mdash; where it handles real customer interactions, processes sensitive data, and runs 24/7 &mdash; requires expertise across server administration, container security, network architecture, backup strategy, monitoring, and the OpenClaw platform itself.</p>
+                <p>ManagedOpenClaw is a managed service that handles all of it. We deploy hardened OpenClaw instances on dedicated infrastructure, maintain them over time, and support the businesses that rely on them. This white paper explains why that matters, what we do, and how it works.</p>
 
-                <h2 id="the-problem">The Problem with Default OpenClaw</h2>
-                <p>OpenClaw's maintainers are transparent about the risks. The onboarding wizard itself displays a security warning that reads, in part: "OpenClaw is a hobby project and still in beta. Expect sharp edges... A bad prompt can trick it into doing unsafe things."</p>
-                <p>The default installation has several critical security gaps:</p>
+                <h2 id="why-openclaw">Why OpenClaw</h2>
+                <p>The AI agent landscape is evolving rapidly. Most platforms fall into one of two categories: hosted SaaS products where you rent access to someone else's infrastructure, or open-source frameworks you run yourself. Each has tradeoffs.</p>
+                <p>Hosted platforms like KiloClaw are convenient. Sign up, configure a bot, connect a channel. But your data lives on their servers, alongside every other customer's data. You don't control the infrastructure, you can't audit the security, and if the platform changes pricing or shuts down, your agent goes with it.</p>
+                <p>OpenClaw sits in the other camp. It's open-source, self-hosted, and extraordinarily capable. Your agent runs on hardware you control. Your data never leaves your server. Your API keys stay in your possession. You can customize everything &mdash; tools, skills, models, channels, workflows &mdash; without waiting for a vendor to ship a feature.</p>
+                <p>For businesses that handle client data, proprietary workflows, financial information, legal documents, or anything where data sovereignty matters, self-hosted is the right posture. The question is not whether to self-host, but how to do it well.</p>
+
+                <h2 id="the-gap">The Gap Between Development and Production</h2>
+                <p>OpenClaw's maintainers are transparent about the platform's maturity. The onboarding wizard displays a security warning that reads: "OpenClaw is a hobby project and still in beta. Expect sharp edges... A bad prompt can trick it into doing unsafe things."</p>
+                <p>This honesty is admirable. It also means that the default installation is optimized for developers experimenting on their own machines, not businesses running agents in production. The gap between those two contexts is significant:</p>
                 <ul>
-                    <li><strong>No authentication.</strong> The gateway dashboard and API are accessible to anyone who can reach the server. There is no login, no token, no access control of any kind.</li>
-                    <li><strong>Gateway bound to all interfaces.</strong> The web gateway listens on <code>0.0.0.0</code>, meaning it accepts connections from every network interface, including the public internet.</li>
-                    <li><strong>No firewall.</strong> There is no firewall configured. Every port on the server is reachable from the internet unless the hosting provider has a separate network-level firewall.</li>
-                    <li><strong>No encryption in transit.</strong> The gateway communicates over plain HTTP. Credentials, tokens, and conversation data are transmitted in cleartext.</li>
-                    <li><strong>Full tool access by default.</strong> The agent has unrestricted access to shell commands, file read/write, and network requests. A prompt injection attack can leverage all of these capabilities.</li>
-                    <li><strong>SSH with password login.</strong> Most cloud providers ship Ubuntu images with password-based SSH enabled and root login permitted.</li>
+                    <li><strong>Security.</strong> Authentication is disabled by default. The gateway is exposed to the public internet. There is no firewall, no encryption in transit, and no access control. Security researchers at Kaspersky, Palo Alto Networks, and Cisco Talos have all flagged default OpenClaw installations as high-risk.</li>
+                    <li><strong>Reliability.</strong> There is no built-in health monitoring, no automatic restart on failure, no backup system, and no structured approach to updates. If the container crashes at 2am, nobody knows until a customer reports it.</li>
+                    <li><strong>Operations.</strong> OpenClaw updates frequently. Each update may introduce breaking changes, new configuration requirements, or security patches that need prompt attention. Somebody needs to track releases, test updates, apply patches, and verify that everything still works.</li>
+                    <li><strong>Expertise.</strong> Getting OpenClaw into a production-ready state requires knowledge of Linux server administration, Docker, reverse proxies, TLS certificates, firewall configuration, DNS, backup tooling, and the OpenClaw platform itself. Most businesses don't have this expertise on staff, and hiring for it is expensive.</li>
                 </ul>
-                <p>For a developer running OpenClaw locally on their laptop behind a NAT, these defaults are tolerable. For a business deploying it on a public server to serve customers, they are not.</p>
-
-                <h2 id="threat-landscape">Threat Landscape</h2>
-                <p>AI agents with tool access represent a new category of attack surface. The risks are not theoretical. The security community has documented several classes of attack against systems like OpenClaw:</p>
-
-                <h3>Prompt Injection</h3>
-                <p>An attacker crafts input (via a messaging channel, uploaded document, or web request) that causes the agent to execute unintended actions. With tool access enabled, this can mean reading sensitive files, executing shell commands, or exfiltrating data to an external server.</p>
-
-                <h3>Credential Theft</h3>
-                <p>If the gateway is accessible without authentication, an attacker can access the dashboard, read conversation history, extract API keys visible in configuration, and issue commands to the agent directly.</p>
-
-                <h3>Lateral Movement</h3>
-                <p>An agent with shell access on an unpatched server can be used as a pivot point. If the server has access to internal networks, databases, or other services, the agent becomes an entry point for deeper compromise.</p>
-
-                <h3>Data Exfiltration</h3>
-                <p>Conversation history, uploaded documents, customer data processed by the agent, and configuration files (including API keys) are all accessible to anyone who can reach an unprotected gateway.</p>
 
                 <div class="callout">
-                    <p><strong>The core issue:</strong> OpenClaw gives your agent the same level of access as a human sitting at the server's terminal. Without security controls, anyone on the internet has that same access.</p>
+                    <p><strong>The core challenge:</strong> OpenClaw gives you a powerful AI agent platform. Making it production-ready is a separate project entirely &mdash; one that requires DevOps, security, and platform expertise that most businesses don't have in-house.</p>
                 </div>
 
-                <h2 id="our-approach">Our Hardening Approach</h2>
-                <p>ManagedOpenClaw applies defense-in-depth security: multiple independent layers of protection so that no single failure compromises the system. Every deployment includes the following controls, configured automatically during provisioning.</p>
+                <h2 id="security">Security Hardening</h2>
+                <p>Security is the most visible gap in default OpenClaw, and the most dangerous to leave unaddressed. Every ManagedOpenClaw deployment includes the following controls, configured automatically during provisioning.</p>
 
-                <h3>1. Operating System Hardening</h3>
-                <p>Every server begins with a minimal Ubuntu LTS image. We immediately apply the following:</p>
+                <h3>Operating System</h3>
                 <ul>
-                    <li><strong>SSH key-only authentication.</strong> Password login is disabled. Root login is disabled. Only the designated service user can authenticate, and only with a pre-authorized SSH key.</li>
-                    <li><strong>Firewall with explicit allowlist.</strong> UFW (Uncomplicated Firewall) is configured with a default-deny policy. Only ports 22 (SSH), 80 (HTTP for TLS certificate issuance), and 443 (HTTPS) are open. All other ports are blocked.</li>
-                    <li><strong>Brute-force protection.</strong> fail2ban monitors SSH logs and automatically bans IP addresses after repeated failed authentication attempts.</li>
-                    <li><strong>Automatic security updates.</strong> Unattended-upgrades is enabled for the security pocket. Critical OS patches are applied automatically without manual intervention.</li>
+                    <li><strong>SSH key-only authentication.</strong> Password login is disabled. Root login is disabled. Only the designated service user can connect, and only with a pre-authorized SSH key.</li>
+                    <li><strong>Firewall with explicit allowlist.</strong> UFW is configured with a default-deny policy. Only ports 22 (SSH), 80 (HTTP for certificate issuance), and 443 (HTTPS) are open.</li>
+                    <li><strong>Brute-force protection.</strong> fail2ban monitors SSH logs and automatically bans IPs after repeated failed authentication attempts.</li>
+                    <li><strong>Automatic security updates.</strong> The OS security pocket receives unattended upgrades. Critical patches are applied without manual intervention.</li>
                 </ul>
 
-                <h3>2. Network Isolation</h3>
-                <p>The OpenClaw gateway runs inside a Docker container. Docker has a well-known behavior where published ports bypass the host firewall (UFW/iptables) by manipulating iptables rules directly. This means that even with UFW configured, a Docker container publishing a port can be reachable from the internet.</p>
-                <p>We solve this at the Docker daemon level. The daemon is configured to bind all published ports to <code>127.0.0.1</code> (localhost) by default. This means no Docker container on the server can expose a port to the public internet, regardless of what the compose file specifies. The only path to the gateway from the outside world is through the Caddy reverse proxy on port 443.</p>
+                <h3>Network Architecture</h3>
+                <p>Docker has a well-known behavior where published ports bypass the host firewall by manipulating iptables directly. This means even with UFW configured, a Docker container can expose ports to the internet. We solve this at the Docker daemon level: all published ports bind to <code>127.0.0.1</code> by default. No container on the server can expose a port externally.</p>
+                <p>All external traffic flows through Caddy, a production-grade reverse proxy that automatically provisions and renews TLS certificates. The gateway is only reachable via HTTPS. There is no plain HTTP path to the application.</p>
 
-                <h3>3. Encrypted HTTPS via Caddy</h3>
-                <p>Caddy is a production-grade reverse proxy that automatically provisions and renews TLS certificates from Let's Encrypt. All traffic between the client's browser and the gateway is encrypted. There is no plain HTTP access to the gateway.</p>
-                <p>Caddy serves as the single ingress point. It terminates TLS, enforces HTTPS, and forwards traffic to the gateway on the local loopback interface. The gateway itself is never directly reachable from the internet.</p>
-
-                <h3>4. Gateway Authentication</h3>
-                <p>Every deployment is configured with a cryptographically random 256-bit gateway token generated during provisioning. The dashboard and API require this token for access. Without it, the gateway rejects all connections.</p>
-                <p>Additionally, OpenClaw's device pairing system is enforced. Each browser that accesses the dashboard must be explicitly approved from the server's command line. This provides a second factor of access control beyond the token itself.</p>
-
-                <h3>5. Docker Container Isolation</h3>
-                <p>The OpenClaw application runs inside a Docker container with its own filesystem, process namespace, and network stack. The container runs as a non-root user with a unique UID that differs from the host system. Configuration files are shared via Docker volume mounts with carefully managed permissions: world-readable for files the container needs to access, with sensitive credentials (OAuth tokens) locked to owner-only access (<code>600</code>).</p>
-
-                <h3>6. CORS and Origin Restrictions</h3>
-                <p>The gateway's Control UI is configured with an explicit allowedOrigins list that only permits requests from the deployment's HTTPS subdomain. Cross-origin requests from other domains are rejected, preventing clickjacking and cross-site request forgery against the dashboard.</p>
-
-                <h2 id="architecture">Deployment Architecture</h2>
-                <p>Every ManagedOpenClaw deployment follows this architecture:</p>
+                <h3>Application Security</h3>
                 <ul>
-                    <li><strong>Dedicated VPS</strong> &mdash; one server per client, provisioned on your choice of cloud provider (Hetzner, AWS, DigitalOcean, or others). No shared infrastructure, no multi-tenancy.</li>
+                    <li><strong>Gateway authentication.</strong> A cryptographically random 256-bit token is generated during provisioning. The dashboard and API reject all connections without it.</li>
+                    <li><strong>Device pairing.</strong> Each browser must be explicitly approved from the server's command line before it can interact with the gateway. This provides a second layer of access control.</li>
+                    <li><strong>CORS restrictions.</strong> The Control UI only accepts requests from the deployment's HTTPS subdomain. Cross-origin requests are rejected.</li>
+                    <li><strong>Credential isolation.</strong> OAuth tokens are stored with owner-only file permissions (<code>600</code>). Other configuration files use permissions that allow the Docker container to read/write without exposing credentials.</li>
+                </ul>
+
+                <h2 id="infrastructure">Infrastructure</h2>
+                <p>Every ManagedOpenClaw deployment runs on dedicated infrastructure. This is not a shared platform. There is no multi-tenancy. Each client gets their own server that nobody else touches.</p>
+
+                <h3>Cloud Provider</h3>
+                <p>We deploy on your choice of cloud provider &mdash; Hetzner, AWS, DigitalOcean, or others. The architecture is platform-agnostic. We recommend the provider and server specification that best fits your usage profile and budget. For most deployments, a modest VPS with 2 vCPUs and 4 GB RAM is more than sufficient to run an OpenClaw agent handling hundreds of conversations per day.</p>
+
+                <h3>Architecture</h3>
+                <ul>
+                    <li><strong>Dedicated VPS</strong> &mdash; one server per client, isolated from every other customer.</li>
                     <li><strong>Ubuntu LTS</strong> &mdash; minimal image with automatic security updates.</li>
-                    <li><strong>Docker + Docker Compose</strong> &mdash; application runs in isolated containers. Daemon configured for localhost-only port binding.</li>
-                    <li><strong>Caddy reverse proxy</strong> &mdash; automatic HTTPS, TLS termination, single ingress point on ports 80/443.</li>
-                    <li><strong>UFW firewall</strong> &mdash; default-deny inbound. Ports 22, 80, 443 only.</li>
-                    <li><strong>fail2ban</strong> &mdash; SSH brute-force protection.</li>
-                    <li><strong>Health monitoring</strong> &mdash; automated health checks every 5 minutes with automatic restart on failure.</li>
-                    <li><strong>Encrypted backups</strong> &mdash; nightly restic backups to off-server storage with 30-day retention. AES-256 encryption at rest.</li>
+                    <li><strong>Docker + Docker Compose</strong> &mdash; application runs in isolated containers with the daemon locked to localhost.</li>
+                    <li><strong>Caddy reverse proxy</strong> &mdash; automatic HTTPS, TLS termination, single ingress point.</li>
+                    <li><strong>Custom subdomain</strong> &mdash; your agent gets a dedicated URL with automatic certificate provisioning.</li>
+                    <li><strong>Encrypted backups</strong> &mdash; nightly restic backups to off-server storage with 30-day retention and AES-256 encryption at rest.</li>
+                    <li><strong>Health monitoring</strong> &mdash; automated checks every 5 minutes with automatic restart on failure.</li>
                 </ul>
+
+                <h3>Disaster Recovery</h3>
+                <p>Every deployment includes automated nightly backups covering configuration, agent memory, conversation history, workspace files, and all OpenClaw data. Backups are encrypted and stored on separate infrastructure from the server itself. If a server fails catastrophically, we can restore a fully functional deployment from backup. Managed care clients receive monthly restore tests to verify backup integrity.</p>
+
+                <h2 id="deployment">Deployment &amp; Onboarding</h2>
+                <p>Getting a new OpenClaw instance from zero to production involves dozens of steps across multiple systems: cloud provisioning, DNS configuration, OS hardening, Docker installation, OpenClaw build, gateway configuration, OAuth handshake, channel integration, permission tuning, and verification. Done manually, this takes hours and is error-prone.</p>
+                <p>We've automated the entire process. Our provisioning toolkit creates a fully hardened, production-ready OpenClaw server in under 10 minutes. The only manual step is the OAuth handshake (connecting your AI model provider), which requires human interaction for security reasons &mdash; we sit with you on a call or walk you through it asynchronously.</p>
+                <p>After provisioning, we configure your agent's personality, connect messaging channels (Discord, Telegram, Slack, or custom integrations), set up tool access levels, and verify that everything works end-to-end. You get a working agent that's live and responding to messages.</p>
+
+                <h2 id="ongoing-ops">Ongoing Operations</h2>
+                <p>Deployment is the beginning, not the end. Running an AI agent in production is an ongoing operation. Things break, dependencies update, models change, costs fluctuate, and the business needs evolve. Someone needs to be watching.</p>
+
+                <h3>Patching &amp; Updates</h3>
+                <ul>
+                    <li><strong>Critical security patches (CVSS 9.0+)</strong> are applied the same day they become available for any component in the stack: Ubuntu, Docker, Caddy, Node.js, or OpenClaw itself.</li>
+                    <li><strong>Routine updates</strong> &mdash; non-critical OpenClaw releases, dependency bumps, and minor patches &mdash; are applied within 48 hours of stable release.</li>
+                    <li><strong>Breaking changes</strong> are tested in isolation before applying. If an update requires configuration changes or has known issues, we handle the migration and notify you of any behavioral changes.</li>
+                </ul>
+
+                <h3>Monitoring &amp; Health</h3>
+                <ul>
+                    <li><strong>Automated health checks</strong> run every 5 minutes. If the gateway container goes down, it's restarted automatically.</li>
+                    <li><strong>Weekly operational reviews</strong> cover uptime, container status, disk usage, error rates, and gateway logs. Issues are caught and resolved before they become incidents.</li>
+                    <li><strong>API cost monitoring</strong> tracks your AI model spend. If costs spike unexpectedly &mdash; a signal of abuse, misconfiguration, or runaway loops &mdash; you're notified immediately.</li>
+                </ul>
+
+                <h3>Backup &amp; Recovery</h3>
+                <ul>
+                    <li><strong>Nightly encrypted backups</strong> capture everything: configuration, agent memory, sessions, workspace, and conversation history.</li>
+                    <li><strong>30-day retention</strong> with daily granularity. You can recover to any point in the last month.</li>
+                    <li><strong>Monthly restore tests</strong> verify that backups actually work. We spin up a test instance from the latest backup and confirm the gateway comes up correctly.</li>
+                    <li><strong>Off-server storage.</strong> Backups live on separate infrastructure. If the server is compromised or lost, backups survive.</li>
+                </ul>
+
+                <h3>Support</h3>
+                <p>When something goes wrong &mdash; or when you want to change how your agent works &mdash; you talk to a human who knows your deployment. Our support is not a ticketing system staffed by generalists. We know your server, your configuration, and your use case. Priority support clients receive responses within 4 business hours.</p>
+
+                <h2 id="agent-development">Agent Development &amp; Customization</h2>
+                <p>A running OpenClaw instance is a foundation, not a finished product. The value comes from what you build on top of it: the agent's personality, the tools it has access to, the workflows it automates, and the channels it connects to.</p>
+
+                <h3>Template Bots</h3>
+                <p>We maintain a library of proven bot templates for common business use cases: sales prospecting, customer support triage, internal knowledge Q&amp;A, team training, and SOP helpers. These are battle-tested configurations that we deploy and customize to your specific business context. For most businesses, a template bot is the fastest path to value.</p>
+
+                <h3>Custom Agents</h3>
+                <p>For businesses with unique workflows, we build custom agents from scratch. This starts with a discovery process: understanding your operations, identifying automation opportunities, and designing an agent that fits your team's actual work. We handle the technical implementation &mdash; custom tools, integrations, guardrails, testing &mdash; and hand off a documented, production-ready agent.</p>
+
+                <h3>Iterating Over Time</h3>
+                <p>AI agents get better with use. As your team works with the agent, you'll discover new capabilities to add, edge cases to handle, and workflows to automate. We support ongoing iteration: adding new tools, refining prompts, connecting new channels, and adjusting behavior based on real-world feedback. This is not a one-time project &mdash; it's a long-term partnership.</p>
+
+                <h2 id="cost-model">Cost Model</h2>
+                <p>ManagedOpenClaw has no hidden fees and no markups on infrastructure. The cost structure is transparent:</p>
+
+                <h3>Your Direct Costs</h3>
+                <ul>
+                    <li><strong>Cloud hosting:</strong> $5&ndash;12/month for the VPS, paid directly to your cloud provider.</li>
+                    <li><strong>AI model API usage:</strong> $20&ndash;60/month typical for an active agent, paid directly to your model provider (OpenAI, Anthropic, etc.).</li>
+                </ul>
+                <p>Total infrastructure cost for most deployments: roughly $25&ndash;75/month.</p>
+
+                <h3>Our Fees</h3>
+                <ul>
+                    <li><strong>Setup:</strong> One-time fee based on scope (guided setup, template bot, or custom build).</li>
+                    <li><strong>Managed care:</strong> Monthly fee for ongoing operations, security, backups, and support.</li>
+                </ul>
+                <p>We add zero markup to your infrastructure or API costs. You pay your cloud provider and your model provider directly, at their published rates. We earn our fee by keeping everything running, secure, and improving over time.</p>
+
+                <div class="callout">
+                    <p><strong>Compare this to hosted platforms:</strong> KiloClaw and similar services charge per-seat or per-message fees that grow with usage. A busy agent on a hosted platform can easily cost $200&ndash;500/month in platform fees alone, on top of the underlying API costs. With ManagedOpenClaw, your infrastructure cost stays flat regardless of usage volume.</p>
+                </div>
 
                 <h2 id="comparison">Default OpenClaw vs. ManagedOpenClaw</h2>
                 <table class="comparison-table">
                     <thead>
-                        <tr><th style="width:40%">Security Control</th><th style="width:30%">Default OpenClaw</th><th style="width:30%">ManagedOpenClaw</th></tr>
+                        <tr><th style="width:35%">Capability</th><th style="width:30%">Default OpenClaw</th><th style="width:35%">ManagedOpenClaw</th></tr>
                     </thead>
                     <tbody>
                         <tr><td>Gateway authentication</td><td class="status-bad">Disabled</td><td class="status-good">256-bit token + device pairing</td></tr>
-                        <tr><td>Gateway network binding</td><td class="status-bad">0.0.0.0 (all interfaces)</td><td class="status-good">127.0.0.1 (localhost only)</td></tr>
-                        <tr><td>Encryption in transit</td><td class="status-bad">Plain HTTP</td><td class="status-good">HTTPS with auto-TLS</td></tr>
+                        <tr><td>Network exposure</td><td class="status-bad">Public internet</td><td class="status-good">Localhost only (via Caddy HTTPS)</td></tr>
+                        <tr><td>Encryption in transit</td><td class="status-bad">Plain HTTP</td><td class="status-good">Auto-TLS via Caddy</td></tr>
                         <tr><td>Firewall</td><td class="status-bad">None</td><td class="status-good">UFW default-deny (22, 80, 443)</td></tr>
-                        <tr><td>SSH access</td><td class="status-bad">Password + root enabled</td><td class="status-good">Key-only, root disabled, fail2ban</td></tr>
-                        <tr><td>Docker port exposure</td><td class="status-bad">Bypasses firewall</td><td class="status-good">Daemon locked to localhost</td></tr>
-                        <tr><td>OS security updates</td><td class="status-bad">Manual</td><td class="status-good">Automatic (unattended-upgrades)</td></tr>
-                        <tr><td>Infrastructure</td><td class="status-bad">Varies</td><td class="status-good">Dedicated VPS per client</td></tr>
-                        <tr><td>Backups</td><td class="status-bad">None</td><td class="status-good">Encrypted nightly</td></tr>
-                        <tr><td>CORS restrictions</td><td class="status-bad">Open</td><td class="status-good">Subdomain-locked allowedOrigins</td></tr>
+                        <tr><td>SSH access</td><td class="status-bad">Password + root</td><td class="status-good">Key-only, root disabled, fail2ban</td></tr>
+                        <tr><td>Docker port security</td><td class="status-bad">Bypasses firewall</td><td class="status-good">Daemon locked to localhost</td></tr>
+                        <tr><td>OS updates</td><td class="status-bad">Manual</td><td class="status-good">Automatic + same-day critical patches</td></tr>
+                        <tr><td>Infrastructure</td><td class="status-bad">You figure it out</td><td class="status-good">Dedicated VPS, cloud-agnostic</td></tr>
+                        <tr><td>Backups</td><td class="status-bad">None</td><td class="status-good">Encrypted nightly, 30-day retention</td></tr>
+                        <tr><td>Health monitoring</td><td class="status-bad">None</td><td class="status-good">5-min checks + auto-restart</td></tr>
+                        <tr><td>Disaster recovery</td><td class="status-bad">Hope for the best</td><td class="status-good">Tested monthly restores</td></tr>
+                        <tr><td>OpenClaw updates</td><td class="status-bad">Manual, untested</td><td class="status-good">Applied within 48 hours, tested</td></tr>
+                        <tr><td>API cost visibility</td><td class="status-bad">Check manually</td><td class="status-good">Alerts on unexpected spikes</td></tr>
+                        <tr><td>Support</td><td class="status-bad">GitHub issues</td><td class="status-good">Direct access, knows your setup</td></tr>
                     </tbody>
                 </table>
 
-                <h2 id="ongoing-security">Ongoing Security Operations</h2>
-                <p>Initial hardening is necessary but not sufficient. Security is an ongoing practice, not a one-time configuration. Our managed care plans include:</p>
-                <ul>
-                    <li><strong>Same-day critical patches.</strong> When a CVE with a CVSS score of 9.0 or higher is published for any component in the stack (Ubuntu, Docker, Caddy, Node.js, OpenClaw), we apply the patch the same day it becomes available.</li>
-                    <li><strong>Routine updates within 48 hours.</strong> Non-critical OpenClaw updates, dependency patches, and minor version bumps are applied within 48 hours of stable release.</li>
-                    <li><strong>Weekly health checks.</strong> We review uptime, container status, disk usage, and gateway logs weekly. Issues are flagged and resolved before they become incidents.</li>
-                    <li><strong>Monthly backup restore tests.</strong> Backups are only useful if they work. We test a full restore from backup monthly and verify the gateway comes up correctly.</li>
-                    <li><strong>API cost monitoring.</strong> We set usage alerts on your AI model API spend. If costs spike unexpectedly (a signal of abuse or misconfiguration), you're notified immediately.</li>
-                </ul>
-
                 <h2 id="ownership">The Ownership Model</h2>
                 <p>ManagedOpenClaw is not a SaaS platform. We do not host your agent on our infrastructure. We do not hold your API keys. We do not have ongoing access to your server unless you explicitly grant it for managed care.</p>
-                <p>Every deployment is built on infrastructure that you own. The VPS is in your cloud account (or a dedicated account we create for you). The domain points to your server. The API keys are yours. If you stop working with us, everything keeps running exactly as it was.</p>
-                <p>This model exists because we believe that businesses running AI agents with access to sensitive data should own and control the infrastructure those agents run on. Multi-tenant platforms are fine for experimentation. For production use with client data, employee data, or proprietary workflows, isolated, owned infrastructure is the appropriate security posture.</p>
+                <p>Every deployment is built on infrastructure that you own. The VPS is in your cloud account (or a dedicated account we create for you). The domain points to your server. The API keys are yours. The conversation history, agent memory, and all data stays on your hardware.</p>
+                <p>If you stop working with us, everything keeps running exactly as it was. There is no kill switch, no license expiration, no data held hostage. The OpenClaw software is open-source. The server is yours. You walk away with a fully operational system.</p>
+                <p>This model exists because we believe businesses running AI agents with access to sensitive data should own and control the infrastructure those agents run on. Multi-tenant platforms are fine for experimentation. For production use with client data, employee data, or proprietary workflows, owned infrastructure is the right choice.</p>
+
+                <h2 id="agencies">For Agencies</h2>
+                <p>Marketing agencies, consulting firms, and service providers represent one of our most common client profiles. The pattern is consistent: an agency wants to offer AI capabilities to their clients without building or managing the infrastructure themselves.</p>
+                <p>ManagedOpenClaw supports this with isolated, per-client deployments. Each of your clients gets their own dedicated server, their own subdomain, their own agent configuration. There is no cross-contamination of data between clients. You own the client relationship and the pricing &mdash; we handle the backend.</p>
+                <p>This gives agencies a new revenue stream (AI agent services) with zero DevOps overhead. You don't need to hire a systems administrator or learn Docker. You need a partner who handles the technical layer while you focus on your clients' business outcomes.</p>
+                <p>We work with agencies at every scale, from solo consultants deploying their first bot to firms managing dozens of client instances. The infrastructure and support scales with you.</p>
 
                 <h2 id="conclusion">Conclusion</h2>
-                <p>OpenClaw is a powerful platform. Its default security posture is designed for local development, not production deployment. The gap between those two contexts is significant, and closing it requires expertise across operating system hardening, container security, network architecture, and TLS configuration.</p>
-                <p>ManagedOpenClaw closes that gap for every client, every deployment, from day one. If you have questions about our security practices or want to discuss your specific requirements, we welcome the conversation.</p>
+                <p>OpenClaw is one of the most powerful self-hosted AI agent platforms available. Its default configuration is designed for developers experimenting locally. Moving it to production &mdash; where it serves real customers, handles sensitive data, and needs to run reliably around the clock &mdash; is a different challenge entirely.</p>
+                <p>That challenge requires security hardening, infrastructure provisioning, ongoing operations, backup and recovery strategy, update management, cost monitoring, and platform expertise. Most businesses don't have this expertise on staff, and building it internally is expensive and slow.</p>
+                <p>ManagedOpenClaw exists to solve that problem. We handle the infrastructure so you can focus on what the agent actually does for your business. Every deployment is hardened, monitored, backed up, and supported. You own everything. We keep it running.</p>
+                <p>If you're considering OpenClaw for your business &mdash; or if you've already deployed it and want it production-ready &mdash; we'd welcome the conversation.</p>
 
                 <div class="mt-16 pt-8 border-t border-neutral-200">
-                    <p class="text-sm text-neutral-500 mb-6">This white paper describes the security controls in place as of March 2026. Our hardening practices evolve as the OpenClaw project and the threat landscape evolve.</p>
+                    <p class="text-sm text-neutral-500 mb-6">This white paper describes ManagedOpenClaw's practices as of March 2026. Our approach evolves as the OpenClaw project and the broader AI landscape evolve.</p>
                     <div class="flex flex-wrap gap-4">
                         <a href="index.html#contact" class="btn-claw px-8 py-3 text-sm font-semibold inline-block">Get in Touch</a>
                         <a href="index.html" class="inline-flex items-center gap-2 px-8 py-3 text-sm font-medium text-neutral-600 border-2 border-neutral-200 rounded hover:border-claw-500 hover:text-claw-500 transition-all">&larr; Back to ManagedOpenClaw.com</a>
