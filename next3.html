@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ManagedOpenClaw.com | AI Employees Owned by You</title>
-    <meta name="description" content="We build secure OpenClaw agents on your own private cloud. You keep the data, the keys, and the profits. Managed by AI Freelancer.">
+    <title>White Paper: Running OpenClaw in Production | ManagedOpenClaw</title>
+    <meta name="description" content="A comprehensive guide to deploying, securing, and operating OpenClaw agents for business use. Covers infrastructure, security, ongoing operations, and the ownership model.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,20 +17,10 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
                     colors: {
-                        claw: {
-                            50: '#FEF2F1', 100: '#FDE3E1', 200: '#FBCBC7', 300: '#F7A9A2',
-                            400: '#F07A6F', 500: '#E63B2E', 600: '#D42A1D', 700: '#B22318',
-                            800: '#932118', 900: '#7A211B',
-                        },
-                        neutral: {
-                            50: '#fafafa', 100: '#f5f5f5', 200: '#e5e5e5', 300: '#d4d4d4',
-                            500: '#737373', 600: '#525252', 700: '#404040', 800: '#262626', 900: '#111111',
-                        },
+                        claw: { 50:'#FEF2F1',100:'#FDE3E1',200:'#FBCBC7',300:'#F7A9A2',400:'#F07A6F',500:'#E63B2E',600:'#D42A1D',700:'#B22318',800:'#932118',900:'#7A211B' },
+                        neutral: { 50:'#fafafa',100:'#f5f5f5',200:'#e5e5e5',300:'#d4d4d4',500:'#737373',600:'#525252',700:'#404040',800:'#262626',900:'#111111' },
                     }
                 }
             }
@@ -38,381 +28,275 @@
     </script>
 
     <style>
-        body { background-color: #ffffff; color: #111111; -webkit-font-smoothing: antialiased; }
+        body { background: #fff; color: #111; -webkit-font-smoothing: antialiased; }
         .btn-claw { background-color: #E63B2E; color: #fff; border: 2px solid #E63B2E; transition: all .2s; border-radius: 4px; }
         .btn-claw:hover { background-color: #D42A1D; border-color: #D42A1D; }
-        .btn-outline { background-color: transparent; color: #111; border: 2px solid #e5e5e5; transition: all .2s; border-radius: 4px; }
-        .btn-outline:hover { border-color: #E63B2E; color: #E63B2E; }
-        .check-list li { position: relative; padding-left: 1.75rem; margin-bottom: .75rem; font-size: .925rem; color: #404040; }
-        .check-list li::before { content: "\2192"; position: absolute; left: 0; color: #E63B2E; font-weight: 700; }
-        .form-input { width: 100%; padding: .875rem 1rem; border: 2px solid #e5e5e5; background: #fff; font-size: .875rem; font-family: 'Inter', sans-serif; transition: border-color .2s; outline: none; border-radius: 4px; }
-        .form-input:focus { border-color: #E63B2E; }
-        .form-input::placeholder { color: #a3a3a3; }
-        textarea.form-input { resize: vertical; min-height: 120px; }
-        select.form-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23E63B2E' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
-        .form-wrapper.submitted form { display: none; }
-        .form-wrapper.submitted .form-success { display: flex; }
-        .form-success { display: none; }
-        .featured-card { box-shadow: 0 25px 50px -12px rgba(230,59,46,.15); }
-        .infra-icon { width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #FEF2F1; border: 1px solid #FDE3E1; color: #E63B2E; font-size: 1rem; flex-shrink: 0; }
+        .prose h2 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.03em; margin-top: 3.5rem; margin-bottom: 1rem; color: #111; }
+        .prose h3 { font-size: 1.25rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 0.75rem; color: #262626; }
+        .prose p { color: #404040; line-height: 1.8; margin-bottom: 1.25rem; }
+        .prose ul { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+        .prose ul li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; color: #404040; line-height: 1.7; }
+        .prose ul li::before { content: "\2192"; position: absolute; left: 0; color: #E63B2E; font-weight: 700; }
+        .prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; background: #f5f5f5; border: 1px solid #e5e5e5; padding: 0.15em 0.4em; border-radius: 3px; }
+        .prose .callout { background: #FEF2F1; border-left: 4px solid #E63B2E; padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: 0 4px 4px 0; }
+        .prose .callout p { color: #7A211B; margin-bottom: 0; }
+        .prose .callout p + p { margin-top: 0.75rem; }
+        .prose .comparison-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.9rem; }
+        .prose .comparison-table th { text-align: left; padding: 0.75rem 1rem; background: #111; color: #fff; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .prose .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #e5e5e5; color: #404040; }
+        .prose .comparison-table tr:last-child td { border-bottom: none; }
+        .prose .comparison-table .status-bad { color: #E63B2E; font-weight: 600; }
+        .prose .comparison-table .status-good { color: #16a34a; font-weight: 600; }
+        .toc a { color: #525252; text-decoration: none; transition: color 0.15s; display: block; padding: 0.35rem 0; font-size: 0.9rem; }
+        .toc a:hover { color: #E63B2E; }
+        @media print { nav, .toc-sidebar { display: none !important; } .prose { max-width: 100% !important; } }
     </style>
 </head>
 <body class="font-sans">
 
     <nav class="fixed w-full z-50 bg-white border-b border-neutral-200">
         <div class="max-w-[1440px] mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="#" class="flex items-center gap-3">
+            <a href="index.html" class="flex items-center gap-3">
                 <div class="w-9 h-9 bg-white flex items-center justify-center text-lg rounded border-2 border-claw-500">&#x1F99E;</div>
                 <span class="font-bold text-xl tracking-tight text-neutral-900">ManagedOpenClaw<span class="text-neutral-400">.com</span></span>
             </a>
             <div class="hidden lg:flex items-center gap-8 whitespace-nowrap">
-                <a href="#services" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Pricing</a>
-                <a href="#infrastructure" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Security</a>
-                <a href="whitepaper.html" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">White Paper</a>
-                <a href="#about" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">About</a>
-                <a href="#faq" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">FAQ</a>
-                <a href="#contact" class="px-5 py-2.5 btn-claw text-sm font-semibold">Let&#39;s Talk</a>
-            </div>
-            <button class="lg:hidden text-2xl" id="mobile-menu-toggle" type="button" aria-label="Open menu">&#x2261;</button>
-        </div>
-        <div id="mobile-menu" class="hidden lg:hidden border-t border-neutral-200 bg-white">
-            <div class="px-6 py-4 flex flex-col gap-4">
-                <a href="#services" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">Pricing</a>
-                <a href="#infrastructure" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">Security</a>
-                <a href="whitepaper.html" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">White Paper</a>
-                <a href="#about" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">About</a>
-                <a href="#faq" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">FAQ</a>
-                <a href="#contact" class="btn-claw px-5 py-3 text-center text-sm font-semibold">Let&#39;s Talk</a>
+                <a href="index.html#services" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Pricing</a>
+                <a href="index.html#infrastructure" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Security</a>
+                <a href="whitepaper.html" class="text-sm font-medium text-claw-500 uppercase tracking-wide">White Paper</a>
+                <a href="index.html#about" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">About</a>
+                <a href="index.html#contact" class="px-5 py-2.5 btn-claw text-sm font-semibold">Let&#39;s Talk</a>
             </div>
         </div>
     </nav>
 
-    <main class="pt-20 max-w-[1440px] mx-auto border-x border-neutral-200 min-h-screen bg-white shadow-[0_0_50px_rgba(0,0,0,.02)]">
+    <main class="pt-20 max-w-[1440px] mx-auto border-x border-neutral-200 min-h-screen bg-white">
 
-        <header class="relative grid md:grid-cols-12 border-b border-neutral-200 bg-cover bg-top bg-no-repeat" style="background-image: url('assets/robobg.png');">
-            <div class="absolute inset-0 bg-white/60 md:bg-gradient-to-r md:from-white/80 md:via-white/20 md:to-transparent pointer-events-none"></div>
-            <div class="relative z-10 md:col-span-7 p-8 md:p-16 lg:p-24 flex flex-col justify-center">
-                <div class="inline-block mb-8">
-                    <span class="px-3 py-1.5 bg-claw-50 border border-claw-200 text-claw-600 text-xs font-bold uppercase tracking-wider rounded-md shadow-sm">&#x1F99E; Now Accepting Partners</span>
-                </div>
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[0.95] mb-8 text-neutral-900 drop-shadow-sm">
-                    AI Employees.<br><span class="text-claw-500">Owned by You.</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-neutral-800 max-w-2xl leading-relaxed mb-12 font-medium drop-shadow-sm">
-                    We build autonomous <strong class="text-neutral-900 font-bold">OpenClaw agents</strong> on <strong class="text-neutral-900 font-bold">your own dedicated, hardened server</strong>. You keep the data, the keys, and the control. We handle the infrastructure.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#services" class="btn-claw px-8 py-4 text-base font-semibold shadow-md hover:shadow-lg">See Pricing</a>
-                    <a href="#infrastructure" class="btn-outline px-8 py-4 text-base font-medium flex items-center gap-2 bg-white/60 backdrop-blur-sm shadow-sm hover:bg-white transition-all">How We Secure It <i class="fa-solid fa-arrow-down transform -rotate-45 text-xs"></i></a>
-                </div>
-            </div>
-            <div class="relative z-10 hidden md:flex md:col-span-5 flex-col justify-end p-10 lg:p-16">
-                <div class="space-y-6 mt-auto bg-white/30 backdrop-blur-md p-8 rounded-2xl border border-white/40 shadow-xl">
-                    <div class="border-l-2 border-claw-500 pl-4 py-1">
-                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Infrastructure</p>
-                        <p class="font-bold text-lg text-neutral-900">Dedicated VPS Per Client</p>
-                    </div>
-                    <div class="border-l-2 border-claw-500 pl-4 py-1">
-                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Security</p>
-                        <p class="font-bold text-lg text-neutral-900">Hardened by Default</p>
-                    </div>
-                    <div class="border-l-2 border-claw-500 pl-4 py-1">
-                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Ownership</p>
-                        <p class="font-bold text-lg text-neutral-900">Your Keys. Your Data.</p>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <section id="services" class="bg-white">
-            <div class="bg-white border-b border-neutral-200">
-                <div class="p-8 md:p-12 border-b border-neutral-200">
-                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-500">Setup Options</p>
-                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mt-3">Get OpenClaw running</h3>
-                    <p class="text-neutral-500 mt-2 max-w-2xl">Every option includes deployment on a dedicated, hardened VPS. From a guided install to template bots to fully custom agent builds.</p>
-                </div>
-                <div class="grid lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-neutral-200">
-                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
-                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">One-Time Session</span><h4 class="text-3xl font-bold mt-2 mb-1">Guided Setup</h4><p class="text-2xl text-neutral-900 font-medium">$200</p></div>
-                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">A live 1-hour video call to install and configure OpenClaw on your VPS, plus quick follow-up help.</p>
-                        <ul class="check-list mb-10 flex-grow"><li>Live install on your dedicated VPS</li><li>OS hardening + firewall + auth</li><li>Connect keys / OAuth (your choice)</li><li>Smoke test: gateway + one channel</li><li>30 minutes async follow-up support</li></ul>
-                        <a href="#contact" class="btn-outline w-full py-4 text-center font-semibold text-sm">Book Setup</a>
-                    </div>
-                    <div class="p-10 flex flex-col relative bg-white lg:-mt-4 lg:-mb-4 featured-card lg:z-10 lg:border-t-4 lg:border-t-claw-500 lg:rounded-t transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(230,59,46,0.25)] hover:z-20">
-                        <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-claw-500 text-white text-[10px] font-bold px-4 py-1.5 uppercase tracking-widest rounded-b-md">Best Value</div>
-                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Template Deploy</span><h4 class="text-3xl font-bold mt-2 mb-1">Template Bots</h4><p class="text-2xl text-neutral-900 font-medium">From $1,000</p></div>
-                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">We deploy a proven, battle-tested bot template on a hardened server and tailor it to your business:</p>
-                        <ul class="check-list mb-10 flex-grow"><li>Sales prospecting assistant</li><li>Team training / SOP helper</li><li>Customer support triage bot</li><li>Internal knowledge Q&amp;A (PDFs)</li><li>Dedicated VPS + hardening included</li><li>Handoff + quick training</li></ul>
-                        <a href="#contact" class="btn-claw w-full py-4 text-center font-semibold text-sm">Pick a Template</a>
-                        <p class="mt-5 text-xs text-neutral-400">If you don't see your use case, we'll recommend the closest template or quote custom.</p>
-                    </div>
-                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
-                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Build + Implement</span><h4 class="text-3xl font-bold mt-2 mb-1">Custom Agents</h4><p class="text-2xl text-neutral-900 font-medium">From $2,000</p></div>
-                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">Purpose-built agents for your exact workflows (sales, HR training, inventory, support, ops).</p>
-                        <ul class="check-list mb-10 flex-grow"><li>Discovery + requirements</li><li>Custom tools / integrations</li><li>Guardrails + testing</li><li>Dedicated VPS + hardening included</li><li>Documentation + handoff</li><li>Managed care available</li></ul>
-                        <a href="#contact" class="btn-outline w-full py-4 text-center font-semibold text-sm">Request a Quote</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-neutral-50 border-b border-neutral-200">
-                <div class="p-8 md:p-12 border-b border-neutral-200">
-                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-500">Managed Service</p>
-                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mt-3">Agent Care Plans</h3>
-                    <p class="text-neutral-500 mt-2 max-w-2xl">Keep your agent patched, monitored, and running. Choose support only, ops + security, or a custom plan for mission-critical systems.</p>
-                </div>
-                <div class="grid lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-neutral-200 bg-white">
-                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
-                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Light Support</span><h4 class="text-3xl font-bold mt-2 mb-1">Support</h4><p class="text-2xl text-neutral-900 font-medium">$50 <span class="text-sm text-neutral-400 font-normal">/ mo</span></p></div>
-                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">For owners who just want a human to ask when something feels off.</p>
-                        <ul class="check-list mb-10 flex-grow"><li>Email support (best-effort)</li><li>1x 20-min support call / month</li><li>Guidance for updates &amp; fixes</li></ul>
-                        <a href="#contact" class="btn-outline w-full py-4 text-center font-semibold text-sm">Start Support</a>
-                        <p class="mt-5 text-xs text-neutral-400">Fair use: designed for light support, not ongoing engineering.</p>
-                    </div>
-                    <div class="p-10 flex flex-col relative bg-white lg:-mt-4 lg:-mb-4 featured-card lg:z-10 lg:border-t-4 lg:border-t-claw-500 lg:rounded-t transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(230,59,46,0.25)] hover:z-20">
-                        <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-claw-500 text-white text-[10px] font-bold px-4 py-1.5 uppercase tracking-widest rounded-b-md">Popular</div>
-                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Ops + Security</span><h4 class="text-3xl font-bold mt-2 mb-1">Ops + Security</h4><p class="text-2xl text-neutral-900 font-medium">$200 <span class="text-sm text-neutral-400 font-normal">/ mo</span></p></div>
-                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">For teams that want proactive care without hiring DevOps.</p>
-                        <ul class="check-list mb-10 flex-grow"><li>Security patches applied same-day for critical CVEs</li><li>Weekly health checks (uptime / logs)</li><li>Nightly encrypted backups + monthly restore test</li><li>Priority support (4 business-hour response)</li><li>API cost alerts + threshold monitoring</li></ul>
-                        <a href="#contact" class="btn-claw w-full py-4 text-center font-semibold text-sm">Get Ops + Security</a>
-                    </div>
-                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
-                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Enterprise</span><h4 class="text-3xl font-bold mt-2 mb-1">Custom Care</h4><p class="text-2xl text-neutral-900 font-medium">Request a quote</p></div>
-                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">SLAs, compliance posture, environment separation, team onboarding &mdash; scoped to your needs.</p>
-                        <ul class="check-list mb-10 flex-grow"><li>SLA + response windows</li><li>Ongoing tuning + improvements</li><li>Deeper security + hardening</li><li>Cost reviews + optimization</li><li>Team onboarding + training</li></ul>
-                        <a href="#contact" class="btn-outline w-full py-4 text-center font-semibold text-sm">Request a Quote</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="infrastructure" class="border-b border-neutral-200">
-            <div class="grid md:grid-cols-12">
-                <div class="md:col-span-5 p-10 md:p-16 border-r border-neutral-200 bg-neutral-900 text-white">
-                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-400 mb-3">Security Foundation</p>
-                    <h2 class="text-3xl md:text-4xl font-bold tracking-tighter mb-6">Every deployment sits on hardened infrastructure.</h2>
-                    <p class="text-neutral-400 leading-relaxed mb-6">OpenClaw is powerful because it has full system access &mdash; shell commands, file systems, browser control, messaging APIs. That power is also the risk. Default installations have been flagged by Kaspersky, Palo Alto Networks, and Cisco as high-risk. We ship with all of that locked down.</p>
-                    <p class="text-neutral-500 leading-relaxed text-sm mb-6">Not multi-tenant. Not shared infrastructure. Your agent runs on a dedicated VPS that nobody else touches.</p>
-                    <a href="whitepaper.html" class="inline-flex items-center gap-2 text-sm font-semibold text-claw-400 hover:text-claw-300 transition-colors">Read the full security white paper <i class="fa-solid fa-arrow-right text-xs"></i></a>
-                </div>
-                <div class="md:col-span-7 p-10 md:p-16">
-                    <div class="grid sm:grid-cols-2 gap-8">
-                        <div class="flex gap-4">
-                            <div class="infra-icon"><i class="fa-solid fa-server"></i></div>
-                            <div><p class="font-bold text-sm mb-1">Dedicated, Isolated VPS</p><p class="text-sm text-neutral-500">One server per client. No noisy neighbors, no shared attack surface. Your data never touches another customer's environment.</p></div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="infra-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                            <div><p class="font-bold text-sm mb-1">Hardened OS Defaults</p><p class="text-sm text-neutral-500">SSH key-only access, firewall with explicit allowlist, fail2ban, automatic security updates. No password login, no open ports.</p></div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="infra-icon"><i class="fa-solid fa-lock"></i></div>
-                            <div><p class="font-bold text-sm mb-1">Auth Enabled, Locked Down</p><p class="text-sm text-neutral-500">OpenClaw ships with auth disabled by default. We enable it. Gateway authentication, firewall-only access, encrypted HTTPS, and Docker isolation are configured from day one.</p></div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="infra-icon"><i class="fa-solid fa-key"></i></div>
-                            <div><p class="font-bold text-sm mb-1">Bring Your Own Keys</p><p class="text-sm text-neutral-500">You provide your own API keys for Anthropic, OpenAI, or whatever model you choose. We never hold your credentials in our accounts.</p></div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="infra-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                            <div><p class="font-bold text-sm mb-1">Encrypted Nightly Backups</p><p class="text-sm text-neutral-500">Config, memory, transcripts, and workflow data backed up nightly with 30-day retention. Off-server, encrypted, and tested.</p></div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="infra-icon"><i class="fa-solid fa-bolt"></i></div>
-                            <div><p class="font-bold text-sm mb-1">Same-Day Critical Patches</p><p class="text-sm text-neutral-500">When the next CVE drops, we patch it the same day. Routine OpenClaw updates within 48 hours of stable release. You don't have to track any of it.</p></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="border-b border-neutral-200 py-12 px-6">
-            <p class="text-center text-xs font-bold uppercase tracking-[0.2em] text-neutral-400 mb-8">Built on Industry Standards</p>
-            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-80 grayscale">
-                <i class="fa-brands fa-docker text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
-                <i class="fa-brands fa-node text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
-                <i class="fa-solid fa-terminal text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
-                <i class="fa-brands fa-aws text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
-                <i class="fa-brands fa-linux text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
-                <i class="fa-brands fa-digital-ocean text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
+        <div class="bg-neutral-900 text-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-neutral-200">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-400 mb-4">White Paper</p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-[1] mb-6">Running OpenClaw<br>in Production</h1>
+            <p class="text-neutral-400 text-lg md:text-xl max-w-3xl leading-relaxed mb-8">What it takes to deploy, secure, and operate OpenClaw agents for real business use &mdash; and why most teams shouldn't do it alone.</p>
+            <div class="flex flex-wrap items-center gap-6 text-sm text-neutral-500">
+                <span>Published: March 2026</span>
+                <span class="hidden sm:inline">&middot;</span>
+                <span>By: AI Freelancer &mdash; ManagedOpenClaw.com</span>
             </div>
         </div>
 
-        <section class="border-b border-neutral-200 grid md:grid-cols-12">
-            <div class="md:col-span-5 p-10 md:p-12 border-r border-neutral-200 bg-claw-50/40">
-                <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-500 mb-3">For Agencies</p>
-                <h3 class="text-2xl md:text-3xl font-bold tracking-tight">White-Label AI for Your Clients</h3>
-            </div>
-            <div class="md:col-span-7 p-10 md:p-12 flex flex-col justify-center">
-                <p class="text-neutral-600 leading-relaxed max-w-2xl mb-6">We work with marketing and consulting agencies who want to offer AI agents to their clients without building the infrastructure themselves. You own the client relationship &mdash; we handle the technical backend, deployment, and ongoing ops. Each client gets their own isolated, hardened instance. You get a new revenue stream with zero DevOps overhead.</p>
-                <a href="#contact" class="text-sm font-semibold text-claw-500 hover:text-claw-700 transition-colors">Explore agency partnerships &rarr;</a>
-            </div>
-        </section>
+        <div class="grid lg:grid-cols-[260px_1fr] divide-x divide-neutral-200">
 
-        <div class="bg-neutral-900 text-white border-b border-neutral-200 px-8 md:px-12 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-                <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-400 mb-2">&#x1F99E; Enterprise Ready</p>
-                <p class="text-base md:text-lg font-medium max-w-2xl">Need production-grade deployments with environment separation, governance controls, observability, and compliance posture? We scope that too.</p>
-            </div>
-            <a href="#contact" class="border-2 border-claw-500 text-claw-400 hover:bg-claw-500 hover:text-white px-8 py-4 text-sm font-semibold whitespace-nowrap rounded transition-all">Tell Us What You Need</a>
+            <aside class="hidden lg:block toc-sidebar p-8 sticky top-20 self-start max-h-[calc(100vh-5rem)] overflow-y-auto">
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-neutral-400 mb-4">Contents</p>
+                <div class="toc space-y-1">
+                    <a href="#executive-summary">Executive Summary</a>
+                    <a href="#why-openclaw">Why OpenClaw</a>
+                    <a href="#the-gap">The Gap</a>
+                    <a href="#security">Security Hardening</a>
+                    <a href="#infrastructure">Infrastructure</a>
+                    <a href="#deployment">Deployment &amp; Onboarding</a>
+                    <a href="#ongoing-ops">Ongoing Operations</a>
+                    <a href="#agent-development">Agent Development</a>
+                    <a href="#cost-model">Cost Model</a>
+                    <a href="#comparison">Default vs. Managed</a>
+                    <a href="#ownership">Ownership</a>
+                    <a href="#agencies">For Agencies</a>
+                    <a href="#conclusion">Conclusion</a>
+                </div>
+            </aside>
+
+            <article class="prose px-8 md:px-16 lg:px-20 py-12 md:py-16 max-w-3xl">
+
+                <h2 id="executive-summary">Executive Summary</h2>
+                <p>OpenClaw is an open-source AI agent platform that gives autonomous bots full system access: shell commands, file systems, browser control, and messaging APIs. It is one of the most capable self-hosted agent frameworks available. It is also one of the most difficult to deploy safely and maintain over time.</p>
+                <p>Out of the box, OpenClaw is designed for local development. Moving it to a production environment &mdash; where it handles real customer interactions, processes sensitive data, and runs 24/7 &mdash; requires expertise across server administration, container security, network architecture, backup strategy, monitoring, and the OpenClaw platform itself.</p>
+                <p>ManagedOpenClaw is a managed service that handles all of it. We deploy hardened OpenClaw instances on dedicated infrastructure, maintain them over time, and support the businesses that rely on them. This white paper explains why that matters, what we do, and how it works.</p>
+
+                <h2 id="why-openclaw">Why OpenClaw</h2>
+                <p>The AI agent landscape is evolving rapidly. Most platforms fall into one of two categories: hosted SaaS products where you rent access to someone else's infrastructure, or open-source frameworks you run yourself. Each has tradeoffs.</p>
+                <p>Hosted platforms like KiloClaw are convenient. Sign up, configure a bot, connect a channel. But your data lives on their servers, alongside every other customer's data. You don't control the infrastructure, you can't audit the security, and if the platform changes pricing or shuts down, your agent goes with it.</p>
+                <p>OpenClaw sits in the other camp. It's open-source, self-hosted, and extraordinarily capable. Your agent runs on hardware you control. Your data never leaves your server. Your API keys stay in your possession. You can customize everything &mdash; tools, skills, models, channels, workflows &mdash; without waiting for a vendor to ship a feature.</p>
+                <p>For businesses that handle client data, proprietary workflows, financial information, legal documents, or anything where data sovereignty matters, self-hosted is the right posture. The question is not whether to self-host, but how to do it well.</p>
+
+                <h2 id="the-gap">The Gap Between Development and Production</h2>
+                <p>OpenClaw's maintainers are transparent about the platform's maturity. The onboarding wizard displays a security warning that reads: "OpenClaw is a hobby project and still in beta. Expect sharp edges... A bad prompt can trick it into doing unsafe things."</p>
+                <p>This honesty is admirable. It also means that the default installation is optimized for developers experimenting on their own machines, not businesses running agents in production. The gap between those two contexts is significant:</p>
+                <ul>
+                    <li><strong>Security.</strong> Authentication is disabled by default. The gateway is exposed to the public internet. There is no firewall, no encryption in transit, and no access control. Security researchers at Kaspersky, Palo Alto Networks, and Cisco Talos have all flagged default OpenClaw installations as high-risk.</li>
+                    <li><strong>Reliability.</strong> There is no built-in health monitoring, no automatic restart on failure, no backup system, and no structured approach to updates. If the container crashes at 2am, nobody knows until a customer reports it.</li>
+                    <li><strong>Operations.</strong> OpenClaw updates frequently. Each update may introduce breaking changes, new configuration requirements, or security patches that need prompt attention. Somebody needs to track releases, test updates, apply patches, and verify that everything still works.</li>
+                    <li><strong>Expertise.</strong> Getting OpenClaw into a production-ready state requires knowledge of Linux server administration, Docker, reverse proxies, TLS certificates, firewall configuration, DNS, backup tooling, and the OpenClaw platform itself. Most businesses don't have this expertise on staff, and hiring for it is expensive.</li>
+                </ul>
+
+                <div class="callout">
+                    <p><strong>The core challenge:</strong> OpenClaw gives you a powerful AI agent platform. Making it production-ready is a separate project entirely &mdash; one that requires DevOps, security, and platform expertise that most businesses don't have in-house.</p>
+                </div>
+
+                <h2 id="security">Security Hardening</h2>
+                <p>Security is the most visible gap in default OpenClaw, and the most dangerous to leave unaddressed. Every ManagedOpenClaw deployment includes the following controls, configured automatically during provisioning.</p>
+
+                <h3>Operating System</h3>
+                <ul>
+                    <li><strong>SSH key-only authentication.</strong> Password login is disabled. Root login is disabled. Only the designated service user can connect, and only with a pre-authorized SSH key.</li>
+                    <li><strong>Firewall with explicit allowlist.</strong> UFW is configured with a default-deny policy. Only ports 22 (SSH), 80 (HTTP for certificate issuance), and 443 (HTTPS) are open.</li>
+                    <li><strong>Brute-force protection.</strong> fail2ban monitors SSH logs and automatically bans IPs after repeated failed authentication attempts.</li>
+                    <li><strong>Automatic security updates.</strong> The OS security pocket receives unattended upgrades. Critical patches are applied without manual intervention.</li>
+                </ul>
+
+                <h3>Network Architecture</h3>
+                <p>Docker has a well-known behavior where published ports bypass the host firewall by manipulating iptables directly. This means even with UFW configured, a Docker container can expose ports to the internet. We solve this at the Docker daemon level: all published ports bind to <code>127.0.0.1</code> by default. No container on the server can expose a port externally.</p>
+                <p>All external traffic flows through Caddy, a production-grade reverse proxy that automatically provisions and renews TLS certificates. The gateway is only reachable via HTTPS. There is no plain HTTP path to the application.</p>
+
+                <h3>Application Security</h3>
+                <ul>
+                    <li><strong>Gateway authentication.</strong> A cryptographically random 256-bit token is generated during provisioning. The dashboard and API reject all connections without it.</li>
+                    <li><strong>Device pairing.</strong> Each browser must be explicitly approved from the server's command line before it can interact with the gateway. This provides a second layer of access control.</li>
+                    <li><strong>CORS restrictions.</strong> The Control UI only accepts requests from the deployment's HTTPS subdomain. Cross-origin requests are rejected.</li>
+                    <li><strong>Credential isolation.</strong> OAuth tokens are stored with owner-only file permissions (<code>600</code>). Other configuration files use permissions that allow the Docker container to read/write without exposing credentials.</li>
+                </ul>
+
+                <h2 id="infrastructure">Infrastructure</h2>
+                <p>Every ManagedOpenClaw deployment runs on dedicated infrastructure. This is not a shared platform. There is no multi-tenancy. Each client gets their own server that nobody else touches.</p>
+
+                <h3>Cloud Provider</h3>
+                <p>We deploy on your choice of cloud provider &mdash; Hetzner, AWS, DigitalOcean, or others. The architecture is platform-agnostic. We recommend the provider and server specification that best fits your usage profile and budget. For most deployments, a modest VPS with 2 vCPUs and 4 GB RAM is more than sufficient to run an OpenClaw agent handling hundreds of conversations per day.</p>
+
+                <h3>Architecture</h3>
+                <ul>
+                    <li><strong>Dedicated VPS</strong> &mdash; one server per client, isolated from every other customer.</li>
+                    <li><strong>Ubuntu LTS</strong> &mdash; minimal image with automatic security updates.</li>
+                    <li><strong>Docker + Docker Compose</strong> &mdash; application runs in isolated containers with the daemon locked to localhost.</li>
+                    <li><strong>Caddy reverse proxy</strong> &mdash; automatic HTTPS, TLS termination, single ingress point.</li>
+                    <li><strong>Custom subdomain</strong> &mdash; your agent gets a dedicated URL with automatic certificate provisioning.</li>
+                    <li><strong>Encrypted backups</strong> &mdash; nightly restic backups to off-server storage with 30-day retention and AES-256 encryption at rest.</li>
+                    <li><strong>Health monitoring</strong> &mdash; automated checks every 5 minutes with automatic restart on failure.</li>
+                </ul>
+
+                <h3>Disaster Recovery</h3>
+                <p>Every deployment includes automated nightly backups covering configuration, agent memory, conversation history, workspace files, and all OpenClaw data. Backups are encrypted and stored on separate infrastructure from the server itself. If a server fails catastrophically, we can restore a fully functional deployment from backup. Managed care clients receive monthly restore tests to verify backup integrity.</p>
+
+                <h2 id="deployment">Deployment &amp; Onboarding</h2>
+                <p>Getting a new OpenClaw instance from zero to production involves dozens of steps across multiple systems: cloud provisioning, DNS configuration, OS hardening, Docker installation, OpenClaw build, gateway configuration, OAuth handshake, channel integration, permission tuning, and verification. Done manually, this takes hours and is error-prone.</p>
+                <p>We've automated the entire process. Our provisioning toolkit creates a fully hardened, production-ready OpenClaw server in under 10 minutes. The only manual step is the OAuth handshake (connecting your AI model provider), which requires human interaction for security reasons &mdash; we sit with you on a call or walk you through it asynchronously.</p>
+                <p>After provisioning, we configure your agent's personality, connect messaging channels (Discord, Telegram, Slack, or custom integrations), set up tool access levels, and verify that everything works end-to-end. You get a working agent that's live and responding to messages.</p>
+
+                <h2 id="ongoing-ops">Ongoing Operations</h2>
+                <p>Deployment is the beginning, not the end. Running an AI agent in production is an ongoing operation. Things break, dependencies update, models change, costs fluctuate, and the business needs evolve. Someone needs to be watching.</p>
+
+                <h3>Patching &amp; Updates</h3>
+                <ul>
+                    <li><strong>Critical security patches (CVSS 9.0+)</strong> are applied the same day they become available for any component in the stack: Ubuntu, Docker, Caddy, Node.js, or OpenClaw itself.</li>
+                    <li><strong>Routine updates</strong> &mdash; non-critical OpenClaw releases, dependency bumps, and minor patches &mdash; are applied within 48 hours of stable release.</li>
+                    <li><strong>Breaking changes</strong> are tested in isolation before applying. If an update requires configuration changes or has known issues, we handle the migration and notify you of any behavioral changes.</li>
+                </ul>
+
+                <h3>Monitoring &amp; Health</h3>
+                <ul>
+                    <li><strong>Automated health checks</strong> run every 5 minutes. If the gateway container goes down, it's restarted automatically.</li>
+                    <li><strong>Weekly operational reviews</strong> cover uptime, container status, disk usage, error rates, and gateway logs. Issues are caught and resolved before they become incidents.</li>
+                    <li><strong>API cost monitoring</strong> tracks your AI model spend. If costs spike unexpectedly &mdash; a signal of abuse, misconfiguration, or runaway loops &mdash; you're notified immediately.</li>
+                </ul>
+
+                <h3>Backup &amp; Recovery</h3>
+                <ul>
+                    <li><strong>Nightly encrypted backups</strong> capture everything: configuration, agent memory, sessions, workspace, and conversation history.</li>
+                    <li><strong>30-day retention</strong> with daily granularity. You can recover to any point in the last month.</li>
+                    <li><strong>Monthly restore tests</strong> verify that backups actually work. We spin up a test instance from the latest backup and confirm the gateway comes up correctly.</li>
+                    <li><strong>Off-server storage.</strong> Backups live on separate infrastructure. If the server is compromised or lost, backups survive.</li>
+                </ul>
+
+                <h3>Support</h3>
+                <p>When something goes wrong &mdash; or when you want to change how your agent works &mdash; you talk to a human who knows your deployment. Our support is not a ticketing system staffed by generalists. We know your server, your configuration, and your use case. Priority support clients receive responses within 4 business hours.</p>
+
+                <h2 id="agent-development">Agent Development &amp; Customization</h2>
+                <p>A running OpenClaw instance is a foundation, not a finished product. The value comes from what you build on top of it: the agent's personality, the tools it has access to, the workflows it automates, and the channels it connects to.</p>
+
+                <h3>Template Bots</h3>
+                <p>We maintain a library of proven bot templates for common business use cases: sales prospecting, customer support triage, internal knowledge Q&amp;A, team training, and SOP helpers. These are battle-tested configurations that we deploy and customize to your specific business context. For most businesses, a template bot is the fastest path to value.</p>
+
+                <h3>Custom Agents</h3>
+                <p>For businesses with unique workflows, we build custom agents from scratch. This starts with a discovery process: understanding your operations, identifying automation opportunities, and designing an agent that fits your team's actual work. We handle the technical implementation &mdash; custom tools, integrations, guardrails, testing &mdash; and hand off a documented, production-ready agent.</p>
+
+                <h3>Iterating Over Time</h3>
+                <p>AI agents get better with use. As your team works with the agent, you'll discover new capabilities to add, edge cases to handle, and workflows to automate. We support ongoing iteration: adding new tools, refining prompts, connecting new channels, and adjusting behavior based on real-world feedback. This is not a one-time project &mdash; it's a long-term partnership.</p>
+
+                <h2 id="cost-model">Cost Model</h2>
+                <p>ManagedOpenClaw has no hidden fees and no markups on infrastructure. The cost structure is transparent:</p>
+
+                <h3>Your Direct Costs</h3>
+                <ul>
+                    <li><strong>Cloud hosting:</strong> $5&ndash;12/month for the VPS, paid directly to your cloud provider.</li>
+                    <li><strong>AI model API usage:</strong> $20&ndash;60/month typical for an active agent, paid directly to your model provider (OpenAI, Anthropic, etc.).</li>
+                </ul>
+                <p>Total infrastructure cost for most deployments: roughly $25&ndash;75/month.</p>
+
+                <h3>Our Fees</h3>
+                <ul>
+                    <li><strong>Setup:</strong> One-time fee based on scope (guided setup, template bot, or custom build).</li>
+                    <li><strong>Managed care:</strong> Monthly fee for ongoing operations, security, backups, and support.</li>
+                </ul>
+                <p>We add zero markup to your infrastructure or API costs. You pay your cloud provider and your model provider directly, at their published rates. We earn our fee by keeping everything running, secure, and improving over time.</p>
+
+                <div class="callout">
+                    <p><strong>Compare this to hosted platforms:</strong> KiloClaw and similar services charge per-seat or per-message fees that grow with usage. A busy agent on a hosted platform can easily cost $200&ndash;500/month in platform fees alone, on top of the underlying API costs. With ManagedOpenClaw, your infrastructure cost stays flat regardless of usage volume.</p>
+                </div>
+
+                <h2 id="comparison">Default OpenClaw vs. ManagedOpenClaw</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th style="width:35%">Capability</th><th style="width:30%">Default OpenClaw</th><th style="width:35%">ManagedOpenClaw</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Gateway authentication</td><td class="status-bad">Disabled</td><td class="status-good">256-bit token + device pairing</td></tr>
+                        <tr><td>Network exposure</td><td class="status-bad">Public internet</td><td class="status-good">Localhost only (via Caddy HTTPS)</td></tr>
+                        <tr><td>Encryption in transit</td><td class="status-bad">Plain HTTP</td><td class="status-good">Auto-TLS via Caddy</td></tr>
+                        <tr><td>Firewall</td><td class="status-bad">None</td><td class="status-good">UFW default-deny (22, 80, 443)</td></tr>
+                        <tr><td>SSH access</td><td class="status-bad">Password + root</td><td class="status-good">Key-only, root disabled, fail2ban</td></tr>
+                        <tr><td>Docker port security</td><td class="status-bad">Bypasses firewall</td><td class="status-good">Daemon locked to localhost</td></tr>
+                        <tr><td>OS updates</td><td class="status-bad">Manual</td><td class="status-good">Automatic + same-day critical patches</td></tr>
+                        <tr><td>Infrastructure</td><td class="status-bad">You figure it out</td><td class="status-good">Dedicated VPS, cloud-agnostic</td></tr>
+                        <tr><td>Backups</td><td class="status-bad">None</td><td class="status-good">Encrypted nightly, 30-day retention</td></tr>
+                        <tr><td>Health monitoring</td><td class="status-bad">None</td><td class="status-good">5-min checks + auto-restart</td></tr>
+                        <tr><td>Disaster recovery</td><td class="status-bad">Hope for the best</td><td class="status-good">Tested monthly restores</td></tr>
+                        <tr><td>OpenClaw updates</td><td class="status-bad">Manual, untested</td><td class="status-good">Applied within 48 hours, tested</td></tr>
+                        <tr><td>API cost visibility</td><td class="status-bad">Check manually</td><td class="status-good">Alerts on unexpected spikes</td></tr>
+                        <tr><td>Support</td><td class="status-bad">GitHub issues</td><td class="status-good">Direct access, knows your setup</td></tr>
+                    </tbody>
+                </table>
+
+                <h2 id="ownership">The Ownership Model</h2>
+                <p>ManagedOpenClaw is not a SaaS platform. We do not host your agent on our infrastructure. We do not hold your API keys. We do not have ongoing access to your server unless you explicitly grant it for managed care.</p>
+                <p>Every deployment is built on infrastructure that you own. The VPS is in your cloud account (or a dedicated account we create for you). The domain points to your server. The API keys are yours. The conversation history, agent memory, and all data stays on your hardware.</p>
+                <p>If you stop working with us, everything keeps running exactly as it was. There is no kill switch, no license expiration, no data held hostage. The OpenClaw software is open-source. The server is yours. You walk away with a fully operational system.</p>
+                <p>This model exists because we believe businesses running AI agents with access to sensitive data should own and control the infrastructure those agents run on. Multi-tenant platforms are fine for experimentation. For production use with client data, employee data, or proprietary workflows, owned infrastructure is the right choice.</p>
+
+                <h2 id="agencies">For Agencies</h2>
+                <p>Marketing agencies, consulting firms, and service providers represent one of our most common client profiles. The pattern is consistent: an agency wants to offer AI capabilities to their clients without building or managing the infrastructure themselves.</p>
+                <p>ManagedOpenClaw supports this with isolated, per-client deployments. Each of your clients gets their own dedicated server, their own subdomain, their own agent configuration. There is no cross-contamination of data between clients. You own the client relationship and the pricing &mdash; we handle the backend.</p>
+                <p>This gives agencies a new revenue stream (AI agent services) with zero DevOps overhead. You don't need to hire a systems administrator or learn Docker. You need a partner who handles the technical layer while you focus on your clients' business outcomes.</p>
+                <p>We work with agencies at every scale, from solo consultants deploying their first bot to firms managing dozens of client instances. The infrastructure and support scales with you.</p>
+
+                <h2 id="conclusion">Conclusion</h2>
+                <p>OpenClaw is one of the most powerful self-hosted AI agent platforms available. Its default configuration is designed for developers experimenting locally. Moving it to production &mdash; where it serves real customers, handles sensitive data, and needs to run reliably around the clock &mdash; is a different challenge entirely.</p>
+                <p>That challenge requires security hardening, infrastructure provisioning, ongoing operations, backup and recovery strategy, update management, cost monitoring, and platform expertise. Most businesses don't have this expertise on staff, and building it internally is expensive and slow.</p>
+                <p>ManagedOpenClaw exists to solve that problem. We handle the infrastructure so you can focus on what the agent actually does for your business. Every deployment is hardened, monitored, backed up, and supported. You own everything. We keep it running.</p>
+                <p>If you're considering OpenClaw for your business &mdash; or if you've already deployed it and want it production-ready &mdash; we'd welcome the conversation.</p>
+
+                <div class="mt-16 pt-8 border-t border-neutral-200">
+                    <p class="text-sm text-neutral-500 mb-6">This white paper describes ManagedOpenClaw's practices as of March 2026. Our approach evolves as the OpenClaw project and the broader AI landscape evolve.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="index.html#contact" class="btn-claw px-8 py-3 text-sm font-semibold inline-block">Get in Touch</a>
+                        <a href="index.html" class="inline-flex items-center gap-2 px-8 py-3 text-sm font-medium text-neutral-600 border-2 border-neutral-200 rounded hover:border-claw-500 hover:text-claw-500 transition-all">&larr; Back to ManagedOpenClaw.com</a>
+                    </div>
+                </div>
+            </article>
         </div>
 
-        <section id="about" class="grid md:grid-cols-12 border-b border-neutral-200">
-            <div class="md:col-span-5 p-10 md:p-16 border-r border-neutral-200">
-                <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-500 mb-3">Who We Are</p>
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tighter mb-6">Built by <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="hover:text-claw-500 transition-colors">AI&nbsp;Freelancer</a></h2>
-                <p class="text-neutral-600 leading-relaxed mb-6">ManagedOpenClaw is a service of <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-claw-600 font-semibold hover:text-claw-800 transition-colors">AI Freelancer</a>, an AI implementation practice based in Cleveland, OH. We help businesses deploy, secure, and maintain AI systems they actually own &mdash; no vendor lock-in, no black boxes.</p>
-                <p class="text-neutral-600 leading-relaxed mb-6">We're a small, technical team that works directly with founders, ops leads, and agency owners. If you're tired of paying SaaS premiums for AI tools you can't control, that's exactly the problem we exist to solve.</p>
-                <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-sm font-semibold text-claw-500 hover:text-claw-700 transition-colors">Learn more at aifreelancer.co &rarr;</a>
-            </div>
-            <div class="md:col-span-7 bg-neutral-50 flex items-center justify-center p-10 md:p-16">
-                <div class="w-full aspect-video bg-neutral-900 rounded overflow-hidden relative" id="video-shell">
-                    <button type="button" id="video-open" class="absolute inset-0 w-full h-full flex items-center justify-center group" aria-label="Play video">
-                        <div class="absolute inset-0" aria-hidden="true">
-                            <svg class="w-full h-full" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Video preview">
-                                <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#111111"/><stop offset="1" stop-color="#262626"/></linearGradient><radialGradient id="r" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#E63B2E" stop-opacity="0.15"/><stop offset="1" stop-color="#E63B2E" stop-opacity="0"/></radialGradient></defs>
-                                <rect width="1280" height="720" fill="url(#g)"/><rect width="1280" height="720" fill="url(#r)"/>
-                            </svg>
-                        </div>
-                        <div class="relative z-10 flex items-center gap-4 px-7 py-5 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm group-hover:bg-white/15 transition">
-                            <span class="w-16 h-16 rounded-full bg-claw-500 flex items-center justify-center shadow-lg transform group-hover:scale-105 transition-transform">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 7.5v9l8-4.5-8-4.5z" fill="#ffffff"/></svg>
-                            </span>
-                            <div class="text-left"><p class="text-white font-semibold leading-tight text-lg">1 minute intro</p><p class="text-white/70 text-sm">Opens in a popup</p></div>
-                        </div>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="grid md:grid-cols-12 border-b border-neutral-200 min-h-[600px]">
-            <div class="md:col-span-4 p-10 md:p-16 border-r border-neutral-200 bg-claw-50/30">
-                <h2 class="text-4xl font-bold tracking-tighter mb-6">FAQ.</h2>
-                <p class="text-neutral-500">Common questions from business owners.</p>
-            </div>
-            <div class="md:col-span-8 divide-y divide-neutral-200" id="faq-accordion">
-                <details class="group faq-item p-10" open>
-                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">Do I really own it?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
-                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Yes. Unlike subscribing to software where you lose access if you stop paying, this is built on your own cloud account. We help you set it up and keep it running &mdash; but the infrastructure, the data, and the API keys are yours. Walk away anytime and everything keeps working.</p>
-                </details>
-                <details class="group faq-item p-10">
-                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">What are the ongoing costs?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
-                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">There are two ongoing costs beyond our care plans. First, cloud hosting for your dedicated VPS &mdash; typically $5&ndash;12/month depending on the provider and specs. Second, AI model API usage (Anthropic, OpenAI, etc.) &mdash; typically $20&ndash;60/month for an active agent, depending on how heavily you use it. So plan for roughly $25&ndash;75/month in total infrastructure and API costs. We add no markups on any of it.</p>
-                </details>
-                <details class="group faq-item p-10">
-                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">Why not just use KiloClaw or another hosted provider?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
-                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Multi-tenant platforms like KiloClaw run your agent on shared infrastructure alongside other customers. That's fine for experimenting, but if you handle client data, legal documents, financial information, or anything sensitive, you want your own isolated server. We give you a dedicated VPS that nobody else touches, with hardened security defaults and your own credentials. You also keep full control &mdash; if you ever want to leave, everything stays running on your server.</p>
-                </details>
-                <details class="group faq-item p-10">
-                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">Can you help my marketing agency?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
-                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Absolutely. We partner with marketing and consulting agencies who want to offer AI agents to their clients without touching the infrastructure. You own the client relationship, we handle the backend. Each of your clients gets their own isolated instance. <a href="#contact" class="underline text-claw-600 hover:text-claw-800">Reach out about agency partnerships</a> &mdash; it's one of the most common ways people work with us.</p>
-                </details>
-                <details class="group faq-item p-10">
-                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">Is this secure?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
-                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Yes. OpenClaw's default installation ships with authentication disabled, no firewall, and the gateway exposed to the internet &mdash; which is why security researchers have flagged it repeatedly. We deploy with all of that fixed: gateway authentication enabled, firewall with explicit allowlist, encrypted HTTPS via automatic TLS certificates, Docker isolation binding all ports to localhost, SSH key-only access, and automatic security updates. Our Ops + Security plan adds ongoing patching (critical CVEs same-day) and encrypted nightly backups on top. <a href="whitepaper.html" class="underline text-claw-600 hover:text-claw-800">Read the full white paper</a> for technical details.</p>
-                </details>
-                <details class="group faq-item p-10">
-                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">What about enterprise needs &mdash; compliance, SLAs, governance?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
-                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">We've got you covered. Our Custom Care plans include SLAs, environment separation (dev/stage/prod), audit-friendly access controls, release and rollback support, and team onboarding. If you need it production-grade, that's exactly what we do.</p>
-                </details>
-            </div>
-        </section>
-
-        <section id="contact" class="grid md:grid-cols-12 border-b border-neutral-200">
-            <div class="md:col-span-8 p-10 md:p-16 border-r border-neutral-200">
-                <div class="form-wrapper max-w-xl" id="contact-form-wrapper">
-                    <form id="contact-form" class="space-y-6">
-                        <div class="grid sm:grid-cols-2 gap-6">
-                            <div><label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">Name</label><input type="text" name="name" class="form-input" placeholder="Your name" required></div>
-                            <div><label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">Email *</label><input type="email" name="email" class="form-input" placeholder="you@company.com" required></div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">I'm interested in</label>
-                            <select name="interest" class="form-input" required>
-                                <option value="" disabled selected>Select an option</option>
-                                <option value="guided-setup">Guided Setup ($200)</option>
-                                <option value="template-bots">Template Bots (from $1,000)</option>
-                                <option value="custom-agents">Custom Agents (from $2,000)</option>
-                                <option value="managed-care">Managed Care Plans</option>
-                                <option value="enterprise">Enterprise / Custom Scope</option>
-                                <option value="agency-partner">Agency Partnership</option>
-                                <option value="not-sure">Not sure yet &mdash; just exploring</option>
-                            </select>
-                        </div>
-                        <div><label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">Tell us more <span class="text-neutral-300 normal-case tracking-normal">(optional)</span></label><textarea name="message" class="form-input" placeholder="What does your business do? What are you hoping the AI agent will handle?"></textarea></div>
-                        <button type="submit" class="btn-claw w-full sm:w-auto px-10 py-4 text-base font-semibold">Send Message</button>
-                        <p class="text-xs text-neutral-400">We'll respond within one business day. No spam, no mailing list. By submitting, you agree to our <a href="terms.html" class="underline hover:text-neutral-600">Terms of Service</a> and <a href="privacy.html" class="underline hover:text-neutral-600">Privacy Policy</a>.</p>
-                    </form>
-                    <div class="form-success flex-col items-center justify-center text-center py-20">
-                        <div class="w-16 h-16 bg-claw-50 border-2 border-claw-500 flex items-center justify-center mb-8 mx-auto rounded-full"><i class="fa-solid fa-check text-2xl text-claw-500"></i></div>
-                        <h3 class="text-2xl font-bold tracking-tight mb-3">Message sent.</h3>
-                        <p class="text-neutral-500 max-w-md mx-auto">We'll get back to you within one business day. In the meantime, feel free to email us directly at <a href="mailto:hello@managedopenclaw.com" class="underline text-claw-600">hello@managedopenclaw.com</a>.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="md:col-span-4 p-10 md:p-16 bg-claw-50/30">
-                <h2 class="text-4xl font-bold tracking-tighter mb-6">Get Started.</h2>
-                <p class="text-neutral-500 mb-8">Tell us what you're looking for and we'll get back to you within one business day.</p>
-                <div class="space-y-6">
-                    <div class="border-l-2 border-claw-500 pl-4"><p class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Email</p><a href="mailto:hello@managedopenclaw.com" class="font-medium text-sm hover:text-claw-500 transition-colors">hello@managedopenclaw.com</a></div>
-                    <div class="border-l-2 border-claw-500 pl-4"><p class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Phone</p><a href="tel:+14409411785" class="font-medium text-sm hover:text-claw-500 transition-colors">(440) 941-1785</a></div>
-                    <div class="border-l-2 border-claw-500 pl-4"><p class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Based In</p><p class="font-medium text-sm">Cleveland, OH</p></div>
-                </div>
-            </div>
-        </section>
-
-        <footer class="p-10 md:p-16">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-10">
-                <div>
-                    <a href="#" class="flex items-center gap-3 mb-4"><div class="w-8 h-8 bg-white flex items-center justify-center text-base rounded border-2 border-claw-500">&#x1F99E;</div><span class="font-bold text-xl tracking-tight text-neutral-900">ManagedOpenClaw<span class="text-neutral-400">.com</span></span></a>
-                    <p class="text-sm text-neutral-500">A service by <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-neutral-800 font-semibold hover:text-claw-500 transition-colors">AI Freelancer</a><br>Sovereign AI Operations &amp; Implementation.<br>Cleveland, OH</p>
-                </div>
-                <div class="flex flex-col md:items-end gap-4">
-                    <div class="flex gap-6 text-xl text-neutral-400">
-                        <a href="#" class="hover:text-claw-500 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="#" class="hover:text-claw-500 transition-colors"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="mailto:hello@managedopenclaw.com" class="hover:text-claw-500 transition-colors"><i class="fa-solid fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-neutral-200 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <footer class="p-10 md:p-16 border-t border-neutral-200">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-sm text-neutral-500 hover:text-neutral-700 transition-colors">Built &amp; managed by <strong class="text-neutral-700">AI Freelancer</strong> &mdash; AI implementation for businesses that want to own their tools.</a>
-                <div class="flex items-center gap-4">
-                    <a href="terms.html" class="text-xs text-neutral-400 hover:text-neutral-600 transition-colors">Terms of Service</a>
-                    <a href="privacy.html" class="text-xs text-neutral-400 hover:text-neutral-600 transition-colors">Privacy Policy</a>
-                    <p class="text-xs text-neutral-400 uppercase tracking-wide">&copy; 2026 ManagedOpenClaw.com</p>
-                </div>
+                <p class="text-xs text-neutral-400 uppercase tracking-wide">&copy; 2026 ManagedOpenClaw.com</p>
             </div>
         </footer>
     </main>
-
-    <div id="video-modal" class="fixed inset-0 z-[999] hidden" aria-hidden="true">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-video-close></div>
-        <div class="relative w-full h-full flex items-center justify-center p-4 sm:p-8">
-            <div class="w-full max-w-5xl bg-neutral-900 rounded-xl border border-white/10 shadow-2xl overflow-hidden">
-                <div class="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/10">
-                    <p class="text-white/90 text-sm font-semibold tracking-tight">ManagedOpenClaw &mdash; Demo</p>
-                    <button type="button" class="text-white/70 hover:text-white transition text-xl leading-none" aria-label="Close video" data-video-close>&times;</button>
-                </div>
-                <div class="relative aspect-video bg-black" id="video-frame-wrap">
-                    <div class="absolute inset-0 flex items-center justify-center" id="video-loading"><div class="text-white/70 text-sm">Loading video&hellip;</div></div>
-                    <div class="absolute inset-0 hidden items-center justify-center p-6 text-center" id="video-fallback">
-                        <div><p class="text-white font-semibold mb-2">Video blocked in this preview.</p><p class="text-white/70 text-sm mb-4">Your environment may be preventing embedded network access.</p><a id="video-fallback-link" href="https://www.youtube.com/watch?v=Hx7hXZxoXz4" target="_blank" rel="noopener" class="inline-flex items-center gap-2 btn-claw px-6 py-3 text-sm font-semibold">Open on YouTube <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        var YT_WATCH_URL='https://www.youtube.com/watch?v=Hx7hXZxoXz4';
-        var YT_EMBED_URL='https://www.youtube-nocookie.com/embed/Hx7hXZxoXz4?autoplay=1&rel=0&modestbranding=1';
-        function lockScroll(l){document.documentElement.style.overflow=l?'hidden':'';document.body.style.overflow=l?'hidden':'';}
-        function openVideoModal(){var m=document.getElementById('video-modal'),w=document.getElementById('video-frame-wrap'),ld=document.getElementById('video-loading'),fb=document.getElementById('video-fallback'),fl=document.getElementById('video-fallback-link');if(!m||!w)return;if(fl)fl.setAttribute('href',YT_WATCH_URL);m.classList.remove('hidden');m.setAttribute('aria-hidden','false');lockScroll(true);if(ld)ld.classList.remove('hidden');if(fb)fb.classList.add('hidden');var o=w.querySelector('iframe');if(o)o.remove();var i=document.createElement('iframe');i.className='absolute inset-0 w-full h-full';i.setAttribute('title','ManagedOpenClaw video');i.setAttribute('frameborder','0');i.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');i.setAttribute('allowfullscreen','');var s=false;var t=window.setTimeout(function(){if(s)return;s=true;if(ld)ld.classList.add('hidden');if(fb)fb.classList.remove('hidden');},1600);i.addEventListener('load',function(){if(s)return;s=true;window.clearTimeout(t);if(ld)ld.classList.add('hidden');});i.src=YT_EMBED_URL;w.appendChild(i);}
-        function closeVideoModal(){var m=document.getElementById('video-modal'),w=document.getElementById('video-frame-wrap'),ld=document.getElementById('video-loading'),fb=document.getElementById('video-fallback');if(!m||!w)return;m.classList.add('hidden');m.setAttribute('aria-hidden','true');lockScroll(false);var i=w.querySelector('iframe');if(i)i.remove();if(ld)ld.classList.remove('hidden');if(fb)fb.classList.add('hidden');}
-        function buildMailtoUrl(d){var int=String(d.get('interest')||'').trim(),n=String(d.get('name')||'').trim(),e=String(d.get('email')||'').trim(),msg=String(d.get('message')||'(no message)');return'mailto:hello@managedopenclaw.com?subject='+encodeURIComponent('MOC Inquiry: '+(int||'general'))+'&body='+encodeURIComponent('Name: '+n+'\nEmail: '+e+'\nInterest: '+int+'\nMessage: '+msg);}
-        function showMailtoFallback(u){var w=document.getElementById('contact-form-wrapper');if(!w)return;var x=document.getElementById('mailto-fallback');if(x){var l=document.getElementById('mailto-link');if(l)l.setAttribute('href',u);x.classList.remove('hidden');return;}var b=document.createElement('div');b.id='mailto-fallback';b.className='mt-4 rounded border-2 border-neutral-200 bg-neutral-50 p-4 text-sm text-neutral-700';b.innerHTML='<p class="font-semibold mb-2">If your preview blocks email links, use this:</p><a id="mailto-link" class="underline text-claw-600 hover:text-claw-800" target="_blank" rel="noopener">Open email draft</a>';w.appendChild(b);var l2=document.getElementById('mailto-link');if(l2)l2.setAttribute('href',u);}
-        function init(){var faq=document.getElementById('faq-accordion');if(faq){var items=Array.prototype.slice.call(faq.querySelectorAll('details.faq-item'));items.forEach(function(it){it.addEventListener('toggle',function(){if(!it.open)return;items.forEach(function(o){if(o!==it)o.open=false;});});});}var mm=document.getElementById('mobile-menu'),mt=document.getElementById('mobile-menu-toggle');if(mt&&mm){mt.addEventListener('click',function(){mm.classList.toggle('hidden');});mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mm.classList.add('hidden');});});}var vo=document.getElementById('video-open');if(vo)vo.addEventListener('click',openVideoModal);var modal=document.getElementById('video-modal');if(modal){modal.querySelectorAll('[data-video-close]').forEach(function(el){el.addEventListener('click',closeVideoModal);});}document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideoModal();});var form=document.getElementById('contact-form'),wrapper=document.getElementById('contact-form-wrapper');if(form&&wrapper){form.addEventListener('submit',function(e){e.preventDefault();var data=new FormData(form);var url=buildMailtoUrl(data);showMailtoFallback(url);try{window.location.href=url;}catch(err){}wrapper.classList.add('submitted');});}}
-        if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
-    </script>
 </body>
 </html>
