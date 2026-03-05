@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | ManagedOpenClaw</title>
+    <meta name="description" content="Terms of Service for ManagedOpenClaw managed AI agent services.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: {
+                        claw: { 50:'#FEF2F1',100:'#FDE3E1',200:'#FBCBC7',300:'#F7A9A2',400:'#F07A6F',500:'#E63B2E',600:'#D42A1D',700:'#B22318',800:'#932118',900:'#7A211B' },
+                        neutral: { 50:'#fafafa',100:'#f5f5f5',200:'#e5e5e5',300:'#d4d4d4',500:'#737373',600:'#525252',700:'#404040',800:'#262626',900:'#111111' },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background: #fff; color: #111; -webkit-font-smoothing: antialiased; }
+        .legal h2 { font-size: 1.35rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 0.75rem; color: #111; }
+        .legal h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1.75rem; margin-bottom: 0.5rem; color: #262626; }
+        .legal p, .legal li { color: #404040; line-height: 1.8; margin-bottom: 0.75rem; font-size: 0.95rem; }
+        .legal ol { padding-left: 1.5rem; margin-bottom: 1.25rem; }
+        .legal ol li { margin-bottom: 0.5rem; }
+        .legal ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
+        .btn-claw { background-color: #E63B2E; color: #fff; border: 2px solid #E63B2E; transition: all .2s; border-radius: 4px; }
+        .btn-claw:hover { background-color: #D42A1D; border-color: #D42A1D; }
+    </style>
+</head>
+<body class="font-sans">
+
+    <nav class="fixed w-full z-50 bg-white border-b border-neutral-200">
+        <div class="max-w-[1440px] mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-white flex items-center justify-center text-lg rounded border-2 border-claw-500">&#x1F99E;</div>
+                <span class="font-bold text-xl tracking-tight text-neutral-900">ManagedOpenClaw<span class="text-neutral-400">.com</span></span>
+            </a>
+            <div class="hidden lg:flex items-center gap-8 whitespace-nowrap">
+                <a href="index.html" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Home</a>
+                <a href="index.html#contact" class="px-5 py-2.5 btn-claw text-sm font-semibold">Let&#39;s Talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20 max-w-[1440px] mx-auto border-x border-neutral-200 min-h-screen bg-white">
+
+        <div class="bg-neutral-900 text-white px-8 md:px-16 lg:px-24 py-12 md:py-16 border-b border-neutral-200">
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tighter mb-3">Terms of Service</h1>
+            <p class="text-neutral-400">Effective Date: March 5, 2026 &middot; Last Updated: March 5, 2026</p>
+        </div>
+
+        <article class="legal px-8 md:px-16 lg:px-24 py-12 md:py-16 max-w-3xl">
+
+            <p>These Terms of Service (&ldquo;Terms&rdquo;) govern your use of the services provided by AI Freelancer LLC, doing business as ManagedOpenClaw (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;Company&rdquo;), located in Cleveland, Ohio. By engaging our services, you (&ldquo;Client,&rdquo; &ldquo;you&rdquo;) agree to these Terms in full. If you do not agree, do not use our services.</p>
+
+            <h2>1. Services Provided</h2>
+            <p>ManagedOpenClaw provides managed deployment, configuration, security hardening, and ongoing operational support for self-hosted OpenClaw AI agent instances. Our services may include:</p>
+            <ol type="a">
+                <li>Provisioning and configuring dedicated virtual private servers (&ldquo;VPS&rdquo;) on third-party cloud infrastructure providers;</li>
+                <li>Installing, configuring, and hardening the OpenClaw software platform;</li>
+                <li>Configuring AI agent personalities, tools, channels, and integrations;</li>
+                <li>Ongoing server maintenance, security patching, monitoring, and backup services;</li>
+                <li>Technical support and consultation related to OpenClaw operations.</li>
+            </ol>
+            <p>The specific scope of services for each engagement is determined by the service tier selected (Guided Setup, Template Bots, Custom Agents) and care plan chosen (Support, Ops + Security, Custom Care), as described on our website or in a separate written agreement.</p>
+
+            <h2>2. Client Responsibilities</h2>
+            <p>You are responsible for:</p>
+            <ol type="a">
+                <li><strong>Third-party accounts and credentials.</strong> You must create and maintain your own accounts with cloud infrastructure providers (e.g., Hetzner, AWS, DigitalOcean), AI model providers (e.g., OpenAI, Anthropic), and any messaging platforms your agent connects to (e.g., Discord, Telegram, Slack). You are responsible for the costs charged by these providers.</li>
+                <li><strong>API keys and secrets.</strong> You must provide valid API keys and OAuth credentials as needed for setup. You are solely responsible for the security and proper use of your credentials. We do not store your API keys in our systems after deployment is complete.</li>
+                <li><strong>Server access.</strong> During setup and managed care, you grant us SSH access to your server. You may revoke this access at any time, with the understanding that doing so will prevent us from providing managed care services.</li>
+                <li><strong>Content and use.</strong> You are solely responsible for the content your AI agent produces, the data it processes, and the interactions it has with end users. You must ensure that your use of the agent complies with all applicable laws and the terms of service of your AI model provider.</li>
+                <li><strong>Accurate information.</strong> You must provide accurate and complete information when requested for setup and configuration.</li>
+                <li><strong>Backup passwords.</strong> If encrypted backups are configured, you are responsible for securely storing the backup encryption password provided to you. If this password is lost, encrypted backups cannot be restored.</li>
+            </ol>
+
+            <h2>3. Infrastructure Ownership</h2>
+            <p>All infrastructure provisioned as part of our services is owned by you. This includes:</p>
+            <ul>
+                <li>The virtual private server and its contents;</li>
+                <li>The domain name and DNS records (if registered by you);</li>
+                <li>All data stored on the server, including agent configuration, conversation history, memory, and workspace files;</li>
+                <li>All backups created by our automated backup systems.</li>
+            </ul>
+            <p>If you terminate our services, all infrastructure remains yours and continues to operate as configured. We do not retain copies of your data, configuration, or credentials after the termination of services, except as required to complete any final deliverables or as required by law.</p>
+
+            <h2>4. Payment Terms</h2>
+            <ol type="a">
+                <li><strong>One-time setup fees</strong> are due in full before work begins, unless otherwise agreed in writing.</li>
+                <li><strong>Monthly care plan fees</strong> are billed monthly in advance. Payment is due within 15 days of invoice.</li>
+                <li><strong>Custom project fees</strong> are billed according to the payment schedule specified in the project agreement. For projects exceeding $2,000, we may require a deposit of up to 50% before work begins.</li>
+                <li><strong>Late payments.</strong> Invoices not paid within 30 days of the due date may incur a late fee of 1.5% per month on the outstanding balance, or the maximum rate permitted by Ohio law, whichever is less.</li>
+                <li><strong>Suspension of services.</strong> We reserve the right to suspend managed care services if payment is more than 30 days overdue. We will provide at least 7 days&rsquo; written notice before suspending services. Suspension of our services does not affect the operation of your server or agent &mdash; it continues to run as configured.</li>
+            </ol>
+
+            <h2>5. Service Availability and Performance</h2>
+            <ol type="a">
+                <li><strong>No uptime guarantee.</strong> Unless a separate Service Level Agreement (SLA) has been executed in writing, we do not guarantee specific uptime percentages for your OpenClaw instance. We make commercially reasonable efforts to maintain availability and respond to issues promptly.</li>
+                <li><strong>Third-party dependencies.</strong> Your OpenClaw instance depends on third-party services including cloud hosting providers, AI model APIs, DNS providers, and TLS certificate authorities. We are not responsible for outages, rate limits, policy changes, or service degradation caused by these third parties.</li>
+                <li><strong>OpenClaw software.</strong> OpenClaw is third-party open-source software that we do not develop or control. We are not responsible for bugs, breaking changes, security vulnerabilities, or limitations in the OpenClaw software itself. We will make reasonable efforts to mitigate such issues through updates, workarounds, and configuration changes.</li>
+                <li><strong>Response times.</strong> For managed care clients, we aim to respond to support requests within the timeframe specified by your care plan. Response times are targets, not guarantees, unless a separate SLA has been executed.</li>
+            </ol>
+
+            <h2>6. Security</h2>
+            <ol type="a">
+                <li>We apply security hardening measures to every deployment as described in our documentation and white paper. These measures significantly reduce the attack surface of a default OpenClaw installation but do not eliminate all security risks.</li>
+                <li><strong>No security guarantee.</strong> No system connected to the internet is completely secure. We do not guarantee that your server, agent, or data will be free from unauthorized access, data breaches, or security incidents. We will make commercially reasonable efforts to prevent and respond to security issues.</li>
+                <li><strong>AI agent behavior.</strong> AI agents can produce unexpected, incorrect, or harmful outputs. OpenClaw agents with tool access can read files, execute commands, and interact with external services. We configure agents with reasonable defaults, but we cannot guarantee that an agent will not produce unintended outputs or take unintended actions. You are responsible for monitoring your agent&rsquo;s behavior and implementing appropriate safeguards for your use case.</li>
+                <li><strong>Shared responsibility.</strong> Security is a shared responsibility. We secure the infrastructure and platform. You are responsible for the security of your API keys, SSH keys, passwords, and any credentials you provide to or through the agent.</li>
+                <li><strong>Incident notification.</strong> If we become aware of a security incident affecting your deployment, we will notify you as promptly as practicable.</li>
+            </ol>
+
+            <h2>7. Acceptable Use</h2>
+            <p>You agree not to use our services or any OpenClaw instance we deploy to:</p>
+            <ol type="a">
+                <li>Violate any applicable local, state, national, or international law or regulation;</li>
+                <li>Generate, store, or distribute child sexual abuse material or any content that exploits minors;</li>
+                <li>Conduct or facilitate fraud, phishing, social engineering, or identity theft;</li>
+                <li>Generate spam, unsolicited bulk messages, or deceptive communications;</li>
+                <li>Harass, threaten, defame, or intimidate any person;</li>
+                <li>Develop, distribute, or deploy malware, ransomware, or any malicious software;</li>
+                <li>Interfere with or disrupt the integrity or performance of any third-party service or network;</li>
+                <li>Circumvent or attempt to circumvent security controls of any system;</li>
+                <li>Impersonate any person or entity, or misrepresent your affiliation with any person or entity;</li>
+                <li>Violate the terms of service of your AI model provider, cloud hosting provider, or any connected messaging platform.</li>
+            </ol>
+            <p>We reserve the right to immediately suspend or terminate services if we reasonably believe you are engaging in prohibited use. In such cases, no refund will be provided for pre-paid fees.</p>
+
+            <h2>8. Intellectual Property</h2>
+            <ol type="a">
+                <li><strong>Your content.</strong> You retain all ownership rights to your data, agent configurations, custom prompts, conversation history, and any content processed by your agent.</li>
+                <li><strong>Our tools.</strong> We retain ownership of our internal provisioning scripts, automation tools, templates, and methodologies used to deliver our services. These are tools we use to serve you; they are not delivered to you as part of the service unless explicitly agreed.</li>
+                <li><strong>OpenClaw.</strong> The OpenClaw software is licensed under its own open-source license. We do not claim ownership of OpenClaw. Your right to use OpenClaw is governed by its license, not by these Terms.</li>
+                <li><strong>Deliverables.</strong> Custom agent configurations, prompt libraries, skill definitions, and documentation created specifically for your engagement are your property upon full payment.</li>
+            </ol>
+
+            <h2>9. Limitation of Liability</h2>
+            <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW:</strong></p>
+            <ol type="a">
+                <li>OUR TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING OUT OF OR RELATED TO THESE TERMS OR OUR SERVICES SHALL NOT EXCEED THE TOTAL AMOUNT YOU PAID TO US IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO THE CLAIM.</li>
+                <li>IN NO EVENT SHALL WE BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, LOSS OF DATA, LOSS OF BUSINESS, LOSS OF GOODWILL, OR COST OF PROCUREMENT OF SUBSTITUTE SERVICES, REGARDLESS OF THE CAUSE OF ACTION OR THE THEORY OF LIABILITY, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</li>
+                <li>WE SHALL NOT BE LIABLE FOR ANY DAMAGES ARISING FROM: (i) THE ACTIONS OR OUTPUTS OF YOUR AI AGENT; (ii) OUTAGES OR FAILURES OF THIRD-PARTY SERVICES; (iii) YOUR FAILURE TO MAINTAIN SECURE CREDENTIALS; (iv) DATA LOSS RESULTING FROM YOUR FAILURE TO STORE BACKUP PASSWORDS; (v) SECURITY VULNERABILITIES IN THE OPENCLAW SOFTWARE; OR (vi) YOUR VIOLATION OF THESE TERMS OR APPLICABLE LAW.</li>
+            </ol>
+
+            <h2>10. Indemnification</h2>
+            <p>You agree to indemnify, defend, and hold harmless AI Freelancer LLC, its owners, employees, and contractors from and against any claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys&rsquo; fees) arising out of or related to:</p>
+            <ol type="a">
+                <li>Your use of the services or your AI agent;</li>
+                <li>The content generated, stored, or processed by your agent;</li>
+                <li>Your violation of these Terms;</li>
+                <li>Your violation of any applicable law or regulation;</li>
+                <li>Your violation of any third party&rsquo;s rights, including intellectual property rights;</li>
+                <li>Any claim by a third party related to the actions or outputs of your AI agent.</li>
+            </ol>
+
+            <h2>11. Termination</h2>
+            <ol type="a">
+                <li><strong>By you.</strong> You may terminate our services at any time by providing written notice (email is sufficient). For monthly care plans, termination is effective at the end of the current billing period. No refund is provided for the partial month in which notice is given.</li>
+                <li><strong>By us.</strong> We may terminate our services: (i) for non-payment, after 30 days&rsquo; written notice; (ii) immediately, for violation of the Acceptable Use policy; or (iii) for any reason, with 30 days&rsquo; written notice.</li>
+                <li><strong>Effect of termination.</strong> Upon termination, your server and all data remain yours and continue to operate. We will remove our SSH access within 7 days of termination. We will provide reasonable assistance during a transition period of up to 14 days to transfer knowledge or documentation, at no additional charge.</li>
+            </ol>
+
+            <h2>12. Disclaimer of Warranties</h2>
+            <p>OUR SERVICES ARE PROVIDED &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT OUR SERVICES WILL BE UNINTERRUPTED, ERROR-FREE, OR COMPLETELY SECURE. WE DO NOT WARRANT THE ACCURACY, RELIABILITY, OR APPROPRIATENESS OF ANY OUTPUT PRODUCED BY YOUR AI AGENT.</p>
+
+            <h2>13. Dispute Resolution</h2>
+            <ol type="a">
+                <li><strong>Governing law.</strong> These Terms are governed by and construed in accordance with the laws of the State of Ohio, without regard to its conflict of laws principles.</li>
+                <li><strong>Informal resolution.</strong> Before filing any formal legal proceeding, you agree to first attempt to resolve the dispute informally by contacting us at hello@managedopenclaw.com. We will attempt to resolve the dispute within 30 days of receipt of your notice.</li>
+                <li><strong>Jurisdiction.</strong> Any legal action arising from or relating to these Terms shall be brought exclusively in the state or federal courts located in Cuyahoga County, Ohio. You consent to the personal jurisdiction of such courts.</li>
+            </ol>
+
+            <h2>14. Changes to These Terms</h2>
+            <p>We may update these Terms from time to time. We will notify active managed care clients of material changes by email at least 14 days before they take effect. Your continued use of our services after the effective date of updated Terms constitutes acceptance of the changes. If you do not agree with updated Terms, you may terminate services as described in Section 11.</p>
+
+            <h2>15. Miscellaneous</h2>
+            <ol type="a">
+                <li><strong>Entire agreement.</strong> These Terms, together with any separate written agreement for a specific project or engagement, constitute the entire agreement between you and us regarding the services.</li>
+                <li><strong>Severability.</strong> If any provision of these Terms is held to be invalid or unenforceable, the remaining provisions shall continue in full force and effect.</li>
+                <li><strong>Waiver.</strong> Our failure to enforce any provision of these Terms shall not constitute a waiver of that provision or any other provision.</li>
+                <li><strong>Assignment.</strong> You may not assign your rights or obligations under these Terms without our prior written consent. We may assign our rights and obligations in connection with a merger, acquisition, or sale of all or substantially all of our assets.</li>
+                <li><strong>Force majeure.</strong> We shall not be liable for any failure or delay in performance resulting from causes beyond our reasonable control, including but not limited to natural disasters, acts of government, internet outages, or failures of third-party services.</li>
+                <li><strong>Notices.</strong> All notices under these Terms shall be in writing and sent to hello@managedopenclaw.com (for notices to us) or to the email address on file for your account (for notices to you).</li>
+            </ol>
+
+            <h2>16. Contact</h2>
+            <p>If you have questions about these Terms, contact us at:</p>
+            <p>AI Freelancer LLC<br>d/b/a ManagedOpenClaw<br>Cleveland, OH<br>Email: <a href="mailto:hello@managedopenclaw.com" class="text-claw-600 hover:text-claw-800 underline">hello@managedopenclaw.com</a><br>Phone: <a href="tel:+14409411785" class="text-claw-600 hover:text-claw-800 underline">(440) 941-1785</a></p>
+
+            <div class="mt-12 pt-8 border-t border-neutral-200">
+                <a href="index.html" class="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors">&larr; Back to ManagedOpenClaw.com</a>
+            </div>
+        </article>
+
+        <footer class="p-10 md:p-16 border-t border-neutral-200">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-sm text-neutral-500 hover:text-neutral-700 transition-colors">Built &amp; managed by <strong class="text-neutral-700">AI Freelancer</strong></a>
+                <p class="text-xs text-neutral-400 uppercase tracking-wide">&copy; 2026 ManagedOpenClaw.com</p>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>
