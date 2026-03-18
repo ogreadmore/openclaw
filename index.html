@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8XP3Y786J9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8XP3Y786J9');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManagedOpenClaw.com | AI Employees Owned by You</title>
+    <meta name="description" content="We build secure OpenClaw agents on your own private cloud. You keep the data, the keys, and the profits. Managed by AI Freelancer.">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="android-chrome-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        claw: {
+                            50: '#FEF2F1', 100: '#FDE3E1', 200: '#FBCBC7', 300: '#F7A9A2',
+                            400: '#F07A6F', 500: '#E63B2E', 600: '#D42A1D', 700: '#B22318',
+                            800: '#932118', 900: '#7A211B',
+                        },
+                        neutral: {
+                            50: '#fafafa', 100: '#f5f5f5', 200: '#e5e5e5', 300: '#d4d4d4',
+                            500: '#737373', 600: '#525252', 700: '#404040', 800: '#262626', 900: '#111111',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #ffffff; color: #111111; -webkit-font-smoothing: antialiased; }
+        .btn-claw { background-color: #E63B2E; color: #fff; border: 2px solid #E63B2E; transition: all .2s; border-radius: 4px; }
+        .btn-claw:hover { background-color: #D42A1D; border-color: #D42A1D; }
+        .btn-outline { background-color: transparent; color: #111; border: 2px solid #e5e5e5; transition: all .2s; border-radius: 4px; }
+        .btn-outline:hover { border-color: #E63B2E; color: #E63B2E; }
+        .check-list li { position: relative; padding-left: 1.75rem; margin-bottom: .75rem; font-size: .925rem; color: #404040; }
+        .check-list li::before { content: "\2192"; position: absolute; left: 0; color: #E63B2E; font-weight: 700; }
+        .form-input { width: 100%; padding: .875rem 1rem; border: 2px solid #e5e5e5; background: #fff; font-size: .875rem; font-family: 'Inter', sans-serif; transition: border-color .2s; outline: none; border-radius: 4px; }
+        .form-input:focus { border-color: #E63B2E; }
+        .form-input::placeholder { color: #a3a3a3; }
+        textarea.form-input { resize: vertical; min-height: 120px; }
+        select.form-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23E63B2E' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
+        .form-wrapper.submitted form { display: none; }
+        .form-wrapper.submitted .form-success { display: flex; }
+        .form-success { display: none; }
+        .featured-card { box-shadow: 0 25px 50px -12px rgba(230,59,46,.15); }
+        .infra-icon { width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #FEF2F1; border: 1px solid #FDE3E1; color: #E63B2E; font-size: 1rem; flex-shrink: 0; }
+    </style>
+</head>
+<body class="font-sans">
+
+    <nav class="fixed w-full z-50 bg-white border-b border-neutral-200">
+        <div class="max-w-[1440px] mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-white flex items-center justify-center text-lg rounded border-2 border-claw-500">&#x1F99E;</div>
+                <span class="font-bold text-xl tracking-tight text-neutral-900">ManagedOpenClaw<span class="text-neutral-400">.com</span></span>
+            </a>
+            <div class="hidden lg:flex items-center gap-8 whitespace-nowrap">
+                <a href="#services" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Pricing</a>
+                <a href="#infrastructure" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Security</a>
+                <a href="whitepaper.html" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">White Paper</a>
+                <a href="#about" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">About</a>
+                <a href="#faq" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">FAQ</a>
+                <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="px-5 py-2.5 btn-claw text-sm font-semibold">Book 15-Min Call</a>
+            </div>
+            <button class="lg:hidden text-2xl" id="mobile-menu-toggle" type="button" aria-label="Open menu">&#x2261;</button>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-neutral-200 bg-white">
+            <div class="px-6 py-4 flex flex-col gap-4">
+                <a href="#services" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">Pricing</a>
+                <a href="#infrastructure" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">Security</a>
+                <a href="whitepaper.html" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">White Paper</a>
+                <a href="#about" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">About</a>
+                <a href="#faq" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">FAQ</a>
+                <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="btn-claw px-5 py-3 text-center text-sm font-semibold">Book 15-Min Call</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20 max-w-[1440px] mx-auto border-x border-neutral-200 min-h-screen bg-white shadow-[0_0_50px_rgba(0,0,0,.02)]">
+
+        <header class="relative grid md:grid-cols-12 border-b border-neutral-200 bg-cover bg-top bg-no-repeat" style="background-image: url('assets/robobg.png');">
+            <div class="absolute inset-0 bg-white/60 md:bg-gradient-to-r md:from-white/80 md:via-white/20 md:to-transparent pointer-events-none"></div>
+            <div class="relative z-10 md:col-span-7 p-8 md:p-16 lg:p-24 flex flex-col justify-center">
+                <div class="inline-block mb-8">
+                    <span class="px-3 py-1.5 bg-claw-50 border border-claw-200 text-claw-600 text-xs font-bold uppercase tracking-wider rounded-md shadow-sm">&#x1F99E; Now Accepting Partners</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[0.95] mb-8 text-neutral-900 drop-shadow-sm">
+                    AI Employees.<br><span class="text-claw-500">Owned by You.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-neutral-800 max-w-2xl leading-relaxed mb-12 font-medium drop-shadow-sm">
+                    We build autonomous <strong class="text-neutral-900 font-bold">OpenClaw agents</strong> on <strong class="text-neutral-900 font-bold">your own dedicated, hardened server</strong>. You keep the data, the keys, and the control. We handle the infrastructure.
+                </p>
+                <!-- Replace #contact hrefs with your real Cal.com or Calendly link when it is ready. -->
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="btn-claw px-8 py-4 text-base font-semibold shadow-md hover:shadow-lg">Book a 15-Minute Discovery Call</a>
+                    <a href="#services" class="btn-outline px-8 py-4 text-base font-medium flex items-center gap-2 bg-white/60 backdrop-blur-sm shadow-sm hover:bg-white transition-all">See Pricing <i class="fa-solid fa-arrow-down transform -rotate-45 text-xs"></i></a>
+                </div>
+            </div>
+            <div class="relative z-10 hidden md:flex md:col-span-5 flex-col justify-end p-10 lg:p-16">
+                <div class="space-y-6 mt-auto bg-white/30 backdrop-blur-md p-8 rounded-2xl border border-white/40 shadow-xl">
+                    <div class="border-l-2 border-claw-500 pl-4 py-1">
+                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Infrastructure</p>
+                        <p class="font-bold text-lg text-neutral-900">Dedicated VPS Per Client</p>
+                    </div>
+                    <div class="border-l-2 border-claw-500 pl-4 py-1">
+                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Security</p>
+                        <p class="font-bold text-lg text-neutral-900">Hardened by Default</p>
+                    </div>
+                    <div class="border-l-2 border-claw-500 pl-4 py-1">
+                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Ownership</p>
+                        <p class="font-bold text-lg text-neutral-900">Your Keys. Your Data.</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="services" class="bg-white">
+            <div class="bg-white border-b border-neutral-200">
+                <div class="p-8 md:p-12 border-b border-neutral-200">
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-500">Setup Options</p>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mt-3">Get OpenClaw running</h3>
+                    <p class="text-neutral-500 mt-2 max-w-2xl">Every option includes deployment on a dedicated, hardened VPS. From a guided install to template bots to fully custom agent builds.</p>
+                </div>
+                <div class="grid lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-neutral-200">
+                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
+                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">One-Time Session</span><h4 class="text-3xl font-bold mt-2 mb-1">Guided Setup</h4><p class="text-2xl text-neutral-900 font-medium">$400</p></div>
+                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">A guided OpenClaw setup delivered live with you or handled privately for you, plus quick follow-up help.</p>
+                        <ul class="check-list mb-10 flex-grow"><li>Live install on your dedicated VPS</li><li>OS hardening + firewall + auth</li><li>Connect keys / OAuth (your choice)</li><li>Smoke test: gateway + one channel</li><li>30 minutes async follow-up support</li></ul>
+                        <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="btn-outline w-full py-4 text-center font-semibold text-sm">Book a 15-Minute Discovery Call</a>
+                    </div>
+                    <div class="p-10 flex flex-col relative bg-white lg:-mt-4 lg:-mb-4 featured-card lg:z-10 lg:border-t-4 lg:border-t-claw-500 lg:rounded-t transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(230,59,46,0.25)] hover:z-20">
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-claw-500 text-white text-[10px] font-bold px-4 py-1.5 uppercase tracking-widest rounded-b-md">Best Value</div>
+                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Template Deploy</span><h4 class="text-3xl font-bold mt-2 mb-1">Template Bots</h4><p class="text-2xl text-neutral-900 font-medium">From $1,000</p></div>
+                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">We deploy a proven, battle-tested bot template on a hardened server and tailor it to your business:</p>
+                        <ul class="check-list mb-10 flex-grow"><li>Sales prospecting assistant</li><li>Team training / SOP helper</li><li>Customer support triage bot</li><li>Internal knowledge Q&amp;A (PDFs)</li><li>Dedicated VPS + hardening included</li><li>Handoff + quick training</li></ul>
+                        <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="btn-claw w-full py-4 text-center font-semibold text-sm">Book a 15-Minute Discovery Call</a>
+                        <p class="mt-5 text-xs text-neutral-400">If you don't see your use case, we'll recommend the closest template or quote custom.</p>
+                    </div>
+                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
+                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Build + Implement</span><h4 class="text-3xl font-bold mt-2 mb-1">Custom Agents</h4><p class="text-2xl text-neutral-900 font-medium">From $2,000</p></div>
+                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">Purpose-built agents for your exact workflows (sales, HR training, inventory, support, ops).</p>
+                        <ul class="check-list mb-10 flex-grow"><li>Discovery + requirements</li><li>Custom tools / integrations</li><li>Guardrails + testing</li><li>Dedicated VPS + hardening included</li><li>Documentation + handoff</li><li>Managed care available</li></ul>
+                        <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="btn-outline w-full py-4 text-center font-semibold text-sm">Book a 15-Minute Discovery Call</a>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-neutral-50 border-b border-neutral-200">
+                <div class="p-8 md:p-12 border-b border-neutral-200">
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-500">Managed Service</p>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mt-3">Agent Care Plans</h3>
+                    <p class="text-neutral-500 mt-2 max-w-2xl">Keep your agent patched, monitored, and running. Choose support only, ops + security, or a custom plan for mission-critical systems.</p>
+                </div>
+                <div class="grid lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-neutral-200 bg-white">
+                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
+                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Light Support</span><h4 class="text-3xl font-bold mt-2 mb-1">Support</h4><p class="text-2xl text-neutral-900 font-medium">$100 <span class="text-sm text-neutral-400 font-normal">/ mo</span></p></div>
+                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">For owners who just want a human to ask when something feels off.</p>
+                        <ul class="check-list mb-10 flex-grow"><li>Email support (best-effort)</li><li>1x 20-min support call / month</li><li>Guidance for updates &amp; fixes</li></ul>
+                        <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="btn-outline w-full py-4 text-center font-semibold text-sm">Book a 15-Minute Discovery Call</a>
+                        <p class="mt-5 text-xs text-neutral-400">Fair use: designed for light support, not ongoing engineering.</p>
+                    </div>
+                    <div class="p-10 flex flex-col relative bg-white lg:-mt-4 lg:-mb-4 featured-card lg:z-10 lg:border-t-4 lg:border-t-claw-500 lg:rounded-t transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(230,59,46,0.25)] hover:z-20">
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-claw-500 text-white text-[10px] font-bold px-4 py-1.5 uppercase tracking-widest rounded-b-md">Popular</div>
+                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Ops + Security</span><h4 class="text-3xl font-bold mt-2 mb-1">Ops + Security</h4><p class="text-2xl text-neutral-900 font-medium">$400 <span class="text-sm text-neutral-400 font-normal">/ mo</span></p></div>
+                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">For teams that want proactive care without hiring DevOps.</p>
+                        <ul class="check-list mb-10 flex-grow"><li>Security patches applied same-day for critical CVEs</li><li>Weekly health checks (uptime / logs)</li><li>Nightly encrypted backups + monthly restore test</li><li>Priority support (4 business-hour response)</li><li>API cost alerts + threshold monitoring</li></ul>
+                        <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="btn-claw w-full py-4 text-center font-semibold text-sm">Book a 15-Minute Discovery Call</a>
+                    </div>
+                    <div class="p-10 flex flex-col relative bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:z-20">
+                        <div class="mb-8"><span class="text-xs font-bold uppercase tracking-widest text-neutral-400">Enterprise</span><h4 class="text-3xl font-bold mt-2 mb-1">Custom Care</h4><p class="text-2xl text-neutral-900 font-medium">From $1,000 <span class="text-sm text-neutral-400 font-normal">/ mo</span></p></div>
+                        <p class="text-sm text-neutral-500 mb-8 min-h-[40px]">SLAs, compliance posture, environment separation, team onboarding &mdash; scoped to your needs.</p>
+                        <ul class="check-list mb-10 flex-grow"><li>SLA + response windows</li><li>Ongoing tuning + improvements</li><li>Deeper security + hardening</li><li>Cost reviews + optimization</li><li>Team onboarding + training</li></ul>
+                        <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="btn-outline w-full py-4 text-center font-semibold text-sm">Book a 15-Minute Discovery Call</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="infrastructure" class="border-b border-neutral-200">
+            <div class="grid md:grid-cols-12">
+                <div class="md:col-span-5 p-10 md:p-16 border-r border-neutral-200 bg-neutral-900 text-white">
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-400 mb-3">Security Foundation</p>
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tighter mb-6">Every deployment sits on hardened infrastructure.</h2>
+                    <p class="text-neutral-400 leading-relaxed mb-6">OpenClaw is powerful because it has full system access &mdash; shell commands, file systems, browser control, messaging APIs. That power is also the risk. Default installations have been flagged by Kaspersky, Palo Alto Networks, and Cisco as high-risk. We ship with all of that locked down.</p>
+                    <p class="text-neutral-500 leading-relaxed text-sm mb-6">Not multi-tenant. Not shared infrastructure. Your agent runs on a dedicated VPS that nobody else touches.</p>
+                    <a href="whitepaper.html" class="inline-flex items-center gap-2 text-sm font-semibold text-claw-400 hover:text-claw-300 transition-colors">Read the full security white paper <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                </div>
+                <div class="md:col-span-7 p-10 md:p-16">
+                    <div class="grid sm:grid-cols-2 gap-8">
+                        <div class="flex gap-4">
+                            <div class="infra-icon"><i class="fa-solid fa-server"></i></div>
+                            <div><p class="font-bold text-sm mb-1">Dedicated, Isolated VPS</p><p class="text-sm text-neutral-500">One server per client. No noisy neighbors, no shared attack surface. Your data never touches another customer's environment.</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="infra-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div><p class="font-bold text-sm mb-1">Hardened OS Defaults</p><p class="text-sm text-neutral-500">SSH key-only access, firewall with explicit allowlist, fail2ban, automatic security updates. No password login, no open ports.</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="infra-icon"><i class="fa-solid fa-lock"></i></div>
+                            <div><p class="font-bold text-sm mb-1">Auth Enabled, Locked Down</p><p class="text-sm text-neutral-500">OpenClaw ships with auth disabled by default. We enable it. Gateway authentication, firewall-only access, encrypted HTTPS, and Docker isolation are configured from day one.</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="infra-icon"><i class="fa-solid fa-key"></i></div>
+                            <div><p class="font-bold text-sm mb-1">Bring Your Own Keys</p><p class="text-sm text-neutral-500">You provide your own API keys for Anthropic, OpenAI, or whatever model you choose. We never hold your credentials in our accounts.</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="infra-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                            <div><p class="font-bold text-sm mb-1">Encrypted Nightly Backups</p><p class="text-sm text-neutral-500">Config, memory, transcripts, and workflow data backed up nightly with 30-day retention. Off-server, encrypted, and tested.</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="infra-icon"><i class="fa-solid fa-bolt"></i></div>
+                            <div><p class="font-bold text-sm mb-1">Same-Day Critical Patches</p><p class="text-sm text-neutral-500">When the next CVE drops, we patch it the same day. Routine OpenClaw updates within 48 hours of stable release. You don't have to track any of it.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="border-b border-neutral-200 py-12 px-6">
+            <p class="text-center text-xs font-bold uppercase tracking-[0.2em] text-neutral-400 mb-8">Built on Industry Standards</p>
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-80 grayscale">
+                <i class="fa-brands fa-docker text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
+                <i class="fa-brands fa-node text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
+                <i class="fa-solid fa-terminal text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
+                <i class="fa-brands fa-aws text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
+                <i class="fa-brands fa-linux text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
+                <i class="fa-brands fa-digital-ocean text-4xl hover:grayscale-0 hover:text-claw-500 transition-all"></i>
+            </div>
+        </div>
+
+        <section class="border-b border-neutral-200 grid md:grid-cols-12">
+            <div class="md:col-span-5 p-10 md:p-12 border-r border-neutral-200 bg-claw-50/40">
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-500 mb-3">For Agencies</p>
+                <h3 class="text-2xl md:text-3xl font-bold tracking-tight">White-Label AI for Your Clients</h3>
+            </div>
+            <div class="md:col-span-7 p-10 md:p-12 flex flex-col justify-center">
+                <p class="text-neutral-600 leading-relaxed max-w-2xl mb-6">We work with marketing and consulting agencies who want to offer AI agents to their clients without building the infrastructure themselves. You own the client relationship &mdash; we handle the technical backend, deployment, and ongoing ops. Each client gets their own isolated, hardened instance. You get a new revenue stream with zero DevOps overhead.</p>
+                <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="text-sm font-semibold text-claw-500 hover:text-claw-700 transition-colors">Explore agency partnerships &rarr;</a>
+            </div>
+        </section>
+
+        <div class="bg-neutral-900 text-white border-b border-neutral-200 px-8 md:px-12 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-400 mb-2">&#x1F99E; Enterprise Ready</p>
+                <p class="text-base md:text-lg font-medium max-w-2xl">Need production-grade deployments with environment separation, governance controls, observability, and compliance posture? We scope that too.</p>
+            </div>
+            <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="border-2 border-claw-500 text-claw-400 hover:bg-claw-500 hover:text-white px-8 py-4 text-sm font-semibold whitespace-nowrap rounded transition-all">Tell Us What You Need</a>
+        </div>
+
+        <section id="about" class="grid md:grid-cols-12 border-b border-neutral-200">
+            <div class="md:col-span-5 p-10 md:p-16 border-r border-neutral-200">
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-claw-500 mb-3">Who We Are</p>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tighter mb-6">Built by <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="hover:text-claw-500 transition-colors">AI&nbsp;Freelancer</a></h2>
+                <p class="text-neutral-600 leading-relaxed mb-6">ManagedOpenClaw is a service of <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-claw-600 font-semibold hover:text-claw-800 transition-colors">AI Freelancer</a>, an AI implementation practice based in Cleveland, OH. We help businesses deploy, secure, and maintain AI systems they actually own &mdash; no vendor lock-in, no black boxes.</p>
+                <p class="text-neutral-600 leading-relaxed mb-6">We're a small, technical team that works directly with founders, ops leads, and agency owners. If you're tired of paying SaaS premiums for AI tools you can't control, that's exactly the problem we exist to solve.</p>
+                <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-sm font-semibold text-claw-500 hover:text-claw-700 transition-colors">Learn more at aifreelancer.co &rarr;</a>
+            </div>
+            <div class="md:col-span-7 bg-neutral-50 flex items-center justify-center p-10 md:p-16">
+                <div class="w-full aspect-video bg-neutral-900 rounded overflow-hidden relative" id="video-shell">
+                    <button type="button" id="video-open" class="absolute inset-0 w-full h-full flex items-center justify-center group" aria-label="Play video">
+                        <div class="absolute inset-0" aria-hidden="true">
+                            <svg class="w-full h-full" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Video preview">
+                                <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#111111"/><stop offset="1" stop-color="#262626"/></linearGradient><radialGradient id="r" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#E63B2E" stop-opacity="0.15"/><stop offset="1" stop-color="#E63B2E" stop-opacity="0"/></radialGradient></defs>
+                                <rect width="1280" height="720" fill="url(#g)"/><rect width="1280" height="720" fill="url(#r)"/>
+                            </svg>
+                        </div>
+                        <div class="relative z-10 flex items-center gap-4 px-7 py-5 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm group-hover:bg-white/15 transition">
+                            <span class="w-16 h-16 rounded-full bg-claw-500 flex items-center justify-center shadow-lg transform group-hover:scale-105 transition-transform">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 7.5v9l8-4.5-8-4.5z" fill="#ffffff"/></svg>
+                            </span>
+                            <div class="text-left"><p class="text-white font-semibold leading-tight text-lg">1 minute intro</p><p class="text-white/70 text-sm">Opens in a popup</p></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="grid md:grid-cols-12 border-b border-neutral-200 min-h-[600px]">
+            <div class="md:col-span-4 p-10 md:p-16 border-r border-neutral-200 bg-claw-50/30">
+                <h2 class="text-4xl font-bold tracking-tighter mb-6">FAQ.</h2>
+                <p class="text-neutral-500">Common questions from business owners.</p>
+            </div>
+            <div class="md:col-span-8 divide-y divide-neutral-200" id="faq-accordion">
+                <details class="group faq-item p-10" open>
+                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">Do I really own it?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
+                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Yes. Unlike subscribing to software where you lose access if you stop paying, this is built on your own cloud account. We help you set it up and keep it running &mdash; but the infrastructure, the data, and the API keys are yours. Walk away anytime and everything keeps working.</p>
+                </details>
+                <details class="group faq-item p-10">
+                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">What are the ongoing costs?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
+                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">There are two ongoing costs beyond our care plans. First, cloud hosting for your dedicated VPS &mdash; typically $5&ndash;12/month depending on the provider and specs. Second, AI model API usage (Anthropic, OpenAI, etc.) &mdash; typically $20&ndash;60/month for an active agent, depending on how heavily you use it. So plan for roughly $25&ndash;75/month in total infrastructure and API costs. We add no markups on any of it.</p>
+                </details>
+                <details class="group faq-item p-10">
+                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">Why not just use a hosted provider?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
+                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Multi-tenant platforms run your agent on shared infrastructure alongside other customers. That's fine for experimenting, but if you handle client data, legal documents, financial information, or anything sensitive, you want your own isolated server. We give you a dedicated VPS that nobody else touches, with hardened security defaults and your own credentials. You also keep full control &mdash; if you ever want to leave, everything stays running on your server.</p>
+                </details>
+                <details class="group faq-item p-10">
+                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">Can you help my marketing agency?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
+                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Absolutely. We partner with marketing and consulting agencies who want to offer AI agents to their clients without touching the infrastructure. You own the client relationship, we handle the backend. Each of your clients gets their own isolated instance. <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="underline text-claw-600 hover:text-claw-800">Reach out about agency partnerships</a> &mdash; it's one of the most common ways people work with us.</p>
+                </details>
+                <details class="group faq-item p-10">
+                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">Is this secure?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
+                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">Yes. OpenClaw's default installation ships with authentication disabled, no firewall, and the gateway exposed to the internet &mdash; which is why security researchers have flagged it repeatedly. We deploy with all of that fixed: gateway authentication enabled, firewall with explicit allowlist, encrypted HTTPS via automatic TLS certificates, Docker isolation binding all ports to localhost, SSH key-only access, and automatic security updates. Our Ops + Security plan adds ongoing patching (critical CVEs same-day) and encrypted nightly backups on top. <a href="whitepaper.html" class="underline text-claw-600 hover:text-claw-800">Read the full white paper</a> for technical details.</p>
+                </details>
+                <details class="group faq-item p-10">
+                    <summary class="flex justify-between items-center list-none font-bold text-lg hover:text-claw-500 transition-colors cursor-pointer select-none">What about enterprise needs &mdash; compliance, SLAs, governance?<span class="transform group-open:rotate-180 transition-transform text-claw-400">&#x25BC;</span></summary>
+                    <p class="mt-4 text-neutral-600 leading-relaxed max-w-2xl">We've got you covered. Our Custom Care plans include SLAs, environment separation (dev/stage/prod), audit-friendly access controls, release and rollback support, and team onboarding. If you need it production-grade, that's exactly what we do.</p>
+                </details>
+            </div>
+        </section>
+
+        <section id="contact" class="grid md:grid-cols-12 border-b border-neutral-200">
+            <div class="md:col-span-8 p-10 md:p-16 border-r border-neutral-200">
+                <div class="form-wrapper max-w-xl" id="contact-form-wrapper">
+                    <form id="contact-form" action="https://formspree.io/f/mykplbdd" method="POST" class="space-y-6">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div><label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">Name</label><input type="text" name="name" class="form-input" placeholder="Your name" required></div>
+                            <div><label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">Email *</label><input type="email" name="email" class="form-input" placeholder="you@company.com" required></div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">I'm interested in</label>
+                            <select name="interest" class="form-input" required>
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="guided-setup">Guided Setup ($400)</option>
+                                <option value="template-bots">Template Bots (from $1,000)</option>
+                                <option value="custom-agents">Custom Agents (from $2,000)</option>
+                                <option value="managed-care">Managed Care Plans (from $100/mo)</option>
+                                <option value="enterprise">Enterprise / Custom Scope</option>
+                                <option value="agency-partner">Agency Partnership</option>
+                                <option value="not-sure">Not sure yet &mdash; just exploring</option>
+                            </select>
+                        </div>
+                        <div><label class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2">Tell us more <span class="text-neutral-300 normal-case tracking-normal">(optional)</span></label><textarea name="message" class="form-input" placeholder="What does your business do? What are you hoping the AI agent will handle?"></textarea></div>
+                        <button type="submit" class="btn-claw w-full sm:w-auto px-10 py-4 text-base font-semibold">Send Message</button>
+                        <p class="text-xs text-neutral-400">We'll respond within one business day. No spam, no mailing list. By submitting, you agree to our <a href="terms.html" class="underline hover:text-neutral-600">Terms of Service</a> and <a href="privacy.html" class="underline hover:text-neutral-600">Privacy Policy</a>.</p>
+                    </form>
+                    <div class="form-success flex-col items-center justify-center text-center py-20">
+                        <div class="w-16 h-16 bg-claw-50 border-2 border-claw-500 flex items-center justify-center mb-8 mx-auto rounded-full"><i class="fa-solid fa-check text-2xl text-claw-500"></i></div>
+                        <h3 class="text-2xl font-bold tracking-tight mb-3">Message sent.</h3>
+                        <p class="text-neutral-500 max-w-md mx-auto">We'll get back to you within one business day. In the meantime, feel free to email us directly at <a href="mailto:hello@aifreelancer.co" class="underline text-claw-600">hello@aifreelancer.co</a>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:col-span-4 p-10 md:p-16 bg-claw-50/30">
+                <h2 class="text-4xl font-bold tracking-tighter mb-6">Request a 15-Minute Discovery Call.</h2>
+                <p class="text-neutral-500 mb-8">Tell us what you need help with and we&#39;ll follow up to schedule a short fit call within one business day.</p>
+                <div class="space-y-6">
+                    <div class="border-l-2 border-claw-500 pl-4"><p class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Email</p><a href="mailto:hello@aifreelancer.co" class="font-medium text-sm hover:text-claw-500 transition-colors">hello@aifreelancer.co</a></div>
+                    <div class="border-l-2 border-claw-500 pl-4"><p class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Phone</p><a href="tel:+14409411785" class="font-medium text-sm hover:text-claw-500 transition-colors">(440) 941-1785</a></div>
+                    <div class="border-l-2 border-claw-500 pl-4"><p class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Based In</p><p class="font-medium text-sm">Cleveland, OH</p></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="p-10 md:p-16">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-10">
+                <div>
+                    <a href="#" class="flex items-center gap-3 mb-4"><div class="w-8 h-8 bg-white flex items-center justify-center text-base rounded border-2 border-claw-500">&#x1F99E;</div><span class="font-bold text-xl tracking-tight text-neutral-900">ManagedOpenClaw<span class="text-neutral-400">.com</span></span></a>
+                    <p class="text-sm text-neutral-500">A service by <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-neutral-800 font-semibold hover:text-claw-500 transition-colors">AI Freelancer</a><br>Sovereign AI Operations &amp; Implementation.<br>Cleveland, OH</p>
+                </div>
+                <div class="flex flex-col md:items-end gap-4">
+                    <div class="flex gap-6 text-xl text-neutral-400">
+                        <a href="#" class="hover:text-claw-500 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#" class="hover:text-claw-500 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="mailto:hello@aifreelancer.co" class="hover:text-claw-500 transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-neutral-200 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-sm text-neutral-500 hover:text-neutral-700 transition-colors">Built &amp; managed by <strong class="text-neutral-700">AI Freelancer</strong> &mdash; AI implementation for businesses that want to own their tools.</a>
+                <div class="flex items-center gap-4">
+                    <a href="terms.html" class="text-xs text-neutral-400 hover:text-neutral-600 transition-colors">Terms of Service</a>
+                    <a href="privacy.html" class="text-xs text-neutral-400 hover:text-neutral-600 transition-colors">Privacy Policy</a>
+                    <p class="text-xs text-neutral-400 uppercase tracking-wide">&copy; 2026 ManagedOpenClaw.com</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <div id="video-modal" class="fixed inset-0 z-[999] hidden" aria-hidden="true">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-video-close></div>
+        <div class="relative w-full h-full flex items-center justify-center p-4 sm:p-8">
+            <div class="w-full max-w-5xl bg-neutral-900 rounded-xl border border-white/10 shadow-2xl overflow-hidden">
+                <div class="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/10">
+                    <p class="text-white/90 text-sm font-semibold tracking-tight">ManagedOpenClaw &mdash; Demo</p>
+                    <button type="button" class="text-white/70 hover:text-white transition text-xl leading-none" aria-label="Close video" data-video-close>&times;</button>
+                </div>
+                <div class="relative aspect-video bg-black" id="video-frame-wrap">
+                    <div class="absolute inset-0 flex items-center justify-center" id="video-loading"><div class="text-white/70 text-sm">Loading video&hellip;</div></div>
+                    <div class="absolute inset-0 hidden items-center justify-center p-6 text-center" id="video-fallback">
+                        <div><p class="text-white font-semibold mb-2">Video blocked in this preview.</p><p class="text-white/70 text-sm mb-4">Your environment may be preventing embedded network access.</p><a id="video-fallback-link" href="https://www.youtube.com/watch?v=Hx7hXZxoXz4" target="_blank" rel="noopener" class="inline-flex items-center gap-2 btn-claw px-6 py-3 text-sm font-semibold">Open on YouTube <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var YT_WATCH_URL='https://www.youtube.com/watch?v=Hx7hXZxoXz4';
+        var YT_EMBED_URL='https://www.youtube-nocookie.com/embed/Hx7hXZxoXz4?autoplay=1&rel=0&modestbranding=1';
+        function lockScroll(l){document.documentElement.style.overflow=l?'hidden':'';document.body.style.overflow=l?'hidden':'';}
+        function openVideoModal(){var m=document.getElementById('video-modal'),w=document.getElementById('video-frame-wrap'),ld=document.getElementById('video-loading'),fb=document.getElementById('video-fallback'),fl=document.getElementById('video-fallback-link');if(!m||!w)return;if(fl)fl.setAttribute('href',YT_WATCH_URL);m.classList.remove('hidden');m.setAttribute('aria-hidden','false');lockScroll(true);if(ld)ld.classList.remove('hidden');if(fb)fb.classList.add('hidden');var o=w.querySelector('iframe');if(o)o.remove();var i=document.createElement('iframe');i.className='absolute inset-0 w-full h-full';i.setAttribute('title','ManagedOpenClaw video');i.setAttribute('frameborder','0');i.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');i.setAttribute('allowfullscreen','');var s=false;var t=window.setTimeout(function(){if(s)return;s=true;if(ld)ld.classList.add('hidden');if(fb)fb.classList.remove('hidden');},1600);i.addEventListener('load',function(){if(s)return;s=true;window.clearTimeout(t);if(ld)ld.classList.add('hidden');});i.src=YT_EMBED_URL;w.appendChild(i);}
+        function closeVideoModal(){var m=document.getElementById('video-modal'),w=document.getElementById('video-frame-wrap'),ld=document.getElementById('video-loading'),fb=document.getElementById('video-fallback');if(!m||!w)return;m.classList.add('hidden');m.setAttribute('aria-hidden','true');lockScroll(false);var i=w.querySelector('iframe');if(i)i.remove();if(ld)ld.classList.remove('hidden');if(fb)fb.classList.add('hidden');}
+        function init(){var faq=document.getElementById('faq-accordion');if(faq){var items=Array.prototype.slice.call(faq.querySelectorAll('details.faq-item'));items.forEach(function(it){it.addEventListener('toggle',function(){if(!it.open)return;items.forEach(function(o){if(o!==it)o.open=false;});});});}var mm=document.getElementById('mobile-menu'),mt=document.getElementById('mobile-menu-toggle');if(mt&&mm){mt.addEventListener('click',function(){mm.classList.toggle('hidden');});mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mm.classList.add('hidden');});});}var vo=document.getElementById('video-open');if(vo)vo.addEventListener('click',openVideoModal);var modal=document.getElementById('video-modal');if(modal){modal.querySelectorAll('[data-video-close]').forEach(function(el){el.addEventListener('click',closeVideoModal);});}document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideoModal();});var form=document.getElementById('contact-form'),wrapper=document.getElementById('contact-form-wrapper');if(form&&wrapper){form.addEventListener('submit',function(e){e.preventDefault();var btn=form.querySelector('button[type="submit"]');var orig=btn.textContent;btn.textContent='Sending...';btn.disabled=true;fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}}).then(function(r){if(r.ok){wrapper.classList.add('submitted');}else{throw new Error('submission failed');}}).catch(function(){alert('Could not send message. Please email us at hello@aifreelancer.co');}).finally(function(){btn.textContent=orig;btn.disabled=false;});});}}
+        if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+    </script>
+</body>
+</html>
