@@ -67,28 +67,6 @@
         .form-success { display: none; }
         .featured-card { box-shadow: 0 25px 50px -12px rgba(230,59,46,.15); }
         .infra-icon { width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: #FEF2F1; border: 1px solid #FDE3E1; color: #E63B2E; font-size: 1rem; flex-shrink: 0; }
-        .hero-desktop-bg { background-color: #faf7f5; }
-        .hero-copy-surface { background-color: #faf7f5; }
-        .hero-mobile-media { background-color: #efe6e0; }
-        .hero-mobile-panel {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: 78% 18%;
-            transform: scale(1.03);
-        }
-        @media (min-width: 768px) {
-            .hero-mobile-panel { object-position: 76% 18%; }
-        }
-        @media (min-width: 1024px) {
-            .hero-desktop-bg {
-                background-image: url('assets/robobg.png');
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: top center;
-            }
-            .hero-copy-surface { background-color: transparent; }
-        }
     </style>
 </head>
 <body class="font-sans">
@@ -105,6 +83,7 @@
                 <a href="whitepaper.html" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">White Paper</a>
                 <a href="#about" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">About</a>
                 <a href="#faq" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">FAQ</a>
+                <a href="#contact" class="text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors uppercase tracking-wide">Contact</a>
                 <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="booking-link px-5 py-2.5 btn-claw text-sm font-semibold">Book 15-Min Call</a>
             </div>
             <button class="lg:hidden text-2xl" id="mobile-menu-toggle" type="button" aria-label="Open menu">&#x2261;</button>
@@ -116,6 +95,7 @@
                 <a href="whitepaper.html" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">White Paper</a>
                 <a href="#about" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">About</a>
                 <a href="#faq" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">FAQ</a>
+                <a href="#contact" class="text-sm font-medium text-neutral-600 uppercase tracking-wide py-2">Contact</a>
                 <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="booking-link btn-claw px-5 py-3 text-center text-sm font-semibold">Book 15-Min Call</a>
             </div>
         </div>
@@ -123,46 +103,36 @@
 
     <main class="pt-20 max-w-[1440px] mx-auto border-x border-neutral-200 min-h-screen bg-white shadow-[0_0_50px_rgba(0,0,0,.02)]">
 
-        <header class="relative border-b border-neutral-200 hero-desktop-bg">
-            <div class="absolute inset-0 hidden lg:block bg-gradient-to-r from-white/80 via-white/20 to-transparent pointer-events-none"></div>
-            <div class="relative z-10 lg:grid lg:grid-cols-12">
-                <div class="hero-copy-surface lg:col-span-7 p-8 md:p-12 lg:p-24 flex flex-col justify-center">
-                    <div class="inline-block mb-8">
-                        <span class="px-3 py-1.5 bg-claw-50 border border-claw-200 text-claw-600 text-xs font-bold uppercase tracking-wider rounded-md shadow-sm">&#x1F99E; Now Accepting Partners</span>
-                    </div>
-                    <h1 class="text-5xl md:text-6xl lg:text-8xl font-extrabold tracking-tighter leading-[0.95] mb-8 text-neutral-900">
-                        AI Employees.<br><span class="text-claw-500">Owned by You.</span>
-                    </h1>
-                    <p class="text-xl md:text-2xl text-neutral-800 max-w-2xl leading-relaxed mb-10 md:mb-12 font-medium">
-                        We build autonomous <strong class="text-neutral-900 font-bold">OpenClaw agents</strong> on <strong class="text-neutral-900 font-bold">your own dedicated, hardened server</strong>. You keep the data, the keys, and the control. We handle the infrastructure.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
-                        <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="booking-link btn-claw inline-flex items-center justify-center px-8 py-4 text-base font-semibold shadow-md hover:shadow-lg w-full sm:w-auto text-center">Book a 15-Minute Discovery Call</a>
-                        <a href="#services" class="btn-outline inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium bg-white shadow-sm hover:bg-white transition-all w-full sm:w-auto text-center">See Pricing <i class="fa-solid fa-arrow-down transform -rotate-45 text-xs"></i></a>
-                    </div>
+        <header class="relative grid md:grid-cols-12 border-b border-neutral-200 bg-cover bg-top bg-no-repeat" style="background-image: url('assets/robobg.png');">
+            <div class="absolute inset-0 bg-white/60 md:bg-gradient-to-r md:from-white/80 md:via-white/20 md:to-transparent pointer-events-none"></div>
+            <div class="relative z-10 md:col-span-7 p-8 md:p-16 lg:p-24 flex flex-col justify-center">
+                <div class="inline-block mb-8">
+                    <span class="px-3 py-1.5 bg-claw-50 border border-claw-200 text-claw-600 text-xs font-bold uppercase tracking-wider rounded-md shadow-sm">&#x1F99E; Now Accepting Partners</span>
                 </div>
-                <div class="relative z-10 lg:hidden px-8 md:px-12 pb-8 md:pb-12">
-                    <div class="hero-mobile-media relative h-[300px] sm:h-[360px] md:h-[420px] overflow-hidden rounded-3xl border border-neutral-200 shadow-[0_20px_60px_-25px_rgba(0,0,0,.22)]">
-                        <img src="assets/robobg.png" alt="" class="hero-mobile-panel" aria-hidden="true">
-                        <div class="absolute inset-0 bg-gradient-to-r from-white/12 via-transparent to-transparent"></div>
-                        <div class="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white/18 to-transparent"></div>
-                        <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-neutral-900/8 to-transparent"></div>
-                    </div>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[0.95] mb-8 text-neutral-900 drop-shadow-sm">
+                    AI Employees.<br><span class="text-claw-500">Owned by You.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-neutral-800 max-w-2xl leading-relaxed mb-12 font-medium drop-shadow-sm">
+                    We build autonomous <strong class="text-neutral-900 font-bold">OpenClaw agents</strong> on <strong class="text-neutral-900 font-bold">your own dedicated, hardened server</strong>. You keep the data, the keys, and the control. We handle the infrastructure.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://aifreelancer.fillout.com/meet-with-taylor" class="booking-link btn-claw px-8 py-4 text-base font-semibold shadow-md hover:shadow-lg">Book a 15-Minute Discovery Call</a>
+                    <a href="#services" class="btn-outline px-8 py-4 text-base font-medium flex items-center gap-2 bg-white/60 backdrop-blur-sm shadow-sm hover:bg-white transition-all">See Pricing <i class="fa-solid fa-arrow-down transform -rotate-45 text-xs"></i></a>
                 </div>
-                <div class="relative z-10 hidden lg:flex lg:col-span-5 flex-col justify-end p-10 lg:p-16">
-                    <div class="space-y-6 mt-auto bg-white/30 backdrop-blur-md p-8 rounded-2xl border border-white/40 shadow-xl">
-                        <div class="border-l-2 border-claw-500 pl-4 py-1">
-                            <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Infrastructure</p>
-                            <p class="font-bold text-lg text-neutral-900">Dedicated VPS Per Client</p>
-                        </div>
-                        <div class="border-l-2 border-claw-500 pl-4 py-1">
-                            <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Security</p>
-                            <p class="font-bold text-lg text-neutral-900">Hardened by Default</p>
-                        </div>
-                        <div class="border-l-2 border-claw-500 pl-4 py-1">
-                            <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Ownership</p>
-                            <p class="font-bold text-lg text-neutral-900">Your Keys. Your Data.</p>
-                        </div>
+            </div>
+            <div class="relative z-10 hidden md:flex md:col-span-5 flex-col justify-end p-10 lg:p-16">
+                <div class="space-y-6 mt-auto bg-white/30 backdrop-blur-md p-8 rounded-2xl border border-white/40 shadow-xl">
+                    <div class="border-l-2 border-claw-500 pl-4 py-1">
+                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Infrastructure</p>
+                        <p class="font-bold text-lg text-neutral-900">Dedicated VPS Per Client</p>
+                    </div>
+                    <div class="border-l-2 border-claw-500 pl-4 py-1">
+                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Security</p>
+                        <p class="font-bold text-lg text-neutral-900">Hardened by Default</p>
+                    </div>
+                    <div class="border-l-2 border-claw-500 pl-4 py-1">
+                        <p class="text-xs font-bold uppercase tracking-widest text-neutral-700 mb-1">Ownership</p>
+                        <p class="font-bold text-lg text-neutral-900">Your Keys. Your Data.</p>
                     </div>
                 </div>
             </div>
