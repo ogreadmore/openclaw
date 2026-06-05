@@ -9,21 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
-                    colors: {
-                        claw: { 50:'#FEF2F1',100:'#FDE3E1',200:'#FBCBC7',300:'#F7A9A2',400:'#F07A6F',500:'#E63B2E',600:'#D42A1D',700:'#B22318',800:'#932118',900:'#7A211B' },
-                        neutral: { 50:'#fafafa',100:'#f5f5f5',200:'#e5e5e5',300:'#d4d4d4',500:'#737373',600:'#525252',700:'#404040',800:'#262626',900:'#111111' },
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="assets/site.css">
 
     <style>
         body { background: #fff; color: #111; -webkit-font-smoothing: antialiased; }
@@ -56,7 +42,7 @@
 
         <div class="bg-neutral-900 text-white px-8 md:px-16 lg:px-24 py-12 md:py-16 border-b border-neutral-200">
             <h1 class="text-3xl md:text-4xl font-extrabold tracking-tighter mb-3">Terms of Service</h1>
-            <p class="text-neutral-400">Effective Date: March 5, 2026 &middot; Last Updated: March 5, 2026</p>
+            <p class="text-neutral-400">Effective Date: June 5, 2026 &middot; Last Updated: June 5, 2026</p>
         </div>
 
         <article class="legal px-8 md:px-16 lg:px-24 py-12 md:py-16 max-w-3xl">
@@ -72,7 +58,7 @@
                 <li>Ongoing server maintenance, security patching, monitoring, and backup services;</li>
                 <li>Technical support and consultation related to OpenClaw operations.</li>
             </ol>
-            <p>The specific scope of services for each engagement is determined by the service tier selected (Guided Setup, Template Bots, Custom Agents) and care plan chosen (Support, Ops + Security, Custom Care), as described on our website or in a separate written agreement.</p>
+            <p>The specific scope of services for each engagement is determined by the service tier selected (Managed Deployment, Template Agents, Custom Workflows) and care plan chosen (Support, Ops + Security, Custom Care), as described on our website or in a separate written agreement.</p>
 
             <h2>2. Client Responsibilities</h2>
             <p>You are responsible for:</p>
@@ -111,10 +97,11 @@
                 <li><strong>OpenClaw software.</strong> OpenClaw is third-party open-source software that we do not develop or control. We are not responsible for bugs, breaking changes, security vulnerabilities, or limitations in the OpenClaw software itself. We will make reasonable efforts to mitigate such issues through updates, workarounds, and configuration changes.</li>
                 <li><strong>Response times.</strong> For managed care clients, we aim to respond to support requests within the timeframe specified by your care plan. Response times are targets, not guarantees, unless a separate SLA has been executed.</li>
             </ol>
+            <p>Any public pricing examples for third-party cloud or AI model providers are informational estimates only. Provider prices, quotas, free-tier capacity, taxes, and terms can change without notice, and you remain responsible for charges from those providers.</p>
 
             <h2>6. Security</h2>
             <ol type="a">
-                <li>We apply security hardening measures to every deployment as described in our documentation and white paper. These measures significantly reduce the attack surface of a default OpenClaw installation but do not eliminate all security risks.</li>
+                <li>We apply security hardening measures to every deployment as described in our documentation and white paper. These measures are intended to reduce the attack surface of a developer-oriented OpenClaw deployment but do not eliminate all security risks.</li>
                 <li><strong>No security guarantee.</strong> No system connected to the internet is completely secure. We do not guarantee that your server, agent, or data will be free from unauthorized access, data breaches, or security incidents. We will make commercially reasonable efforts to prevent and respond to security issues.</li>
                 <li><strong>AI agent behavior.</strong> AI agents can produce unexpected, incorrect, or harmful outputs. OpenClaw agents with tool access can read files, execute commands, and interact with external services. We configure agents with reasonable defaults, but we cannot guarantee that an agent will not produce unintended outputs or take unintended actions. You are responsible for monitoring your agent&rsquo;s behavior and implementing appropriate safeguards for your use case.</li>
                 <li><strong>Shared responsibility.</strong> Security is a shared responsibility. We secure the infrastructure and platform. You are responsible for the security of your API keys, SSH keys, passwords, and any credentials you provide to or through the agent.</li>
@@ -196,7 +183,7 @@
 
             <h2>16. Contact</h2>
             <p>If you have questions about these Terms, contact us at:</p>
-            <p>Oliphant Digital LLC<br>d/b/a AI Freelancer<br>Cleveland, OH<br>Email: <a href="mailto:hello@aifreelancer.co" class="text-claw-600 hover:text-claw-800 underline">hello@aifreelancer.co</a><br>Phone: <a href="tel:+14409411785" class="text-claw-600 hover:text-claw-800 underline">(440) 941-1785</a></p>
+            <p>Oliphant Digital LLC<br>d/b/a AI Freelancer<br>Cleveland, OH<br>Email: <a href="mailto:hello@aifreelancer.co" class="text-claw-600 hover:text-claw-800 underline">hello@aifreelancer.co</a><br>Phone: <a href="tel:+14409411785" class="text-claw-600 hover:text-claw-800 underline">(440)&nbsp;941&#8209;1785</a></p>
 
             <div class="mt-12 pt-8 border-t border-neutral-200">
                 <a href="index.html" class="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 hover:text-claw-500 transition-colors">&larr; Back to ManagedOpenClaw.com</a>
