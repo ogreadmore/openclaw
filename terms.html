@@ -63,23 +63,24 @@
             <h2>2. Client Responsibilities</h2>
             <p>You are responsible for:</p>
             <ol type="a">
-                <li><strong>Third-party accounts and credentials.</strong> You must create and maintain your own accounts with cloud infrastructure providers (e.g., Hetzner, AWS, DigitalOcean), AI model providers (e.g., OpenAI, Anthropic), and any messaging platforms your agent connects to (e.g., Discord, Telegram, Slack). You are responsible for the costs charged by these providers.</li>
+                <li><strong>Third-party accounts and credentials.</strong> Depending on the agreed scope, you may need to create and maintain accounts with cloud infrastructure providers (e.g., Hetzner, AWS, DigitalOcean), AI model providers (e.g., OpenAI, Anthropic), and messaging platforms your agent connects to (e.g., Discord, Telegram, Slack). If we provision infrastructure or provider services under accounts we administer, the written agreement or invoice will describe how those costs are handled.</li>
                 <li><strong>API keys and secrets.</strong> You must provide valid API keys and OAuth credentials as needed for setup. You are solely responsible for the security and proper use of your credentials. We do not store your API keys in our systems after deployment is complete.</li>
-                <li><strong>Server access.</strong> During setup and managed care, you grant us SSH access to your server. You may revoke this access at any time, with the understanding that doing so will prevent us from providing managed care services.</li>
+                <li><strong>Server access.</strong> During setup and managed care, you grant us SSH access to the deployment server when needed. For client-controlled infrastructure, you may revoke this access at any time, with the understanding that doing so will prevent us from providing managed care services.</li>
                 <li><strong>Content and use.</strong> You are solely responsible for the content your AI agent produces, the data it processes, and the interactions it has with end users. You must ensure that your use of the agent complies with all applicable laws and the terms of service of your AI model provider.</li>
                 <li><strong>Accurate information.</strong> You must provide accurate and complete information when requested for setup and configuration.</li>
                 <li><strong>Backup passwords.</strong> If encrypted backups are configured, you are responsible for securely storing the backup encryption password provided to you. If this password is lost, encrypted backups cannot be restored.</li>
             </ol>
 
-            <h2>3. Infrastructure Ownership</h2>
-            <p>All infrastructure provisioned as part of our services is owned by you. This includes:</p>
+            <h2>3. Infrastructure, Data, and Portability</h2>
+            <p>Deployments may be provisioned in a cloud account you control, a cloud account we administer, or another agreed environment. The written agreement or project scope controls which arrangement applies.</p>
+            <p>Unless otherwise agreed in writing, you retain ownership of:</p>
             <ul>
-                <li>The virtual private server and its contents;</li>
+                <li>Your data stored on the deployment server;</li>
+                <li>Custom agent configurations, prompts, workflow documentation, and other paid deliverables created specifically for your engagement;</li>
                 <li>The domain name and DNS records (if registered by you);</li>
-                <li>All data stored on the server, including agent configuration, conversation history, memory, and workspace files;</li>
-                <li>All backups created by our automated backup systems.</li>
+                <li>API keys, OAuth credentials, and third-party accounts that you create or control.</li>
             </ul>
-            <p>If you terminate our services, all infrastructure remains yours and continues to operate as configured. We do not retain copies of your data, configuration, or credentials after the termination of services, except as required to complete any final deliverables or as required by law.</p>
+            <p>We retain ownership of our internal provisioning scripts, automation tools, reusable templates, and methodologies unless explicitly assigned in a separate written agreement. If services terminate, continued operation may require migration, account transfer, or a new hosting/support arrangement depending on where the deployment is hosted. We will provide reasonable transition assistance as described in Section 11.</p>
 
             <h2>4. Payment Terms</h2>
             <ol type="a">
@@ -87,7 +88,7 @@
                 <li><strong>Monthly care plan fees</strong> are billed monthly in advance. Payment is due within 15 days of invoice.</li>
                 <li><strong>Custom project fees</strong> are billed according to the payment schedule specified in the project agreement. For projects exceeding $2,000, we may require a deposit of up to 50% before work begins.</li>
                 <li><strong>Late payments.</strong> Invoices not paid within 30 days of the due date may incur a late fee of 1.5% per month on the outstanding balance, or the maximum rate permitted by Ohio law, whichever is less.</li>
-                <li><strong>Suspension of services.</strong> We reserve the right to suspend managed care services if payment is more than 30 days overdue. We will provide at least 7 days&rsquo; written notice before suspending services. Suspension of our services does not affect the operation of your server or agent &mdash; it continues to run as configured.</li>
+                <li><strong>Suspension of services.</strong> We reserve the right to suspend managed care services if payment is more than 30 days overdue. We will provide at least 7 days&rsquo; written notice before suspending services. Suspension may affect access, support, updates, monitoring, backups, or hosting for deployments running in provider accounts we administer. Deployments running entirely in accounts you control may continue operating without managed care, but we will not be responsible for maintaining them while services are suspended.</li>
             </ol>
 
             <h2>5. Service Availability and Performance</h2>
@@ -97,12 +98,12 @@
                 <li><strong>OpenClaw software.</strong> OpenClaw is third-party open-source software that we do not develop or control. We are not responsible for bugs, breaking changes, security vulnerabilities, or limitations in the OpenClaw software itself. We will make reasonable efforts to mitigate such issues through updates, workarounds, and configuration changes.</li>
                 <li><strong>Response times.</strong> For managed care clients, we aim to respond to support requests within the timeframe specified by your care plan. Response times are targets, not guarantees, unless a separate SLA has been executed.</li>
             </ol>
-            <p>Any public pricing examples for third-party cloud or AI model providers are informational estimates only. Provider prices, quotas, free-tier capacity, taxes, and terms can change without notice, and you remain responsible for charges from those providers.</p>
+            <p>Any public pricing examples for third-party cloud or AI model providers are informational estimates only. Provider prices, quotas, free-tier capacity, taxes, and terms can change without notice. The written agreement or invoice controls whether provider charges are paid directly by you, included in a managed hosting arrangement, or handled another way.</p>
 
             <h2>6. Security</h2>
             <ol type="a">
                 <li>We apply security hardening measures to every deployment as described in our documentation and white paper. These measures are intended to reduce the attack surface of a developer-oriented OpenClaw deployment but do not eliminate all security risks.</li>
-                <li><strong>No security guarantee.</strong> No system connected to the internet is completely secure. We do not guarantee that your server, agent, or data will be free from unauthorized access, data breaches, or security incidents. We will make commercially reasonable efforts to prevent and respond to security issues.</li>
+                <li><strong>No security guarantee.</strong> No system connected to the internet is completely secure. We do not guarantee that the deployment server, agent, or data will be free from unauthorized access, data breaches, or security incidents. We will make commercially reasonable efforts to prevent and respond to security issues.</li>
                 <li><strong>AI agent behavior.</strong> AI agents can produce unexpected, incorrect, or harmful outputs. OpenClaw agents with tool access can read files, execute commands, and interact with external services. We configure agents with reasonable defaults, but we cannot guarantee that an agent will not produce unintended outputs or take unintended actions. You are responsible for monitoring your agent&rsquo;s behavior and implementing appropriate safeguards for your use case.</li>
                 <li><strong>Shared responsibility.</strong> Security is a shared responsibility. We secure the infrastructure and platform. You are responsible for the security of your API keys, SSH keys, passwords, and any credentials you provide to or through the agent.</li>
                 <li><strong>Incident notification.</strong> If we become aware of a security incident affecting your deployment, we will notify you as promptly as practicable.</li>
@@ -155,7 +156,7 @@
             <ol type="a">
                 <li><strong>By you.</strong> You may terminate our services at any time by providing written notice (email is sufficient). For monthly care plans, termination is effective at the end of the current billing period. No refund is provided for the partial month in which notice is given.</li>
                 <li><strong>By us.</strong> We may terminate our services: (i) for non-payment, after 30 days&rsquo; written notice; (ii) immediately, for violation of the Acceptable Use policy; or (iii) for any reason, with 30 days&rsquo; written notice.</li>
-                <li><strong>Effect of termination.</strong> Upon termination, your server and all data remain yours and continue to operate. We will remove our SSH access within 7 days of termination. We will provide reasonable assistance during a transition period of up to 14 days to transfer knowledge or documentation, at no additional charge.</li>
+                <li><strong>Effect of termination.</strong> Upon termination, we will provide reasonable assistance during a transition period of up to 14 days to transfer knowledge, documentation, configuration details, or data exports as applicable to the engagement. If the deployment runs in an account you control, we will remove our SSH access within 7 days of termination unless you remove it sooner. If the deployment runs in an account we administer, continued operation may require migration, account transfer, or a separate hosting/support arrangement.</li>
             </ol>
 
             <h2>12. Disclaimer of Warranties</h2>

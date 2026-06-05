@@ -108,7 +108,7 @@
                 <h2 id="executive-summary">Executive Summary</h2>
                 <p>OpenClaw is a self-hosted AI agent platform for people who want their agents, data, credentials, and workflow state on infrastructure they control. The appeal is straightforward: less SaaS lock-in, more customization, and a platform that can use real tools instead of living inside a narrow chatbot box.</p>
                 <p>The production challenge is equally straightforward. OpenClaw can operate browsers, files, shells, channels, APIs, and long-running workflows. Current OpenClaw documentation frames that as a trusted-operator system: powerful when isolated and supervised, risky when treated like a hostile multi-tenant SaaS platform.</p>
-                <p>ManagedOpenClaw exists for teams that want the self-hosted ownership model without taking on every deployment, security, backup, update, and cost-control responsibility themselves. We deploy one trust boundary per client, keep remote access conservative, pin and verify releases, and build workflows that use expensive models only when the task calls for them.</p>
+                <p>ManagedOpenClaw exists for teams that want a private, dedicated OpenClaw deployment without taking on every deployment, security, backup, update, and cost-control responsibility themselves. We deploy one trust boundary per client, keep remote access conservative, pin and verify releases, and build workflows that use expensive models only when the task calls for them.</p>
 
                 <div class="callout">
                     <p><strong>June 2026 update:</strong> This white paper replaces older language about default OpenClaw installs lacking auth or being publicly exposed. Current OpenClaw requires gateway authentication by default and documents safer remote-access patterns. The managed-service value is no longer "turn auth on." It is production architecture, isolation, operations, backup discipline, and workflow implementation.</p>
@@ -116,11 +116,11 @@
 
                 <h2 id="why-openclaw">Why OpenClaw</h2>
                 <p>Hosted agent platforms are convenient. You sign up, connect a model, add a channel, and start iterating. The tradeoff is that your agent lives inside somebody else's platform economics and security boundary. Pricing can change, integration limits can appear, and data governance depends on a vendor's posture rather than your own.</p>
-                <p>OpenClaw gives you the other side of that tradeoff. It is open-source, self-hosted, and designed for flexible tool use. Your API keys stay in your account. Your agent memory and workspace stay on your server. Your workflow can be shaped around your actual business process rather than the feature set of a hosted bot builder.</p>
-                <p>That ownership is most valuable when the agent touches client data, proprietary processes, internal documents, regulated workflows, or operational systems that you would not casually push through a generic SaaS account.</p>
+                <p>OpenClaw gives you the other side of that tradeoff. It is open-source, self-hosted, and designed for flexible tool use. Your deployment can run in a client-owned account, a project account we administer, or another agreed environment. The important difference is that the workflow, data, credentials, and operating notes are visible and portable instead of trapped inside a hosted bot builder.</p>
+                <p>That control is most valuable when the agent touches client data, proprietary processes, internal documents, regulated workflows, or operational systems that you would not casually push through a generic SaaS account.</p>
 
                 <h2 id="production-gap">The Production Gap</h2>
-                <p>A developer install and a production deployment are different things. A developer install optimizes for fast local iteration. A production deployment must define a trust boundary, protect credentials, survive upgrades, recover from mistakes, and keep monthly provider bills predictable.</p>
+                <p>A developer install and a production deployment are different things. A developer install optimizes for fast local iteration. A production deployment must define a trust boundary, protect credentials, survive upgrades, recover from mistakes, and keep operating costs predictable.</p>
                 <ul>
                     <li><strong>Trust boundary.</strong> OpenClaw should be treated as a trusted personal or business assistant inside a boundary you control, not as a public multi-tenant service.</li>
                     <li><strong>Remote access.</strong> The gateway should stay loopback-first whenever possible, with access through SSH, Tailscale, Caddy, or another intentional ingress path.</li>
@@ -184,9 +184,9 @@
                 </ul>
 
                 <h2 id="cost-model">Cost Model</h2>
-                <p>ManagedOpenClaw has two kinds of cost: direct provider bills you pay to cloud/model vendors, and service fees you pay us for deployment, implementation, and care.</p>
+                <p>ManagedOpenClaw has two practical cost buckets: the service fee for deployment, implementation, and care, plus the underlying cloud and model usage required to run the agent. The billing path is scoped per engagement. Many deployments run in our Hetzner account because that is operationally simple; client-owned accounts are available when procurement, compliance, or offboarding needs make that preferable.</p>
 
-                <h3>Current Direct Costs</h3>
+                <h3>Current Reference Costs</h3>
                 <table class="comparison-table">
                     <thead>
                         <tr><th scope="col">Category</th><th scope="col">Current Range</th><th scope="col">Notes</th></tr>
@@ -202,14 +202,14 @@
                 <p>Provider prices now span a wide range. As of this update, Gemini 2.5 Flash-Lite is priced far below premium reasoning models, Gemini 2.5 Flash sits in the middle for fast general work, Claude Sonnet/Opus and GPT-5-class models cost materially more, and output tokens usually cost more than input tokens. That means workflow design matters as much as vendor selection.</p>
                 <p>Our default pattern is to classify tasks by risk and reasoning depth: cheap model for extraction, routing, summaries, and repetitive replies; stronger model for tool planning, high-stakes reasoning, sensitive customer responses, or steps where mistakes are expensive.</p>
 
-                <h3>Our Fees</h3>
+                <h3>Service Fees</h3>
                 <ul>
                     <li><strong>Managed Deployment:</strong> $199 one-time for the infrastructure and OpenClaw production baseline.</li>
                     <li><strong>Template Agents:</strong> $499 one-time for a tailored workflow built from a proven pattern.</li>
                     <li><strong>Custom Workflows:</strong> from $1,200 for bespoke tools, integrations, prompts, and implementation.</li>
                     <li><strong>Managed care:</strong> from $49/mo for support, with Ops + Security and Custom Care options for ongoing operations.</li>
                 </ul>
-                <p>We add no markup to infrastructure, model APIs, domains, or storage. Those stay in your accounts, at published provider rates.</p>
+                <p>These public provider numbers are useful for sizing expectations, not a promise about the final billing flow. The proposal or written agreement controls whether provider charges are paid directly by the client, included in a managed hosting arrangement, or handled another way.</p>
 
                 <h2 id="comparison">DIY Developer Install vs. ManagedOpenClaw</h2>
                 <table class="comparison-table">
@@ -230,13 +230,13 @@
                     </tbody>
                 </table>
 
-                <h2 id="ownership">The Ownership Model</h2>
-                <p>ManagedOpenClaw is not a multi-tenant SaaS platform. We do not put your agent on shared infrastructure we control. The VPS, API keys, agent memory, workspace files, and conversation state live in infrastructure you own or control.</p>
-                <p>If you stop working with us, the system does not disappear behind a license check. The server remains yours. The OpenClaw software remains open-source. The handoff notes explain how it is configured. Managed care is available because production systems benefit from care, not because the system is designed to trap you.</p>
+                <h2 id="ownership">Control and Portability</h2>
+                <p>ManagedOpenClaw is not a multi-tenant SaaS platform. Each client gets a dedicated deployment boundary. The hosting account can be ours, yours, or another agreed environment, but the important deliverables are portable: the agent configuration, workflow decisions, custom prompts, documentation, and project handoff.</p>
+                <p>If you stop working with us, the system should not disappear behind a mystery platform. Depending on where it is hosted, continued operation may require migration, account transfer, or a new support arrangement. The OpenClaw software remains open-source, and the deployment notes explain how the system is configured.</p>
 
                 <h2 id="agencies">For Agencies</h2>
                 <p>Marketing agencies, consultants, and implementation shops often want to sell AI agent outcomes without building an internal DevOps practice. ManagedOpenClaw supports that pattern with isolated client deployments, documented handoff, and recurring care options.</p>
-                <p>The important architecture decision is isolation. Each agency client should have its own server, subdomain, credentials, backups, and operational notes. That keeps client data separate and makes incident response, billing, and offboarding cleaner.</p>
+                <p>The important architecture decision is isolation. Each agency client should have its own deployment boundary, subdomain, credentials, backups, and operational notes. That keeps client data separate and makes incident response, billing, and offboarding cleaner.</p>
 
                 <h2 id="sources">Sources and Current References</h2>
                 <p>This white paper was updated using public provider documentation and pricing pages available in early June 2026. Provider prices can change; verify them before quoting a client proposal.</p>
@@ -254,7 +254,7 @@
                 </ul>
 
                 <h2 id="conclusion">Conclusion</h2>
-                <p>OpenClaw is a strong choice when ownership, customization, and data locality matter. It is not a magic shortcut around production operations. The teams that get the most out of it treat the agent as a powerful trusted operator, isolate it carefully, watch costs, and maintain the boring operational systems around it.</p>
+                <p>OpenClaw is a strong choice when control, customization, and data locality matter. It is not a magic shortcut around production operations. The teams that get the most out of it treat the agent as a powerful trusted operator, isolate it carefully, watch costs, and maintain the boring operational systems around it.</p>
                 <p>ManagedOpenClaw handles that layer so businesses can focus on what the agent actually does: answer customers, search internal knowledge, support operations, draft work, move data, and save human time without giving up control of the system.</p>
 
                 <div class="mt-16 pt-8 border-t border-neutral-200">
@@ -269,7 +269,7 @@
 
         <footer class="p-10 md:p-16 border-t border-neutral-200">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-sm text-neutral-500 hover:text-neutral-700 transition-colors">Built &amp; managed by <strong class="text-neutral-700">AI Freelancer</strong> &mdash; AI implementation for businesses that want to own their tools.</a>
+                <a href="https://aifreelancer.co" target="_blank" rel="noopener" class="text-sm text-neutral-500 hover:text-neutral-700 transition-colors">Built &amp; managed by <strong class="text-neutral-700">AI Freelancer</strong> &mdash; AI implementation for businesses that want control without the black box.</a>
                 <p class="text-xs text-neutral-400 uppercase tracking-wide">&copy; 2026 ManagedOpenClaw.com</p>
             </div>
         </footer>
